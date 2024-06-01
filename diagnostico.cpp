@@ -1,5 +1,7 @@
 #include "diagnostico.h"
 
+using namespace std;
+
 Diagnostico::Diagnostico(string et, string desc, CodDiagnostico* cod){
     this->etiqueta = et;
     this->descripcion = desc;
