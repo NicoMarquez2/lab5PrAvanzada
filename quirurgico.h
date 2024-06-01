@@ -6,14 +6,9 @@ class Quirurgico
 private:
     Fecha fechaIntervencion;
 public:
-    Quirurgico(/* args */);
+    Quirurgico(Fecha fecha);
+    Quirurgico();
+    Fecha getFechaintervencion();
+    void setFechaIntervencion(Fecha fecha);
     ~Quirurgico();
 };
-
-Quirurgico::Quirurgico(/* args */)
-{
-}
-
-Quirurgico::~Quirurgico()
-{
-}
