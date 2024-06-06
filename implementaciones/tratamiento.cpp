@@ -1,5 +1,7 @@
 #include "tratamiento.h"
 
+using namespace std;
+
 Tratamiento::Tratamiento(string desc){
     this->descripcion = desc;
 }
