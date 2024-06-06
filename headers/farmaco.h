@@ -1,5 +1,7 @@
 #include "tratamiento.h"
 
+using namespace std;
+
 class Farmaco: public Tratamiento
 {
 private:

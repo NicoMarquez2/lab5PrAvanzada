@@ -6,9 +6,7 @@ using namespace std;
 
 class CategoriaUsuario
 {
-private:
-
 public:
-    CategoriaUsuario(/* args */);
+    CategoriaUsuario();
     ~CategoriaUsuario();
 };
