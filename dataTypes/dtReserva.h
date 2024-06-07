@@ -18,7 +18,7 @@ private:
     Usuario* paciente;
     Usuario* medico;
 public:
-    DtReserva(Fecha f, Hora h, Fecha fechaReserva, Usuario* pac, Usuario* med);
+    DtReserva(Fecha f, Hora h, Fecha fechaRes, Usuario* pac, Usuario* med);
     Fecha getFecha();
     Hora getHora();
     Fecha getFechaReserva();
