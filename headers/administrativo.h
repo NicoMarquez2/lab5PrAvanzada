@@ -1,3 +1,5 @@
+#ifndef _H
+#define _H
 #include "categoriaUsuario.h"
 
 class Administrativo: public CategoriaUsuario{
@@ -5,3 +7,5 @@ class Administrativo: public CategoriaUsuario{
         Administrativo();
         ~Administrativo();
 };
+
+#endif

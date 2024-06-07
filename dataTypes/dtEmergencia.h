@@ -1,3 +1,6 @@
+#ifndef DTEMERGENCIA_H
+#define DTEMERGENCIA_H
+
 #include <string>
 #include <iostream>
 #include "fecha.h"
@@ -23,3 +26,5 @@ public:
     Usuario* getMedico();
     ~DtEmergencia();
 };
+
+#endif

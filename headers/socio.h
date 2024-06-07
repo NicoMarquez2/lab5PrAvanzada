@@ -1,3 +1,6 @@
+#ifndef SOCIO_H
+#define SOCIO_H
+
 #include "categoriaUsuario.h"
 
 class Socio: public CategoriaUsuario{
@@ -5,3 +8,5 @@ class Socio: public CategoriaUsuario{
         Socio();
         ~Socio();
 };
+
+#endif

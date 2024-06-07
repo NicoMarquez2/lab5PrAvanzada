@@ -1,3 +1,6 @@
+#ifndef DTQUIR_H
+#define DTQUIR_H
+
 #include <string>
 #include <iostream>
 #include "fecha.h"
@@ -15,3 +18,5 @@ public:
     Fecha getFechaIntervencion();
     ~DtQuir();
 };
+
+#endif

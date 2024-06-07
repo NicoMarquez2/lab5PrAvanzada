@@ -1,3 +1,6 @@
+#ifndef DTFARM_H
+#define DTFARM_H
+
 #include <string>
 #include <iostream>
 
@@ -14,3 +17,5 @@ public:
     string getMedicamento();
     ~DtFarm();
 };
+
+#endif

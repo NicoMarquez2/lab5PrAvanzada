@@ -1,3 +1,6 @@
+#ifndef CATEGORIAUSUARIO_H
+#define CATEGORIAUSUARIO_H
+
 #include "stdio.h"
 #include <string>
 #include <iostream>
@@ -10,3 +13,5 @@ public:
     CategoriaUsuario();
     ~CategoriaUsuario();
 };
+
+#endif

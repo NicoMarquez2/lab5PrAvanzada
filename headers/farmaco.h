@@ -1,3 +1,6 @@
+#ifndef FARMACO_H
+#define FARMACO_H
+
 #include "tratamiento.h"
 
 using namespace std;
@@ -13,3 +16,5 @@ public:
     void setMedicamento(string medic);
     ~Farmaco();
 };
+
+#endif

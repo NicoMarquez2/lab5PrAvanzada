@@ -1,3 +1,6 @@
+#ifndef CODDIAGNOSTICO_H
+#define CODDIAGNOSTICO_H
+
 #include "stdio.h"
 #include <string>
 #include <iostream>
@@ -17,3 +20,5 @@ public:
     void setCodigo(int cod);
     ~CodDiagnostico();
 };
+
+#endif

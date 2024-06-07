@@ -1,3 +1,6 @@
+#ifndef DTRESERVA_H
+#define DTRESERVA_H
+
 #include <string>
 #include <iostream>
 #include "fecha.h"
@@ -23,3 +26,5 @@ public:
     Usuario* getMedico();
     ~DtReserva();
 };
+
+#endif

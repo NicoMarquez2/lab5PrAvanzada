@@ -1,3 +1,6 @@
+#ifndef IALTADIAGNOSTICO_H
+#define IALTADIAGNOSTICO_H
+
 #include <string.h>
 #include "fecha.h"
 
@@ -26,3 +29,5 @@ public:
 
 +agregarMedicamento(medicamento: string)*/
 };
+
+#endif

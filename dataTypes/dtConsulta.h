@@ -1,3 +1,6 @@
+#ifndef DTCONSULTA_H
+#define DTCONSULTA_H
+
 #include <string>
 #include <iostream>
 #include "fecha.h"
@@ -21,3 +24,5 @@ public:
     Usuario* getMedico();
     ~DtConsulta();
 };
+
+#endif

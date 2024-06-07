@@ -1,3 +1,6 @@
+#ifndef HORA_H
+#define HORA_H
+
 #include "stdio.h"
 #include <string>
 #include <iostream>
@@ -16,3 +19,5 @@ public:
     int getMinutos();
     ~Hora();
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef TRATAMIENTO_H
+#define TRATAMIENTO_H
+
 #include "stdio.h"
 #include <string>
 #include <iostream>
@@ -16,3 +19,5 @@ public:
     void setDescripcion(string desc);
     ~Tratamiento();
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef FECHA_H
+#define FECHA_H
+
 #include "stdio.h"
 #include <string>
 #include <iostream>
@@ -19,3 +22,5 @@ public:
     int getDia() const;
     ~Fecha();
 };
+
+#endif

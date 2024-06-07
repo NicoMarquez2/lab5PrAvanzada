@@ -1,3 +1,6 @@
+#ifndef DIAGNOSTICO_H
+#define DIAGNOSTICO_H
+
 #include "codDiagnostico.h"
 #include "tratamiento.h"
 #include "stdio.h"
@@ -25,3 +28,5 @@ public:
     void setCodigo();
     ~Diagnostico();
 };
+
+#endif

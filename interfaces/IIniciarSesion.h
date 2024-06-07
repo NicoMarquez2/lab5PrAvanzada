@@ -1,3 +1,6 @@
+#ifndef IINICIARSESION_H
+#define IINICIARSESION_H
+
 #include <string.h>
 #include "fecha.h"
 
@@ -11,3 +14,5 @@ public:
     virtual void activarUsuario(string ci) = 0;
     virtual void salir() = 0;
 };
+
+#endif

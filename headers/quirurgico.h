@@ -1,3 +1,6 @@
+#ifndef QUIRURGICO_H
+#define QUIRURGICO_H
+
 #include "tratamiento.h"
 #include "fecha.h"
 
@@ -12,3 +15,5 @@ public:
     void setFechaIntervencion(Fecha fecha);
     ~Quirurgico();
 };
+
+#endif

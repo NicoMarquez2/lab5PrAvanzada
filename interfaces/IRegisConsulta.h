@@ -1,0 +1,4 @@
+#ifndef IREGISCONSULTA_H
+#define IREGISCONSULTA_H
+
+#endif
