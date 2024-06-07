@@ -1,15 +1,19 @@
 #ifndef IALTADIAGNOSTICO_H
 #define IALTADIAGNOSTICO_H
 
+#include <set>
 #include <string.h>
 #include "fecha.h"
+#include "dtConsulta.h"
 
 using namespace std;
 
 class IAltaDiagnostico
 {
 public:
-/*+obtenerConsultas(): set(consultas)
+   set<DtConsulta> obtenerConsultas();
+   DtConsulta seleccionarConsulta(string ci);
+/*+
 
 +seleccionarConsulta(ci: string): Consulta
 
