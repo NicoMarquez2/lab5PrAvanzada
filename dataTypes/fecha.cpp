@@ -6,18 +6,24 @@ Fecha::Fecha(int a, int m, int d){
     this->dia = d;
 }
 
+Fecha::Fecha(const Fecha& f){
+    this->anio = f.getAnio();
+    this->mes = f.getMes();
+    this->dia = f.getDia();
+}
+
 Fecha::Fecha(){
     this->anio = 1900;    
     this->mes = 1;
     this->dia = 1;
 }
 
-int Fecha::getAnio(){
+int Fecha::getAnio() const{
     return this->anio;
 }
-int Fecha::getMes(){
+int Fecha::getMes() const{
     return this->mes;
 }
-int Fecha::getDia(){
+int Fecha::getDia() const{
     return this->dia;
 }

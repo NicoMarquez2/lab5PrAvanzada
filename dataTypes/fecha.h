@@ -12,9 +12,10 @@ private:
     int dia;
 public:
     Fecha(int a, int m, int d);
+    Fecha(const Fecha& f);
     Fecha();
-    int getAnio();
-    int getMes();
-    int getDia();
+    int getAnio() const;
+    int getMes() const;
+    int getDia() const;
     ~Fecha();
 };
