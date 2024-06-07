@@ -1,10 +1,13 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
+#include <set>
 #include <string>
 #include <iostream>
 #include "fecha.h"
 #include "categoriaUsuario.h"
+#include "dtReserva.h"
+#include "dtEmergencia.h"
 
 using namespace std;
 
@@ -34,6 +37,7 @@ public:
     int getEdad();
     bool getActivo();
     bool esContrasena(string pass);
+    set<DtReserva> getReservas();
 
     void setContrasena(string cont);
     void setNombre(string nom);
@@ -42,6 +46,9 @@ public:
     void setSexo(string s);
     void setFechaNacimiento(Fecha fecha);
     void setActivo(bool act);
+    void borrarReserva(DtReserva reserva);
+    void agregarReserva(DtReserva reserva);
+    void agregarEmergencia(DtEmergencia reserva);
 
     ~Usuario();
 };
