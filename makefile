@@ -1,6 +1,6 @@
 # Definiciones de variables
 CXX = g++
-CXXFLAGS = -I./fabrica -I./controllers -I./interfaces -I./dataTypes
+CXXFLAGS = -I./fabrica -I./controllers -I./interfaces -I./dataTypes -std=c++11
 TARGET = myprogram
 
 # Lista de archivos fuente

@@ -1,11 +1,11 @@
-#include "farmaco.h"
+#include "../headers/farmaco.h"
 
 Farmaco::Farmaco(string medic){
     this->medicamento = medic;
 }
 
 Farmaco::Farmaco(){
-    this->medicamento = "Medicamento"
+    this->medicamento = "Medicamento";
 }
 
 string Farmaco::getMedicamento(){

@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include "fecha.h"
+#include "../dataTypes/fecha.h"
 
 using namespace std;
 

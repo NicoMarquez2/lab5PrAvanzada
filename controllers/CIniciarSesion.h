@@ -12,9 +12,9 @@ private:
 public:
     static CIniciarSesion* getInstancia();
     void ingresarCedula(string ci);
-    void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento ,string categoria);
-    void activarUsuario(string ci);
-    void salir();
+    bool registrarContrasena(string pass);
+    bool ingresarContrasena(string pass);
+    void cancelar();
 };
 
 #endif

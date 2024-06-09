@@ -4,10 +4,10 @@
 #include <set>
 #include <string>
 #include <iostream>
-#include "fecha.h"
+#include "../dataTypes/fecha.h"
 #include "categoriaUsuario.h"
-#include "dtReserva.h"
-#include "dtEmergencia.h"
+#include "../dataTypes/dtReserva.h"
+#include "../dataTypes/dtEmergencia.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ private:
     Fecha fechaNacimiento;
     int edad;
     bool activo;
-    CategoriaUsuario* categoria;
+    //CategoriaUsuario* categoria;
 public:
     Usuario(string contrasena, string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, int edad, bool activo);
     Usuario(string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, int edad, bool activo);

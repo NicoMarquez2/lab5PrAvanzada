@@ -8,6 +8,17 @@ DtReserva::DtReserva(Fecha f, Hora h, Fecha fechaRes, Usuario* pac, Usuario* med
     this->medico = med;
 }
 
+DtReserva::DtReserva(){
+    Usuario* pac = new Usuario();
+    Usuario* med = new Usuario();
+
+    this->fecha = Fecha::Fecha();
+    this->hora = Hora::Hora();
+    this->fechaReserva = Fecha::Fecha();
+    this->paciente = pac;
+    this->medico = med;
+}
+
 Fecha DtReserva::getFecha(){
     return this->fecha;
 }

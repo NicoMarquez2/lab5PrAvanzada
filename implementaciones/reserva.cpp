@@ -1,4 +1,4 @@
-#include "reserva.h"
+#include "../headers/reserva.h"
 
 Reserva::Reserva() : Consulta(), fechaReserva(Fecha::Fecha()){}
 

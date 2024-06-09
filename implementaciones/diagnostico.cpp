@@ -1,4 +1,4 @@
-#include "diagnostico.h"
+#include "../headers/diagnostico.h"
 
 using namespace std;
 

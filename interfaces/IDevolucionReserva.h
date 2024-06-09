@@ -1,8 +1,11 @@
 #ifndef IDEVOLUCIONRESERVA_H
 #define IDEVOLUCIONRESERVA_H
 
-#include "dtReserva.h"
+#include "../dataTypes/dtReserva.h"
 #include <set>
+#include <string>
+#include <iostream>
+#include "stdio.h"
 
 class IDevolucionReserva
 {

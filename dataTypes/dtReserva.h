@@ -3,9 +3,9 @@
 
 #include <string>
 #include <iostream>
-#include "fecha.h"
-#include "hora.h"
-#include "usuario.h"
+#include "../dataTypes/fecha.h"
+#include "../dataTypes/hora.h"
+#include "../headers/usuario.h"
 
 using namespace std;
 
@@ -19,6 +19,7 @@ private:
     Usuario* medico;
 public:
     DtReserva(Fecha f, Hora h, Fecha fechaRes, Usuario* pac, Usuario* med);
+    DtReserva();
     Fecha getFecha();
     Hora getHora();
     Fecha getFechaReserva();

@@ -2,7 +2,9 @@
 #define IREGISCONSULTA_H
 
 #include <string>
-#include "fecha.h"
+#include <iostream>
+#include "stdio.h"
+#include "../dataTypes/fecha.h"
 
 using namespace std;
 

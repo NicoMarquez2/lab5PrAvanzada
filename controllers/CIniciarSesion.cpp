@@ -11,17 +11,19 @@ CIniciarSesion* CIniciarSesion::getInstancia(){
 }
 
 void CIniciarSesion::ingresarCedula(string ci){
-    printf("funciono");
+    cout << "cedula: " << ci;
 };
 
-void CIniciarSesion::ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento ,string categoria){
+bool CIniciarSesion::registrarContrasena(string ci){
     printf("funciono");
+    return true;
 };
 
-void CIniciarSesion::activarUsuario(string ci){
+bool CIniciarSesion::ingresarContrasena(string ci){
     printf("funciono");
+    return true;
 };
 
-void CIniciarSesion::salir(){
+void CIniciarSesion::cancelar(){
     printf("funciono");
 };

@@ -2,7 +2,7 @@
 #define QUIRURGICO_H
 
 #include "tratamiento.h"
-#include "fecha.h"
+#include "../dataTypes/fecha.h"
 
 class Quirurgico
 {

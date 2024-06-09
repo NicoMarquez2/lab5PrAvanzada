@@ -3,35 +3,24 @@
 
 #include <set>
 #include <string.h>
-#include "fecha.h"
-#include "dtConsulta.h"
+#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtConsulta.h"
 
 using namespace std;
 
 class IAltaDiagnostico
 {
 public:
-   set<DtConsulta> obtenerConsultas();
-   DtConsulta seleccionarConsulta(string ci);
-/*+
-
-+seleccionarConsulta(ci: string): Consulta
-
-+obtenerCategorias()
-
-+seleccionarCategoria(categoria: string)
-
-+obtenerDiagnosticos()
-
-+seleccionarDiagnostico(diagnostico: string)
-
-+agregarDescripcion(descripcion: string)
-
-+agregarTratamiento(descripcion: string, tipo: string)
-
-+agregarFecha(fecha: DtFecha)
-
-+agregarMedicamento(medicamento: string)*/
+   virtual set<DtConsulta> obtenerConsultas() = 0;
+   virtual DtConsulta seleccionarConsulta(string ci) = 0;
+   virtual void obtenerCategorias() = 0;
+   virtual void seleccionarCategoria(string categoria) = 0;
+   virtual void obtenerDiagnosticos() = 0;
+   virtual void seleccionarDiagnostico(string diagnostico) = 0;
+   virtual void agregarDescripcion(string descripcion) = 0;
+   virtual void agregarTratamiento(string descripcion, string tipo) = 0;
+   virtual void agregarFecha(Fecha fecha) = 0;
+   virtual void agregarMedicamento(string medicamento) = 0;
 };
 
 #endif

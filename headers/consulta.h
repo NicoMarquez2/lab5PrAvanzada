@@ -4,8 +4,8 @@
 #include <set>
 #include <string>
 #include <iostream>
-#include "fecha.h"
-#include "hora.h"
+#include "../dataTypes/fecha.h"
+#include "../dataTypes/hora.h"
 
 class Consulta
 {

@@ -1,4 +1,4 @@
-#include "quirurgico.h"
+#include "../headers/quirurgico.h"
 
 Quirurgico::Quirurgico(){
     this->fechaIntervencion = Fecha::Fecha();

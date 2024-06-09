@@ -1,4 +1,4 @@
-#include "tratamiento.h"
+#include "../headers/tratamiento.h"
 
 using namespace std;
 

@@ -1,4 +1,4 @@
-#include "emergencia.h"
+#include "../headers/emergencia.h"
 
 Emergencia::Emergencia() : Consulta(), motivo("motivo"){}
 

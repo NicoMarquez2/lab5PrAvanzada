@@ -1,4 +1,4 @@
-#include "codDiagnostico.h"
+#include "../headers/codDiagnostico.h"
 
 CodDiagnostico::CodDiagnostico(int cod){
     this->codigo = cod;

@@ -2,7 +2,7 @@
 #define IINICIARSESION_H
 
 #include <string.h>
-#include "fecha.h"
+#include "../dataTypes/fecha.h"
 
 using namespace std;
 
@@ -10,9 +10,9 @@ class IIniciarSesion
 {
 public:
     virtual void ingresarCedula(string ci) = 0;
-    virtual void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento ,string categoria)= 0;
-    virtual void activarUsuario(string ci) = 0;
-    virtual void salir() = 0;
+    virtual bool registrarContrasena(string pass) = 0;
+    virtual bool ingresarContrasena(string pass) = 0;
+    virtual void cancelar() = 0;
 };
 
 #endif

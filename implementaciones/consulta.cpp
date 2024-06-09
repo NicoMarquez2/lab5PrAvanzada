@@ -1,4 +1,4 @@
-#include "consulta.h"
+#include "../headers/consulta.h"
 
 Consulta::Consulta(){
     this->fecha = Fecha::Fecha();
