@@ -1,6 +1,8 @@
 #include "stdio.h"
 #include <string>
 #include <iostream>
+#include "IIniciarSesion.h"
+
 using namespace std;
 
 int main(){
@@ -12,5 +14,6 @@ int main(){
    cin >> cedula;
    cout << "\nIngrese su contrasena: ";
    cin >> pass;
+   
    return 0;
 }
