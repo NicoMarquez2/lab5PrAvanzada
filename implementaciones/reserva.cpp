@@ -1,6 +1,6 @@
 #include "../headers/reserva.h"
 
-Reserva::Reserva() : Consulta(), fechaReserva(Fecha::Fecha()){}
+Reserva::Reserva() : Consulta(), fechaReserva(Fecha()){}
 
 Reserva::Reserva(Fecha f, Hora h, Fecha fechaRes) : Consulta(f, h), fechaReserva(fechaRes){}
 

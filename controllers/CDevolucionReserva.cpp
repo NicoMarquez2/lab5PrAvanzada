@@ -10,9 +10,9 @@ CDevolucionReserva* CDevolucionReserva::getInstancia(){
     return instancia;
 }
 
-set<DtReserva> CDevolucionReserva::obtenerReservas(){
+vector<DtReserva> CDevolucionReserva::obtenerReservas(){
     cout << "obtener reservas";
-    set<DtReserva> s = {DtReserva::DtReserva()};
+    vector<DtReserva> s = {DtReserva()};
     return s;
 }
 

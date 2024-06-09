@@ -5,6 +5,8 @@ DtFarm::DtFarm(string desc, string medic){
     this->medicamento = medic;
 }
 
+DtFarm::~DtFarm(){}
+
 string DtFarm::getDescripcion(){
     return this->descripcion;
 }

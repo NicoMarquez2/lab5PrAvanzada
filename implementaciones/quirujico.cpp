@@ -1,7 +1,7 @@
 #include "../headers/quirurgico.h"
 
 Quirurgico::Quirurgico(){
-    this->fechaIntervencion = Fecha::Fecha();
+    this->fechaIntervencion = Fecha();
 }
 
 Quirurgico::Quirurgico(Fecha fecha){

@@ -10,6 +10,6 @@ CCerrarSesion* CCerrarSesion::getInstancia(){
     return instancia;
 }
 
-void cerrarSesion(){
+void CCerrarSesion::cerrarSesion(){
     printf("Cerrar sesion\n");
 }

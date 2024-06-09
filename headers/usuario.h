@@ -1,15 +1,17 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
-#include <set>
+#include <vector>
 #include <string>
 #include <iostream>
 #include "../dataTypes/fecha.h"
 #include "categoriaUsuario.h"
-#include "../dataTypes/dtReserva.h"
-#include "../dataTypes/dtEmergencia.h"
+//#include "../dataTypes/dtReserva.h"
+//#include "../dataTypes/dtEmergencia.h"
 
 using namespace std;
+class DtEmergencia;
+class DtReserva;
 
 class Usuario
 {
@@ -37,7 +39,7 @@ public:
     int getEdad();
     bool getActivo();
     bool esContrasena(string pass);
-    set<DtReserva> getReservas();
+    vector<DtReserva> getReservas();
 
     void setContrasena(string cont);
     void setNombre(string nom);
@@ -48,7 +50,7 @@ public:
     void setActivo(bool act);
     void borrarReserva(DtReserva reserva);
     void agregarReserva(DtReserva reserva);
-    void agregarEmergencia(DtEmergencia reserva);
+    void agregarEmergencia(DtEmergencia emergencia);
 
     ~Usuario();
 };

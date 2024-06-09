@@ -10,7 +10,7 @@ private:
     CAltaDiagnostico();
 public:
     static CAltaDiagnostico* getInstancia();
-    set<DtConsulta> obtenerConsultas();
+    vector<DtConsulta> obtenerConsultas();
     DtConsulta seleccionarConsulta(string ci);
     void obtenerCategorias();
     void seleccionarCategoria(string categoria);

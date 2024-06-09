@@ -8,14 +8,16 @@ DtConsulta::DtConsulta(Fecha f, Hora h, Usuario* pac, Usuario* med){
 }
 
 DtConsulta::DtConsulta(){
-    Usuario* pac = new Usuario();    
+    /*Usuario* pac = new Usuario();    
     Usuario* med = new Usuario();
 
-    this->fecha = Fecha::Fecha();
-    this->hora = Hora::Hora();
+    this->fecha = Fecha();
+    this->hora = Hora();
     this->paciente = pac;
-    this->medico = med;
+    this->medico = med;*/
 }
+
+DtConsulta::~DtConsulta(){}
 
 Fecha DtConsulta::getFecha(){
     return this->fecha;

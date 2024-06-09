@@ -21,9 +21,24 @@ bool correcto(string ci){
 int main(){
    bool valido = false;
    Fabrica* f;
-   IIniciarSesion* c;
+   IIniciarSesion* iSesion;
+   IAltaDiagnostico* iAD;
+   IAltaUsuario* iAU;
+   ICerrarSesion* ICS;
+   IDevolucionReserva* iDR;
+   IListarRepresentaciones* iLR;
+   IObtenerHistorial* iOH;
+   IRegisConsulta* iRG;
+   Usuario* usuario = new Usuario();
    f = Fabrica::getInstancia();
-   c = f->getIIniciarSesion();
+   iSesion = f->getIIniciarSesion();
+   iAD = f->getIAltaDiagnostico();
+   iAU = f->getIAltaUsuario();
+   ICS = f->getICerrarSesion();
+   iDR = f->getIDevolucionReserva();
+   iLR = f->getIListarRepresentaciones();
+   iOH = f->getIObtenerHistorial();
+   iRG = f->getIRegisConsulta();
    string cedula;
    string pass;
    printf("\t\tBIENVENIDO\n\n");
@@ -39,6 +54,10 @@ int main(){
    
    cout << "\nIngrese su contrasena: ";
    cin >> pass;
-   c->ingresarCedula(cedula);
+   iSesion->ingresarCedula(cedula);
+   iAD->agregarDescripcion("descripcion");
+   iAU->salir();
+   ICS->cerrarSesion();
+   cout <<"\n" << usuario->getApellido();
    return 0;
 }

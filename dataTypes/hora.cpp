@@ -10,6 +10,8 @@ Hora::Hora(){
     this->minutos = 0;
 }
 
+Hora::~Hora(){}
+
 int Hora::getHoras(){
     return this->horas;
 }

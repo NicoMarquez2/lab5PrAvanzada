@@ -1,14 +1,16 @@
 #include "../headers/consulta.h"
 
 Consulta::Consulta(){
-    this->fecha = Fecha::Fecha();
-    this->hora = Hora::Hora();
+    this->fecha = Fecha();
+    this->hora = Hora();
 }
 
 Consulta::Consulta(Fecha f, Hora h){
     this->fecha = f;
     this->hora = h;
 }
+
+Consulta::~Consulta(){}
 
 Fecha Consulta::getFecha(){
     return this->fecha;

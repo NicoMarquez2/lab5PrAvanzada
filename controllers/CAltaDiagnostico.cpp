@@ -10,9 +10,9 @@ CAltaDiagnostico* CAltaDiagnostico::getInstancia(){
     return instancia;
 }
 
-set<DtConsulta> CAltaDiagnostico::obtenerConsultas(){
+vector<DtConsulta> CAltaDiagnostico::obtenerConsultas(){
     DtConsulta c = DtConsulta();
-    set<DtConsulta> s = {c};
+    vector<DtConsulta> s = {c};
     cout << "obtenerConsultas";
     return s;
 }

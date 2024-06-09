@@ -10,6 +10,8 @@ Tratamiento::Tratamiento(){
     this->descripcion = "Descripcion vacia";
 }
 
+Tratamiento::~Tratamiento(){}
+
 void Tratamiento::setDescripcion(string desc){
     this->descripcion = desc;
 }

@@ -18,6 +18,8 @@ Fecha::Fecha(){
     this->dia = 1;
 }
 
+Fecha::~Fecha(){}
+
 int Fecha::getAnio() const{
     return this->anio;
 }

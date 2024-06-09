@@ -8,6 +8,8 @@ DtEmergencia::DtEmergencia(Fecha f, Hora h, string mot, Usuario* pac, Usuario* m
     this->medico = med;
 }
 
+DtEmergencia::~DtEmergencia(){}
+
 Fecha DtEmergencia::getFecha(){
     return this->fecha;
 }

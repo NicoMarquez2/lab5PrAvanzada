@@ -1,7 +1,7 @@
 #ifndef IALTADIAGNOSTICO_H
 #define IALTADIAGNOSTICO_H
 
-#include <set>
+#include <vector>
 #include <string.h>
 #include "../dataTypes/fecha.h"
 #include "../dataTypes/dtConsulta.h"
@@ -11,7 +11,7 @@ using namespace std;
 class IAltaDiagnostico
 {
 public:
-   virtual set<DtConsulta> obtenerConsultas() = 0;
+   virtual vector<DtConsulta> obtenerConsultas() = 0;
    virtual DtConsulta seleccionarConsulta(string ci) = 0;
    virtual void obtenerCategorias() = 0;
    virtual void seleccionarCategoria(string categoria) = 0;

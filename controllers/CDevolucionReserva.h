@@ -10,7 +10,7 @@ private:
     CDevolucionReserva();
 public:
     static CDevolucionReserva* getInstancia();
-    virtual set<DtReserva> obtenerReservas();
+    virtual vector<DtReserva> obtenerReservas();
     virtual void cancelarReserva(DtReserva reserva);
 };
 
