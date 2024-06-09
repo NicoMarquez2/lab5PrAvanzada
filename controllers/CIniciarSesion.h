@@ -1,7 +1,8 @@
 #ifndef CINICIARSESION_H
 #define CINICIARSESION_H
 
-#include "IIniciarSesion.h"
+#include "../interfaces/IIniciarSesion.h"
+#include "../dataTypes/Fecha.h"
 
 class CIniciarSesion : public IIniciarSesion
 {

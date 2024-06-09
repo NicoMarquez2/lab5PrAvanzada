@@ -11,4 +11,17 @@ CIniciarSesion* CIniciarSesion::getInstancia(){
 }
 
 void CIniciarSesion::ingresarCedula(string ci){
+    printf("funciono");
+};
+
+void CIniciarSesion::ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento ,string categoria){
+    printf("funciono");
+};
+
+void CIniciarSesion::activarUsuario(string ci){
+    printf("funciono");
+};
+
+void CIniciarSesion::salir(){
+    printf("funciono");
 };

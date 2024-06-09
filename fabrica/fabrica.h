@@ -1,22 +1,15 @@
 #ifndef FABRICA_H
 #define FABRICA_H
+#include "../controllers/CIniciarSesion.h"
 
-class fabrica
-{
+class Fabrica{
 private:
-    /* data */
+    static Fabrica* instancia;
+    Fabrica();
 public:
-    fabrica(/* args */);
-    ~fabrica();
+    static Fabrica* getInstancia();
+    IIniciarSesion* getIIniciarSesion();
+    ~Fabrica();
 };
-
-fabrica::fabrica(/* args */)
-{
-}
-
-fabrica::~fabrica()
-{
-}
-
 
 #endif
