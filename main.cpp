@@ -4,6 +4,8 @@
 #include <map>
 #include "fabrica/fabrica.h"
 #include "../headers/socio.h"
+#include "../headers/medico.h"
+#include "../headers/administrativo.h"
 
 using namespace std;
 
@@ -36,8 +38,14 @@ int main(){
    map<string, Usuario*> usersCollection;
    Fecha fecha = Fecha(2001, 10, 22);
    Socio* catS = new Socio();
+   Medico* catM = new Medico();
+   Administrativo* catA = new Administrativo();
    Usuario* pruebaU = new Usuario("contrasena", "Nicolas", "Marquez", "51467384", "masculino", fecha, true, catS);
+   Usuario* pruebaM = new Usuario("medico", "medico", "medicoAp", "12345678", "femenino", fecha, true, catM);
+   Usuario* pruebaA = new Usuario("admin", "admin", "adminAp", "87654321", "masculino", fecha, true, catA);
    usersCollection.insert({pruebaU->getCedula(), pruebaU});
+   usersCollection.insert({pruebaM->getCedula(), pruebaM});
+   usersCollection.insert({pruebaA->getCedula(), pruebaA});
 
    f = Fabrica::getInstancia();
    iSesion = f->getIIniciarSesion();
@@ -90,13 +98,21 @@ int main(){
             cout << "3 - " << endl;
             cout << "4 - " << endl;
             cout << "5 - Salir socio" << endl;
+         } else if(dynamic_cast<Medico*>(usuarioSesion->getCategoria())){
+            cout << "¿Que desea hacer medico?" << endl;
+            cout << "1 - " << endl;
+            cout << "2 - " << endl;
+            cout << "3 - " << endl;
+            cout << "4 - " << endl;
+            cout << "5 - Salir medico" << endl;
+         } else if(dynamic_cast<Administrativo*>(usuarioSesion->getCategoria())){
+            cout << "¿Que desea hacer admin?" << endl;
+            cout << "1 - " << endl;
+            cout << "2 - " << endl;
+            cout << "3 - " << endl;
+            cout << "4 - " << endl;
+            cout << "5 - Salir admin" << endl;
          }
-         cout << "¿Que desea hacer no socio?" << endl;
-         cout << "1 - " << endl;
-         cout << "2 - " << endl;
-         cout << "3 - " << endl;
-         cout << "4 - " << endl;
-         cout << "5 - Salir" << endl;
          cin >> option;
          switch(option){
          case 5:
