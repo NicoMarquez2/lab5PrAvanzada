@@ -5,9 +5,7 @@
 #include <string>
 #include <iostream>
 #include "../dataTypes/fecha.h"
-#include "categoriaUsuario.h"
-//#include "../dataTypes/dtReserva.h"
-//#include "../dataTypes/dtEmergencia.h"
+#include "../headers/categoriaUsuario.h"
 
 using namespace std;
 class DtEmergencia;
@@ -24,10 +22,10 @@ private:
     Fecha fechaNacimiento;
     int edad;
     bool activo;
-    //CategoriaUsuario* categoria;
+    CategoriaUsuario* categoria;
 public:
-    Usuario(string contrasena, string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, int edad, bool activo);
-    Usuario(string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, int edad, bool activo);
+    Usuario(string contrasena, string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, bool activo);
+    Usuario(string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, bool activo);
     Usuario();
 
     string getContrasena();

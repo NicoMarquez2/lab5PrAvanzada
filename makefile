@@ -54,9 +54,12 @@ implementaciones/%.o: implementaciones/%.cpp
 	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@
 
 # Regla para limpiar los archivos de construcción
-clean:
-	del *.o *.d myprogram.exe
-	del ./fabrica/*.o ./fabrica/*.d
-	del implementaciones/*.o ./implementaciones/*.d
-	del dataTypes/*.o ./dataTypes/*.d
-	del controllers/*.o ./controllers/*.d
+clean: 
+	powershell -Command "if (Test-Path 'dataTypes\*.o') { Remove-Item 'dataTypes\*.o' }"
+	powershell -Command "if (Test-Path 'dataTypes\*.d') { Remove-Item 'dataTypes\*.d' }"
+	powershell -Command "if (Test-Path 'controllers\*.o') { Remove-Item 'controllers\*.o' }"
+	powershell -Command "if (Test-Path 'controllers\*.d') { Remove-Item 'controllers\*.d' }"
+	powershell -Command "if (Test-Path 'fabrica\*.o') { Remove-Item 'fabrica\*.o' }"
+	powershell -Command "if (Test-Path 'fabrica\*.d') { Remove-Item 'fabrica\*.d' }"
+	powershell -Command "if (Test-Path 'implementaciones\*.o') { Remove-Item 'implementaciones\*.o' }"
+	powershell -Command "if (Test-Path 'implementaciones\*.d') { Remove-Item 'implementaciones\*.d' }"

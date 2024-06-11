@@ -3,12 +3,14 @@
 
 #include "../interfaces/IIniciarSesion.h"
 #include "../dataTypes/Fecha.h"
+#include "../headers/usuario.h"
 
 class CIniciarSesion : public IIniciarSesion
 {
 private:
     static CIniciarSesion* instancia;
     CIniciarSesion();
+    Usuario* user;
 public:
     static CIniciarSesion* getInstancia();
     void ingresarCedula(string ci);

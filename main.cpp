@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include <string>
 #include <iostream>
+#include <map>
 #include "fabrica/fabrica.h"
 
 using namespace std;
@@ -29,8 +30,13 @@ int main(){
    IListarRepresentaciones* iLR;
    IObtenerHistorial* iOH;
    IRegisConsulta* iRG;
-   Fecha fechaNac = Fecha(2001,10,22);
-   Usuario* usuario = new Usuario("string nom", "string ap", "string ci", "string se", fechaNac, 10, true);
+
+   Usuario* usuarioSesion = new Usuario();
+   map<string, Usuario*> usersCollection;
+   Fecha fecha = Fecha(2001, 10, 22);
+   Usuario* pruebaU = new Usuario("contrasena", "Nicolas", "Marquez", "51467384", "masculino", fecha, true);
+   usersCollection.insert({pruebaU->getCedula(), pruebaU});
+
    f = Fabrica::getInstancia();
    iSesion = f->getIIniciarSesion();
    iAD = f->getIAltaDiagnostico();
@@ -52,15 +58,49 @@ int main(){
          cout << "cedula invalida\n";
       }
    }
+
+   auto it = usersCollection.find(cedula);
+      if (it != usersCollection.end()) {
+         Usuario* u = it->second;
+         cout << "\nIngrese su contrasena: ";
+         cin >> pass;
+         if(u->getActivo() == false && u->getContrasena() == " "){
+            u->setContrasena(pass);
+            u->setActivo(true);
+         } else if(u->getActivo() == true){
+            if(u->esContrasena(pass)){
+               usuarioSesion = u;
+            }
+         }
+      } else {
+         cout << "Usuario no encontrado" << endl;
+      }
    
-   cout << "\nIngrese su contrasena: ";
-   cin >> pass;
-   iSesion->ingresarCedula(cedula);
+   if(usuarioSesion->getCedula() != "11111111"){
+      bool salir = false;
+      int option = 0;
+      while (!salir){
+         cout << "\nBienvenido " << usuarioSesion->getNombre() << endl;
+         cout << "¿Que desea hacer?" << endl;
+         cout << "1 - " << endl;
+         cout << "2 - " << endl;
+         cout << "3 - " << endl;
+         cout << "4 - " << endl;
+         cout << "5 - Salir" << endl;
+         cin >> option;
+         switch(option){
+         case 5:
+            salir = true;
+            break;
+         
+         default:
+            break;
+         }
+      }
+   }
+   
    iAD->agregarDescripcion("descripcion");
    iAU->salir();
    ICS->cerrarSesion();
-   cout <<"\n" << usuario->getApellido();
-   cout <<"\n" << usuario->getFechaNacimiento().getAnio();
-   cout <<"\n" << usuario->getEdad();
    return 0;
 }
