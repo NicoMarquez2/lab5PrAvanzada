@@ -29,7 +29,8 @@ int main(){
    IListarRepresentaciones* iLR;
    IObtenerHistorial* iOH;
    IRegisConsulta* iRG;
-   Usuario* usuario = new Usuario();
+   Fecha fechaNac = Fecha(2001,10,22);
+   Usuario* usuario = new Usuario("string nom", "string ap", "string ci", "string se", fechaNac, 10, true);
    f = Fabrica::getInstancia();
    iSesion = f->getIIniciarSesion();
    iAD = f->getIAltaDiagnostico();
@@ -59,5 +60,7 @@ int main(){
    iAU->salir();
    ICS->cerrarSesion();
    cout <<"\n" << usuario->getApellido();
+   cout <<"\n" << usuario->getFechaNacimiento().getAnio();
+   cout <<"\n" << usuario->getEdad();
    return 0;
 }
