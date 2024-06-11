@@ -22,7 +22,7 @@ int calcularEdad(Fecha fecha){
     return edad;
 }
 
-Usuario::Usuario(string cont, string nom, string ap, string ced, string se, Fecha fechaNac, bool act){
+Usuario::Usuario(string cont, string nom, string ap, string ced, string se, Fecha fechaNac, bool act, CategoriaUsuario* cat){
     this->contrasena = cont;
     this->nombre = nom;
     this->apellido = ap;
@@ -31,9 +31,10 @@ Usuario::Usuario(string cont, string nom, string ap, string ced, string se, Fech
     this->fechaNacimiento = fechaNac;
     this->edad = calcularEdad(fechaNac);
     this->activo = act;
+    this->categoria = cat;
 }
 
-Usuario::Usuario(string nom, string ap, string ci, string se, Fecha fechaNac, bool act){
+Usuario::Usuario(string nom, string ap, string ci, string se, Fecha fechaNac, bool act, CategoriaUsuario* cat){
     this->contrasena = " ";
     this->nombre = nom;
     this->apellido = ap;
@@ -42,6 +43,7 @@ Usuario::Usuario(string nom, string ap, string ci, string se, Fecha fechaNac, bo
     this->fechaNacimiento = fechaNac;
     this->edad = calcularEdad(fechaNac);
     this->activo = act;
+    this->categoria = cat;
 }
 
 Usuario::Usuario(){
@@ -79,10 +81,14 @@ int Usuario::getEdad(){
 bool Usuario::getActivo(){
     return this->activo;
 }
+
+CategoriaUsuario* Usuario::getCategoria(){
+    return this->categoria;
+}
+
 bool Usuario::esContrasena(string pass){
     return this->contrasena == pass;
 }
-vector<DtReserva> Usuario::getReservas(){}
 
 void Usuario::setContrasena(string cont){
     this->contrasena = cont;
@@ -105,8 +111,9 @@ void Usuario::setFechaNacimiento(Fecha fecha){
 void Usuario::setActivo(bool act){
     this->activo = act;
 }
-void Usuario::borrarReserva(DtReserva reserva){}
-void Usuario::agregarReserva(DtReserva reserva){}
-void Usuario::agregarEmergencia(DtEmergencia emergencia){}
+
+void Usuario::setCategoria(CategoriaUsuario* cat){
+    this->categoria = cat;
+}
 
 Usuario::~Usuario(){}

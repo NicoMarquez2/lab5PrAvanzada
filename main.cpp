@@ -3,6 +3,7 @@
 #include <iostream>
 #include <map>
 #include "fabrica/fabrica.h"
+#include "../headers/socio.h"
 
 using namespace std;
 
@@ -34,7 +35,8 @@ int main(){
    Usuario* usuarioSesion = new Usuario();
    map<string, Usuario*> usersCollection;
    Fecha fecha = Fecha(2001, 10, 22);
-   Usuario* pruebaU = new Usuario("contrasena", "Nicolas", "Marquez", "51467384", "masculino", fecha, true);
+   Socio* catS = new Socio();
+   Usuario* pruebaU = new Usuario("contrasena", "Nicolas", "Marquez", "51467384", "masculino", fecha, true, catS);
    usersCollection.insert({pruebaU->getCedula(), pruebaU});
 
    f = Fabrica::getInstancia();
@@ -81,7 +83,15 @@ int main(){
       int option = 0;
       while (!salir){
          cout << "\nBienvenido " << usuarioSesion->getNombre() << endl;
-         cout << "¿Que desea hacer?" << endl;
+         if(dynamic_cast<Socio*>(usuarioSesion->getCategoria())){
+            cout << "¿Que desea hacer socio?" << endl;
+            cout << "1 - " << endl;
+            cout << "2 - " << endl;
+            cout << "3 - " << endl;
+            cout << "4 - " << endl;
+            cout << "5 - Salir socio" << endl;
+         }
+         cout << "¿Que desea hacer no socio?" << endl;
          cout << "1 - " << endl;
          cout << "2 - " << endl;
          cout << "3 - " << endl;

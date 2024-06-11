@@ -24,8 +24,8 @@ private:
     bool activo;
     CategoriaUsuario* categoria;
 public:
-    Usuario(string contrasena, string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, bool activo);
-    Usuario(string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, bool activo);
+    Usuario(string contrasena, string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, bool activo, CategoriaUsuario* cat);
+    Usuario(string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, bool activo, CategoriaUsuario* cat);
     Usuario();
 
     string getContrasena();
@@ -36,8 +36,8 @@ public:
     Fecha getFechaNacimiento();
     int getEdad();
     bool getActivo();
+    CategoriaUsuario* getCategoria();
     bool esContrasena(string pass);
-    vector<DtReserva> getReservas();
 
     void setContrasena(string cont);
     void setNombre(string nom);
@@ -46,9 +46,7 @@ public:
     void setSexo(string s);
     void setFechaNacimiento(Fecha fecha);
     void setActivo(bool act);
-    void borrarReserva(DtReserva reserva);
-    void agregarReserva(DtReserva reserva);
-    void agregarEmergencia(DtEmergencia emergencia);
+    void setCategoria(CategoriaUsuario* cat);
 
     ~Usuario();
 };

@@ -11,7 +11,7 @@ class CategoriaUsuario
 {
 public:
     CategoriaUsuario();
-    ~CategoriaUsuario();
+    virtual ~CategoriaUsuario() {}
 };
 
 #endif
