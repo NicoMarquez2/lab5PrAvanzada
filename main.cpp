@@ -95,7 +95,7 @@ int main(){
             cout << "Que desea hacer socio?" << endl;
             cout << "1 - Realizar reserva" << endl;
             cout << "2 - Cancelar reserva" << endl;
-            cout << "3 - Salir" << endl;
+            cout << "4 - Salir" << endl;
             cin >> option;
             switch(option){
                case 1:
@@ -118,6 +118,21 @@ int main(){
             cout << "3 - " << endl;
             cout << "4 - " << endl;
             cout << "5 - Salir medico" << endl;
+            cin >> option;
+            switch(option){
+               case 1:
+                  cout << "Realizar reserva" << endl;
+                  break;
+               case 2:
+                  cout << "Cancelar reserva" << endl;
+                  break;
+               case 5:
+                  salir = true;
+                  break;
+               
+               default:
+                  break;
+            }
          } else if(dynamic_cast<Administrativo*>(usuarioSesion->getCategoria())){
             cout << "Que desea hacer admin?" << endl;
             cout << "1 - " << endl;
@@ -125,6 +140,21 @@ int main(){
             cout << "3 - " << endl;
             cout << "4 - " << endl;
             cout << "5 - Salir admin" << endl;
+            cin >> option;
+            switch(option){
+               case 1:
+                  cout << "Realizar reserva" << endl;
+                  break;
+               case 2:
+                  cout << "Cancelar reserva" << endl;
+                  break;
+               case 5:
+                  salir = true;
+                  break;
+               
+               default:
+                  break;
+            }
          }
       }
    }
