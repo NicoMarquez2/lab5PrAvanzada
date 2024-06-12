@@ -2,7 +2,8 @@
 
 Emergencia::Emergencia() : Consulta(), motivo("motivo"){}
 
-Emergencia::Emergencia(Fecha f, Hora h, string mot) : Consulta(f, h), motivo(mot){}
+Emergencia::Emergencia(Fecha f, Hora h, Usuario* soc, Usuario* med, string mot) : 
+            Consulta(f, h, soc, med), motivo(mot){}
 
 string Emergencia::getMotivo(){
     return this->motivo;

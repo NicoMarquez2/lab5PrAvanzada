@@ -66,6 +66,7 @@ string Usuario::getNombre(){
 string Usuario::getApellido(){
     return this->apellido;
 }
+
 string Usuario::getCedula(){
     return this->cedula;
 }

@@ -9,7 +9,7 @@ private:
     Fecha fechaReserva;
 public:
     Reserva();
-    Reserva(Fecha f, Hora h, Fecha fechaRes);
+    Reserva(Fecha f, Hora h, Usuario* soc, Usuario* med, Fecha fechaRes);
 
     Fecha getFechaReserva();
 

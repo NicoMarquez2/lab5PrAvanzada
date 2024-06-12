@@ -11,7 +11,7 @@ class Emergencia : public Consulta
 private:
     string motivo;
 public:
-    Emergencia(Fecha f, Hora h, string mot);
+    Emergencia(Fecha f, Hora h, Usuario* soc, Usuario* med, string mot);
     Emergencia();
 
     string getMotivo();
