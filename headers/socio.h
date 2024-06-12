@@ -8,14 +8,19 @@
 #include "../headers/consulta.h"
 #include "../headers/reserva.h"
 #include "../headers/emergencia.h"
-#include "../headers/usuarioSocio.h"
 #include <vector>
 
 class Socio: public CategoriaUsuario{
     private:
-        UsuarioSocio* userS;
+        vector<Consulta*> consultas; 
     public:
         Socio();
+        vector<DtConsulta> getConsultas();
+        vector<DtReserva> getReservas();
+        void setConsultas(vector<Consulta*>);
+        void borrarReserva(DtReserva reserva);
+        void agregarReserva(DtReserva reserva);
+        void agregarEmergencia(DtEmergencia emergencia);
         ~Socio();
 };
 
