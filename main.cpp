@@ -33,10 +33,12 @@ int main(){
    IListarRepresentaciones* iLR;
    IObtenerHistorial* iOH;
    IRegisConsulta* iRG;
+   IUsuario* IU;
+   Fecha fecha = Fecha(2001, 10, 22);  
 
    Usuario* usuarioSesion = new Usuario();
    map<string, Usuario*> usersCollection;
-   Fecha fecha = Fecha(2001, 10, 22);
+   
    Socio* catS = new Socio();
    Medico* catM = new Medico();
    Administrativo* catA = new Administrativo();
@@ -56,8 +58,11 @@ int main(){
    iLR = f->getIListarRepresentaciones();
    iOH = f->getIObtenerHistorial();
    iRG = f->getIRegisConsulta();
+   IU = f->getIUsuario();
+
+   IU->cargarDatos(usersCollection);
    string cedula;
-   string pass;
+   string pass = " ";
    printf("\t\tBIENVENIDO\n\n");
    printf("Iniciar sesion\n");
    printf("Ingrese su cedula: ");
@@ -69,7 +74,27 @@ int main(){
       }
    }
 
-   auto it = usersCollection.find(cedula);
+   usuarioSesion = IU->ingresarCedula(cedula);
+   bool correcto = false;
+   if(usuarioSesion->getContrasena() == " "){
+      cout << "Ingrese su contrsena" << endl;
+      while (!correcto && pass != "-1"){
+         IU->registrarContrasena(pass);
+      }
+   } else {
+      cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
+      while (!correcto && pass != "-1"){
+         cin >> pass;
+         correcto = IU->ingresarContrasena(pass);
+         if(!correcto && pass != "-1")
+            cout <<  "Contrasena incorrecta" << endl;
+      }
+   }
+   
+   if(pass == "-1"){
+      return 0;
+   }
+   /*auto it = usersCollection.find(cedula);
       if (it != usersCollection.end()) {
          Usuario* u = it->second;
          cout << "\nIngrese su contrasena: ";
@@ -84,7 +109,7 @@ int main(){
          }
       } else {
          cout << "Usuario no encontrado" << endl;
-      }
+      }*/
    
    if(usuarioSesion->getCedula() != "11111111"){
       bool salir = false;

@@ -42,4 +42,8 @@ IListarRepresentaciones* Fabrica::getIListarRepresentaciones(){
     return CListarRepresentaciones::getInstancia();
 }
 
+IUsuario* Fabrica::getIUsuario(){
+    return CUsuario::getInstancia();
+}
+
 Fabrica::~Fabrica(){}

@@ -8,6 +8,7 @@
 #include "../controllers/CListarRepresentaciones.h"
 #include "../controllers/CObtenerHistorial.h"
 #include "../controllers/CRegisConsulta.h"
+#include "../controllers/CUsuario.h"
 
 class Fabrica{
 private:
@@ -23,6 +24,7 @@ public:
     IListarRepresentaciones* getIListarRepresentaciones();
     IObtenerHistorial* getIObtenerHistorial();
     IRegisConsulta* getIRegisConsulta();
+    IUsuario* getIUsuario();
     ~Fabrica();
 };
 
