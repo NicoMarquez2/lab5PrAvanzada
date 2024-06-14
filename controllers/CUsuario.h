@@ -11,6 +11,7 @@ class CUsuario : public IUsuario
 private:
     static CUsuario* instancia;
     CUsuario();
+    Usuario* userSesion;
     Usuario* user;
     string ci;
     string pass;
@@ -21,10 +22,10 @@ public:
     Usuario* getUser();
     map<string, Usuario*> getUsuarios();
     Usuario* ingresarCedula(string ci);
-    void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria);
+    void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, CategoriaUsuario* categoria);
     void activarUsuario(string ci);
     void salir();
-    //void ingresarCedula(string ci);
+    bool ingresarCedulaAlta(string ci);
     bool registrarContrasena(string pass);
     bool ingresarContrasena(string pass);
     void cerrarSesion();

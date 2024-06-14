@@ -10,19 +10,19 @@
 using namespace std;
 
 bool isNumber(const string& str) {
-  for (char const& c : str) {
-    if (std::isdigit(c) == 0) return false;
-  }
-  return true;
+    for (char const& c : str) {
+        if (std::isdigit(c) == 0) return false;
+    }
+    return true;
 }
 
-bool correcto(string ci){
-   if(!isNumber(ci) || ci.length() < 8 || ci.length() > 8)
-      return false;
-   return true;
+bool correcto(string ci) {
+    if (!isNumber(ci) || ci.length() != 8)
+        return false;
+    return true;
 }
 
-int main(){
+int main() {
    bool valido = false;
    Fabrica* f;
    IIniciarSesion* iSesion;
@@ -34,11 +34,10 @@ int main(){
    IObtenerHistorial* iOH;
    IRegisConsulta* iRG;
    IUsuario* IU;
-   Fecha fecha = Fecha(2001, 10, 22);  
+   Fecha fecha = Fecha(2001, 10, 22);
 
    Usuario* usuarioSesion = new Usuario();
    map<string, Usuario*> usersCollection;
-   
    Socio* catS = new Socio();
    Medico* catM = new Medico();
    Administrativo* catA = new Administrativo();
@@ -62,128 +61,168 @@ int main(){
 
    IU->cargarDatos(usersCollection);
    string cedula;
-   string pass = " ";
-   printf("\t\tBIENVENIDO\n\n");
-   printf("Iniciar sesion\n");
-   printf("Ingrese su cedula: ");
-   while (!valido){
+   string pass;
+   cout << "\t\tBIENVENIDO\n\n";
+   cout << "Iniciar sesion\n";
+   cout << "Ingrese su cedula: ";
+   while (!valido) {
       cin >> cedula;
       valido = correcto(cedula);
-      if(!valido){
+      if (!valido) {
          cout << "cedula invalida\n";
       }
    }
 
    usuarioSesion = IU->ingresarCedula(cedula);
+   cout << "\nCedula del usuario: " << usuarioSesion->getCedula() << endl;
    bool correcto = false;
-   if(usuarioSesion->getContrasena() == " "){
+   if (usuarioSesion->getContrasena() == " ") {
       cout << "Ingrese su contrsena" << endl;
-      while (!correcto && pass != "-1"){
-         IU->registrarContrasena(pass);
+      while (!correcto && pass != "-1") {
+         correcto = IU->registrarContrasena(pass);
       }
    } else {
       cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
-      while (!correcto && pass != "-1"){
+      while (!correcto && pass != "-1") {
          cin >> pass;
          correcto = IU->ingresarContrasena(pass);
-         if(!correcto && pass != "-1")
-            cout <<  "Contrasena incorrecta" << endl;
+         if (!correcto && pass != "-1")
+               cout << "Contrasena incorrecta" << endl;
       }
    }
-   
-   if(pass == "-1"){
+
+   if (pass == "-1") {
       return 0;
    }
-   /*auto it = usersCollection.find(cedula);
-      if (it != usersCollection.end()) {
-         Usuario* u = it->second;
-         cout << "\nIngrese su contrasena: ";
-         cin >> pass;
-         if(u->getActivo() == false && u->getContrasena() == " "){
-            u->setContrasena(pass);
-            u->setActivo(true);
-         } else if(u->getActivo() == true){
-            if(u->esContrasena(pass)){
-               usuarioSesion = u;
-            }
-         }
-      } else {
-         cout << "Usuario no encontrado" << endl;
-      }*/
-   
-   if(usuarioSesion->getCedula() != "11111111"){
+
+   if (usuarioSesion->getCedula() != "11111111") {
       bool salir = false;
       int option = 0;
-      while (!salir){
+      while (!salir) {
          cout << "\nBienvenido " << usuarioSesion->getNombre() << endl;
-         if(dynamic_cast<Socio*>(usuarioSesion->getCategoria())){
-            cout << "Que desea hacer socio?" << endl;
-            cout << "1 - Realizar reserva" << endl;
-            cout << "2 - Cancelar reserva" << endl;
-            cout << "4 - Salir" << endl;
-            cin >> option;
-            switch(option){
-               case 1:
-                  cout << "Realizar reserva" << endl;
-                  break;
-               case 2:
-                  cout << "Cancelar reserva" << endl;
-                  break;
-               case 3:
-                  salir = true;
-                  break;
-               
-               default:
-                  break;
-            }
-         } else if(dynamic_cast<Medico*>(usuarioSesion->getCategoria())){
-            cout << "Que desea hacer medico?" << endl;
-            cout << "1 - " << endl;
-            cout << "2 - " << endl;
-            cout << "3 - " << endl;
-            cout << "4 - " << endl;
-            cout << "5 - Salir medico" << endl;
-            cin >> option;
-            switch(option){
-               case 1:
-                  cout << "Realizar reserva" << endl;
-                  break;
-               case 2:
-                  cout << "Cancelar reserva" << endl;
-                  break;
-               case 5:
-                  salir = true;
-                  break;
-               
-               default:
-                  break;
-            }
-         } else if(dynamic_cast<Administrativo*>(usuarioSesion->getCategoria())){
-            cout << "Que desea hacer admin?" << endl;
-            cout << "1 - " << endl;
-            cout << "2 - " << endl;
-            cout << "3 - " << endl;
-            cout << "4 - " << endl;
-            cout << "5 - Salir admin" << endl;
-            cin >> option;
-            switch(option){
-               case 1:
-                  cout << "Realizar reserva" << endl;
-                  break;
-               case 2:
-                  cout << "Cancelar reserva" << endl;
-                  break;
-               case 5:
-                  salir = true;
-                  break;
-               
-               default:
-                  break;
-            }
+         if (dynamic_cast<Socio*>(usuarioSesion->getCategoria())) {
+               cout << "Que desea hacer socio?" << endl;
+               cout << "1 - Realizar reserva" << endl;
+               cout << "2 - Cancelar reserva" << endl;
+               cout << "4 - Salir" << endl;
+               cin >> option;
+               switch (option) {
+                  case 1:
+                     cout << "Realizar reserva" << endl;
+                     break;
+                  case 2:
+                     cout << "Cancelar reserva" << endl;
+                     break;
+                  case 3:
+                     salir = true;
+                     break;
+                  default:
+                     break;
+               }
+         } else if (dynamic_cast<Medico*>(usuarioSesion->getCategoria())) {
+               cout << "Que desea hacer medico?" << endl;
+               cout << "1 - " << endl;
+               cout << "2 - " << endl;
+               cout << "3 - " << endl;
+               cout << "4 - " << endl;
+               cout << "5 - Salir medico" << endl;
+               cin >> option;
+               switch (option) {
+                  case 1:
+                     cout << "Realizar reserva" << endl;
+                     break;
+                  case 2:
+                     cout << "Cancelar reserva" << endl;
+                     break;
+                  case 5:
+                     salir = true;
+                     break;
+                  default:
+                     break;
+               }
+         } else if (dynamic_cast<Administrativo*>(usuarioSesion->getCategoria())) {
+               string input;
+               cout << "Que desea hacer admin?" << endl;
+               cout << "1 - Alta/Reactivacion de usuario" << endl;
+               cout << "2 - " << endl;
+               cout << "3 - " << endl;
+               cout << "4 - " << endl;
+               cout << "5 - Salir admin" << endl;
+               cin >> option;
+
+               string nombre, apellido, sexo, categoria;
+               int anio, mes, dia;
+               bool encuentra;
+               switch (option) {
+                  case 1:
+                     while (input != "-1") {
+                           cout << "Ingrese una cedula (ingrese -1 si desea salir): ";
+                           cin >> input;
+                           if (input == "-1"){
+                              break;
+                           }                           
+                           encuentra = IU->ingresarCedulaAlta(input);
+                           if (!encuentra) {
+                              cout << "ingrese el nombre del usuario: ";
+                              cin >> nombre;
+                              cout << "\ningrese el apellido del usuario: ";
+                              cin >> apellido;
+                              cout << "\ningrese el sexo del usuario: ";
+                              cin >> sexo;
+                              cout << "\ningrese el anio, mes y dia de nacimiento del usuario: ";
+                              cin >> anio >> mes >> dia;
+                              cout << "\ningrese la categoria del usuario: ";
+                              cin >> categoria;
+
+                              Fecha fecha(anio, mes, dia);
+                              if (categoria == "socio")
+                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, catS);
+                              else if (categoria == "medico")
+                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, catM);
+                              else
+                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, catA);
+                           } else {
+                              // Aquí deberías tener una lógica para mostrar los datos del usuario encontrado
+                              // cout << "\n Nombre: " << u->getNombre();
+                              // cout << "\n Apellido:" << u->getApellido();
+                              // cout << "\n Sexo: " << u->getSexo();
+                              // cout << "\n Edad: " << u->getEdad();
+                              // cout << "\n Activo: " << u->getActivo();
+                              // if(dynamic_cast<Administrativo*>(u->getCategoria())){
+                              //    cout << "\n Categoria: Administrativo";
+                              // } else if(dynamic_cast<Socio*>(u->getCategoria())){
+                              //    cout << "\n Categoria: Socio";
+                              // } else if(dynamic_cast<Medico*>(u->getCategoria())){
+                              //    cout << "\n Categoria: Medico";
+                              // }
+
+                              // if(u->getActivo() == false){
+                              //    cout << "desea reactivar el usuario?" << endl;
+                              //    cout << "1- SI\t\t2- NO";
+                              //    cin >> option;
+
+                              //    if(option == 1){
+                              //       IU->activarUsuario(u->getCedula());
+                              //       cout << "Usuario reactivado";
+                              //    }
+                              // }
+                           }
+                     }
+                     IU->salir();
+                     break;
+                  case 2:
+                     cout << "Cancelar reserva" << endl;
+                     break;
+                  case 5:
+                     salir = true;
+                     break;
+                  default:
+                     break;
+               }
          }
       }
    }
-   
+
    iAD->agregarDescripcion("descripcion");
    iAU->salir();
    ICS->cerrarSesion();

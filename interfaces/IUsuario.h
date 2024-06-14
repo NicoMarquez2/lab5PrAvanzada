@@ -7,6 +7,7 @@
 #include "stdio.h"
 #include <map>
 #include "../headers/usuario.h"
+#include "../headers/categoriaUsuario.h"
 
 using namespace std;
 
@@ -15,10 +16,10 @@ class IUsuario
 public:
     virtual void cargarDatos(map<string, Usuario*> usersCol) = 0;
     virtual Usuario* ingresarCedula(string ci) = 0;
-    virtual void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria) = 0;
+    virtual void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, CategoriaUsuario* categoria) = 0;
     virtual void activarUsuario(string ci) = 0;
     virtual void salir() = 0;
-    //virtual void ingresarCedula(string ci) = 0;
+    virtual bool ingresarCedulaAlta(string ci) = 0;
     virtual bool registrarContrasena(string pass) = 0;
     virtual bool ingresarContrasena(string pass) = 0;
     virtual void cerrarSesion() = 0;

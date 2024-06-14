@@ -27,17 +27,32 @@ Usuario* CUsuario::ingresarCedula(string ci){
     map<string, Usuario*>::iterator it;
     it = this->usuarios.find(ci);
     Usuario* u = it->second;
-    this->user = u;
+    this->userSesion = u;
     return u;
 }
-void CUsuario::ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria){
-    cout << "ingresar datos: " << nombre << endl;
+
+bool CUsuario::ingresarCedulaAlta(string ci){
+    this->ci = ci;
+    map<string, Usuario*>::iterator it;
+    it = this->usuarios.find(ci);
+    if(it != usuarios.end()){
+        this->user = it->second;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void CUsuario::ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, CategoriaUsuario* categoria){
+    Usuario* u = new Usuario(nombre, apellido, this->ci, sexo, fechaNacimiento, false, categoria);
+    this->usuarios.insert({this->ci,u});
 }
 void CUsuario::activarUsuario(string ci){
-    cout << "activar usuario: " << ci << endl;
+    this->user->setActivo(true);
 }
 void CUsuario::salir(){
     cout << "salir";
+    delete this->user;
 }
 bool CUsuario::registrarContrasena(string pass){
     cout << "registrar ci: " << pass << endl;
@@ -46,7 +61,7 @@ bool CUsuario::registrarContrasena(string pass){
 bool CUsuario::ingresarContrasena(string pass){
     cout << "ingresar ci: " << pass << endl;
     this->pass = pass;
-    return (this->user->esContrasena(pass));
+    return (this->userSesion->esContrasena(pass));
 }
 void CUsuario::cerrarSesion(){
     cout << "cerrar sesion";
