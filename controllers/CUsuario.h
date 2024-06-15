@@ -21,11 +21,11 @@ public:
     void cargarDatos(map<string, Usuario*> usersCol);
     Usuario* getUser();
     map<string, Usuario*> getUsuarios();
-    Usuario* ingresarCedula(string ci);
+    DtUsuario ingresarCedula(string ci);
     void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, CategoriaUsuario* categoria);
     void activarUsuario(string ci);
     void salir();
-    bool ingresarCedulaAlta(string ci);
+    DtUsuario ingresarCedulaAlta(string ci);
     bool registrarContrasena(string pass);
     bool ingresarContrasena(string pass);
     void cerrarSesion();

@@ -36,7 +36,7 @@ int main() {
    IUsuario* IU;
    Fecha fecha = Fecha(2001, 10, 22);
 
-   Usuario* usuarioSesion = new Usuario();
+   DtUsuario usuarioSesion = DtUsuario();
    map<string, Usuario*> usersCollection;
    Socio* catS = new Socio();
    Medico* catM = new Medico();
@@ -74,9 +74,9 @@ int main() {
    }
 
    usuarioSesion = IU->ingresarCedula(cedula);
-   cout << "\nCedula del usuario: " << usuarioSesion->getCedula() << endl;
+   cout << "\nCedula del usuario: " << usuarioSesion.getCedula() << endl;
    bool correcto = false;
-   if (usuarioSesion->getContrasena() == " ") {
+   if (usuarioSesion.getContrasena() == " ") {
       cout << "Ingrese su contrsena" << endl;
       while (!correcto && pass != "-1") {
          correcto = IU->registrarContrasena(pass);
@@ -95,12 +95,12 @@ int main() {
       return 0;
    }
 
-   if (usuarioSesion->getCedula() != "11111111") {
+   if (usuarioSesion.getCedula() != "11111111") {
       bool salir = false;
       int option = 0;
       while (!salir) {
-         cout << "\nBienvenido " << usuarioSesion->getNombre() << endl;
-         if (dynamic_cast<Socio*>(usuarioSesion->getCategoria())) {
+         cout << "\nBienvenido " << usuarioSesion.getNombre() << endl;
+         if (dynamic_cast<Socio*>(usuarioSesion.getCategoria())) {
                cout << "Que desea hacer socio?" << endl;
                cout << "1 - Realizar reserva" << endl;
                cout << "2 - Cancelar reserva" << endl;
@@ -119,7 +119,7 @@ int main() {
                   default:
                      break;
                }
-         } else if (dynamic_cast<Medico*>(usuarioSesion->getCategoria())) {
+         } else if (dynamic_cast<Medico*>(usuarioSesion.getCategoria())) {
                cout << "Que desea hacer medico?" << endl;
                cout << "1 - " << endl;
                cout << "2 - " << endl;
@@ -140,7 +140,7 @@ int main() {
                   default:
                      break;
                }
-         } else if (dynamic_cast<Administrativo*>(usuarioSesion->getCategoria())) {
+         } else if (dynamic_cast<Administrativo*>(usuarioSesion.getCategoria())) {
                string input;
                cout << "Que desea hacer admin?" << endl;
                cout << "1 - Alta/Reactivacion de usuario" << endl;
@@ -152,7 +152,7 @@ int main() {
 
                string nombre, apellido, sexo, categoria;
                int anio, mes, dia;
-               bool encuentra;
+               DtUsuario user = DtUsuario();
                switch (option) {
                   case 1:
                      while (input != "-1") {
@@ -161,8 +161,8 @@ int main() {
                            if (input == "-1"){
                               break;
                            }                           
-                           encuentra = IU->ingresarCedulaAlta(input);
-                           if (!encuentra) {
+                           user = IU->ingresarCedulaAlta(input);
+                           if (user.getCedula() == "11111111") {
                               cout << "ingrese el nombre del usuario: ";
                               cin >> nombre;
                               cout << "\ningrese el apellido del usuario: ";
@@ -182,30 +182,29 @@ int main() {
                               else
                                  IU->ingresarDatos(nombre, apellido, sexo, fecha, catA);
                            } else {
-                              // Aquí deberías tener una lógica para mostrar los datos del usuario encontrado
-                              // cout << "\n Nombre: " << u->getNombre();
-                              // cout << "\n Apellido:" << u->getApellido();
-                              // cout << "\n Sexo: " << u->getSexo();
-                              // cout << "\n Edad: " << u->getEdad();
-                              // cout << "\n Activo: " << u->getActivo();
-                              // if(dynamic_cast<Administrativo*>(u->getCategoria())){
-                              //    cout << "\n Categoria: Administrativo";
-                              // } else if(dynamic_cast<Socio*>(u->getCategoria())){
-                              //    cout << "\n Categoria: Socio";
-                              // } else if(dynamic_cast<Medico*>(u->getCategoria())){
-                              //    cout << "\n Categoria: Medico";
-                              // }
+                              cout << "\n Nombre: " << user.getNombre();
+                              cout << "\n Apellido:" << user.getApellido();
+                              cout << "\n Sexo: " << user.getSexo();
+                              cout << "\n Edad: " << user.getEdad();
+                              cout << "\n Activo: " << user.getActivo();
+                              if(dynamic_cast<Administrativo*>(user.getCategoria())){
+                                 cout << "\n Categoria: Administrativo";
+                              } else if(dynamic_cast<Socio*>(user.getCategoria())){
+                                 cout << "\n Categoria: Socio";
+                              } else if(dynamic_cast<Medico*>(user.getCategoria())){
+                                 cout << "\n Categoria: Medico";
+                              }
 
-                              // if(u->getActivo() == false){
-                              //    cout << "desea reactivar el usuario?" << endl;
-                              //    cout << "1- SI\t\t2- NO";
-                              //    cin >> option;
+                              if(user.getActivo() == false){
+                                 cout << "desea reactivar el usuario?" << endl;
+                                 cout << "1- SI\t\t2- NO";
+                                 cin >> option;
 
-                              //    if(option == 1){
-                              //       IU->activarUsuario(u->getCedula());
-                              //       cout << "Usuario reactivado";
-                              //    }
-                              // }
+                                 if(option == 1){
+                                    IU->activarUsuario(user.getCedula());
+                                    cout << "Usuario reactivado";
+                                 }
+                              }
                            }
                      }
                      IU->salir();
