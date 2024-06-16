@@ -23,7 +23,6 @@ bool correcto(string ci) {
 }
 
 int main() {
-   bool valido = false;
    Fabrica* f;
    IIniciarSesion* iSesion;
    IAltaDiagnostico* iAD;
@@ -59,52 +58,73 @@ int main() {
    iRG = f->getIRegisConsulta();
    IU = f->getIUsuario();
 
-   IU->cargarDatos(usersCollection);
-   string cedula;
+   string cedula = "-1";
    string pass;
+   bool salir = false;
+   bool cedulaValida = false;
+   bool passCorrecto = false;
+   int opcion = -1;
    cout << "\t\tBIENVENIDO\n\n";
-   cout << "Iniciar sesion\n";
-   cout << "Ingrese su cedula: ";
-   while (!valido) {
-      cin >> cedula;
-      valido = correcto(cedula);
-      if (!valido) {
-         cout << "cedula invalida\n";
-      }
-   }
+   while (!salir){
+      cout << "Que desea hacer?\n";
+      cout << "0- Cargar datos\n";
+      cout << "1- Iniciar sesion\n";
+      cout << "2- Salir\n";
+      cin >> opcion;
+      switch (opcion){
+      case  0:
+         IU->cargarDatos(usersCollection);
+         break;
+      
+      case 1:
+         cout << "Ingrese su cedula: ";
+         while (!cedulaValida) {
+            cin >> cedula;
+            cedulaValida = correcto(cedula);
+            if (!cedulaValida) {
+               cout << "cedula invalida\n";
+            }
+         }
+         usuarioSesion = IU->ingresarCedula(cedula);
 
-   usuarioSesion = IU->ingresarCedula(cedula);
-   cout << "\nCedula del usuario: " << usuarioSesion.getCedula() << endl;
-   bool correcto = false;
-   if (usuarioSesion.getContrasena() == " ") {
-      cout << "Ingrese su contrsena" << endl;
-      while (!correcto && pass != "-1") {
-         correcto = IU->registrarContrasena(pass);
-      }
-   } else {
-      cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
-      while (!correcto && pass != "-1") {
-         cin >> pass;
-         correcto = IU->ingresarContrasena(pass);
-         if (!correcto && pass != "-1")
-               cout << "Contrasena incorrecta" << endl;
-      }
-   }
+         if (usuarioSesion.getContrasena() == " ") {
+            cout << "Ingrese su contrsena" << endl;
+            while (!passCorrecto && pass != "-1") {
+               cin >> pass;
+               passCorrecto = IU->registrarContrasena(pass);
+               if (!passCorrecto && pass != "-1")
+                     cout << "Contrasena invalida" << endl;
+            }
+         } else {
+            cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
+            while (!passCorrecto && pass != "-1") {
+               cin >> pass;
+               passCorrecto = IU->ingresarContrasena(pass);
+               if (!passCorrecto && pass != "-1")
+                     cout << "Contrasena incorrecta" << endl;
+            }
+         }
+         break;
+      
+      case 2:
+         salir = true;
+         break;
 
-   if (pass == "-1") {
-      return 0;
-   }
+      default:
+         cout << "\nOpcion invalida\n\n";
+         break;
+      }
 
-   if (usuarioSesion.getCedula() != "11111111") {
-      bool salir = false;
-      int option = 0;
-      while (!salir) {
-         cout << "\nBienvenido " << usuarioSesion.getNombre() << endl;
-         if (dynamic_cast<Socio*>(usuarioSesion.getCategoria())) {
+      if (usuarioSesion.getCedula() != "11111111") {
+         bool salirSesion = false;
+         int option = 0;
+         while (!salirSesion) {
+            cout << "\nBienvenido " << usuarioSesion.getNombre() << endl;
+            if (dynamic_cast<Socio*>(usuarioSesion.getCategoria())) {
                cout << "Que desea hacer socio?" << endl;
                cout << "1 - Realizar reserva" << endl;
                cout << "2 - Cancelar reserva" << endl;
-               cout << "4 - Salir" << endl;
+               cout << "3 - Salir" << endl;
                cin >> option;
                switch (option) {
                   case 1:
@@ -114,12 +134,16 @@ int main() {
                      cout << "Cancelar reserva" << endl;
                      break;
                   case 3:
-                     salir = true;
+                     cedula = "-1";
+                     usuarioSesion = DtUsuario();
+                     cedulaValida = false;
+                     passCorrecto = false;
+                     salirSesion = true;
                      break;
                   default:
                      break;
                }
-         } else if (dynamic_cast<Medico*>(usuarioSesion.getCategoria())) {
+            } else if (dynamic_cast<Medico*>(usuarioSesion.getCategoria())) {
                cout << "Que desea hacer medico?" << endl;
                cout << "1 - " << endl;
                cout << "2 - " << endl;
@@ -135,12 +159,16 @@ int main() {
                      cout << "Cancelar reserva" << endl;
                      break;
                   case 5:
-                     salir = true;
+                     cedula = "-1";
+                     usuarioSesion = DtUsuario();
+                     cedulaValida = false;
+                     passCorrecto = false;
+                     salirSesion = true;
                      break;
                   default:
                      break;
                }
-         } else if (dynamic_cast<Administrativo*>(usuarioSesion.getCategoria())) {
+            } else if (dynamic_cast<Administrativo*>(usuarioSesion.getCategoria())) {
                string input;
                cout << "Que desea hacer admin?" << endl;
                cout << "1 - Alta/Reactivacion de usuario" << endl;
@@ -213,14 +241,20 @@ int main() {
                      cout << "Cancelar reserva" << endl;
                      break;
                   case 5:
-                     salir = true;
+                     cedula = "-1";
+                     usuarioSesion = DtUsuario();
+                     cedulaValida = false;
+                     passCorrecto = false;
+                     salirSesion = true;
                      break;
                   default:
                      break;
                }
+            }
          }
       }
    }
+   cout << "\n\nsalgo\n\n";
 
    iAD->agregarDescripcion("descripcion");
    iAU->salir();

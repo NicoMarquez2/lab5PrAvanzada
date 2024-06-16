@@ -61,7 +61,7 @@ void CUsuario::salir(){
 }
 bool CUsuario::registrarContrasena(string pass){
     cout << "registrar ci: " << pass << endl;
-    return true;
+    return (pass.length() >= 6 && pass.length() <= 9);
 }
 bool CUsuario::ingresarContrasena(string pass){
     cout << "ingresar ci: " << pass << endl;
