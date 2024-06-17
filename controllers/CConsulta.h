@@ -7,6 +7,9 @@
 #include "../headers/consulta.h"
 #include "../headers/diagnostico.h"
 #include "../headers/codDiagnostico.h"
+#include "../headers/reserva.h"
+#include "../headers/emergencia.h"
+#include "CUsuario.h"
 
 class CConsulta : public IConsulta
 {
@@ -27,7 +30,7 @@ public:
     void setConsultas(vector<Consulta*> consultas);
     void setDiagnosticos(map<string, Diagnostico*> diagnosticos);
     void setCodigos(vector<CodDiagnostico*> codigos);
-    
+
     vector<DtConsulta> obtenerConsultas();
     DtConsulta seleccionarConsulta(string ci);
     void obtenerCategorias();
@@ -38,7 +41,7 @@ public:
     void agregarTratamiento(string descripcion, string tipo);
     void agregarFecha(Fecha fecha);
     void agregarMedicamento(string medicamento);
-    void registroReserva(string ciMed, string ciPac, bool asiste, Fecha fecha, Fecha fechaReserva);
+    void registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva);
     void registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo);
     void listarRepresentacionesEstandarizadas();
 };

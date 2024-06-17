@@ -5,6 +5,7 @@
 #include <vector>
 #include "../dataTypes/dtConsulta.h"
 #include "../dataTypes/fecha.h"
+#include "../dataTypes/hora.h"
 
 class IConsulta
 {
@@ -19,7 +20,7 @@ public:
     virtual void agregarTratamiento(string descripcion, string tipo) = 0;
     virtual void agregarFecha(Fecha fecha) = 0;
     virtual void agregarMedicamento(string medicamento) = 0;
-    virtual void registroReserva(string ciMed, string ciPac, bool asiste, Fecha fecha, Fecha fechaReserva) = 0;
+    virtual void registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva) = 0;
     virtual void registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo) = 0;
     virtual void listarRepresentacionesEstandarizadas() = 0;
 };

@@ -9,6 +9,7 @@
 #include "../controllers/CObtenerHistorial.h"
 #include "../controllers/CRegisConsulta.h"
 #include "../controllers/CUsuario.h"
+#include "../controllers/CConsulta.h"
 
 class Fabrica{
 private:
@@ -25,6 +26,7 @@ public:
     IObtenerHistorial* getIObtenerHistorial();
     IRegisConsulta* getIRegisConsulta();
     IUsuario* getIUsuario();
+    IConsulta* getIConsulta();
     ~Fabrica();
 };
 

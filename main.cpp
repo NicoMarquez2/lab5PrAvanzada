@@ -33,6 +33,7 @@ int main() {
    IObtenerHistorial* iOH;
    IRegisConsulta* iRG;
    IUsuario* IU;
+   IConsulta* IC;
    Fecha fecha = Fecha(2001, 10, 22);
 
    DtUsuario usuarioSesion = DtUsuario();
@@ -57,6 +58,7 @@ int main() {
    iOH = f->getIObtenerHistorial();
    iRG = f->getIRegisConsulta();
    IU = f->getIUsuario();
+   IC = f->getIConsulta();
 
    string cedula = "-1";
    string pass;
@@ -169,16 +171,15 @@ int main() {
                      break;
                }
             } else if (dynamic_cast<Administrativo*>(usuarioSesion.getCategoria())) {
-               string input;
+               string input, nombre, apellido, sexo, categoria, ciMed, ciPac, motivo;
+               int anio, mes, dia, anioR, mesR, diaR, opcionConsulta;
+               DtUsuario user = DtUsuario();
                cout << "Que desea hacer admin?" << endl;
                cout << "1 - Alta/Reactivacion de usuario" << endl;
                cout << "2 - Registro de consulta" << endl;
                cout << "3 - Salir" << endl;
                cin >> option;
 
-               string nombre, apellido, sexo, categoria;
-               int anio, mes, dia;
-               DtUsuario user = DtUsuario();
                switch (option) {
                   case 1:
                      while (input != "-1") {
@@ -236,7 +237,34 @@ int main() {
                      IU->salir();
                      break;
                   case 2:
-                     cout << "Registro de consulta" << endl;
+                     cout << "Desea ingresar una reserva o una emergencia?" << endl;
+                     cout << "1- RESERVA\t\t\t2- EMERGENCIA" << endl;
+                     cin >> opcionConsulta;
+                     if(opcionConsulta == 1){
+                        cout << "Registro de consulta" << endl;
+                        cout << "Ingrese la ci del medico: ";
+                        cin >> ciMed;
+                        cout << "\nIngrese la ci del paciente: ";
+                        cin >> ciPac;
+                        cout << "\nIngrese dia, mes y anio de la consulta: ";
+                        cin >> dia >> mes >> anio;
+                        cout << "\nIngrese dia, mes y anio de la reserva: ";
+                        cin >> diaR >> mesR >> anioR;
+
+                        IC->registroReserva(ciMed, ciPac, Fecha(dia, mes, anio), Fecha(diaR, mesR, anioR));
+                     } else {
+                        cout << "Registro de emergencia" << endl;
+                        cout << "Ingrese la ci del medico: ";
+                        cin >> ciMed;
+                        cout << "\nIngrese la ci del paciente: ";
+                        cin >> ciPac;
+                        cout << "\nIngrese dia, mes y anio de la consulta: ";
+                        cin >> dia >> mes >> anio;
+                        cout << "\nIngrese el motivo de la emergencia: ";
+                        cin >> motivo;
+
+                        IC->registroEmergencia(ciMed, ciPac, Fecha(dia, mes, anio), motivo);
+                     }
                      break;
                   case 3:
                      cedula = "-1";

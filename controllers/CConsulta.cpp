@@ -1,5 +1,7 @@
 #include "CConsulta.h"
 
+CUsuario* CU = CUsuario::getInstancia();
+
 CConsulta* CConsulta::instancia = NULL;
 
 CConsulta::CConsulta(){}
@@ -36,16 +38,41 @@ void CConsulta::setCodigos(vector<CodDiagnostico*> codigos){
     this->codigos = codigos;
 }
 
-vector<DtConsulta> obtenerConsultas(){}
-DtConsulta seleccionarConsulta(string ci){}
-void obtenerCategorias(){}
-void seleccionarCategoria(string categoria){}
-void obtenerDiagnosticos(){}
-void seleccionarDiagnostico(string diagnostico){}
-void agregarDescripcion(string descripcion){}
-void agregarTratamiento(string descripcion, string tipo){}
-void agregarFecha(Fecha fecha){}
-void agregarMedicamento(string medicamento){}
-void registroReserva(string ciMed, string ciPac, bool asiste, Fecha fecha, Fecha fechaReserva){}
-void registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo){}
-void listarRepresentacionesEstandarizadas(){}
+vector<DtConsulta> CConsulta::obtenerConsultas(){}
+DtConsulta CConsulta::seleccionarConsulta(string ci){}
+void CConsulta::obtenerCategorias(){}
+void CConsulta::seleccionarCategoria(string categoria){}
+void CConsulta::obtenerDiagnosticos(){}
+void CConsulta::seleccionarDiagnostico(string diagnostico){}
+void CConsulta::agregarDescripcion(string descripcion){}
+void CConsulta::agregarTratamiento(string descripcion, string tipo){}
+void CConsulta::agregarFecha(Fecha fecha){}
+void CConsulta::agregarMedicamento(string medicamento){}
+void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva){
+    map<string,Usuario*> users = CU->getUsuarios();
+
+    map<string, Usuario*>::iterator it;
+    it = users.find(ciMed);
+    Usuario* med = it->second;
+
+    it = users.find(ciPac);
+    Usuario* pac = it->second;
+    Reserva* r = new Reserva(fecha, Hora(), pac, med, fechaReserva);
+
+    this->consultas.push_back(r);
+}
+
+void CConsulta::registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo){  
+    map<string,Usuario*> users = CU->getUsuarios();
+
+    map<string, Usuario*>::iterator it;
+    it = users.find(ciMed);
+    Usuario* med = it->second;
+
+    it = users.find(ciPac);
+    Usuario* pac = it->second;
+    Emergencia* e = new Emergencia(fecha, Hora(), pac, med, motivo);
+
+    this->consultas.push_back(e);
+}
+void CConsulta::listarRepresentacionesEstandarizadas(){}

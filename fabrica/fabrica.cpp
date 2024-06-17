@@ -46,4 +46,8 @@ IUsuario* Fabrica::getIUsuario(){
     return CUsuario::getInstancia();
 }
 
+IConsulta* Fabrica::getIConsulta(){
+    return CConsulta::getInstancia();
+}
+
 Fabrica::~Fabrica(){}
