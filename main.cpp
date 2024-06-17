@@ -63,6 +63,7 @@ int main() {
    bool salir = false;
    bool cedulaValida = false;
    bool passCorrecto = false;
+   bool datosCargados = false;
    int opcion = -1;
    cout << "\t\tBIENVENIDO\n\n";
    while (!salir){
@@ -73,7 +74,12 @@ int main() {
       cin >> opcion;
       switch (opcion){
       case  0:
-         IU->cargarDatos(usersCollection);
+         if(!datosCargados){        
+            IU->cargarDatos(usersCollection);
+            datosCargados = true;  
+         } else {
+            cout << "\nLos datos ya fueron cargados" << endl;
+         }
          break;
       
       case 1:
