@@ -151,20 +151,14 @@ int main() {
                }
             } else if (dynamic_cast<Medico*>(usuarioSesion.getCategoria())) {
                cout << "Que desea hacer medico?" << endl;
-               cout << "1 - " << endl;
-               cout << "2 - " << endl;
-               cout << "3 - " << endl;
-               cout << "4 - " << endl;
-               cout << "5 - Salir medico" << endl;
+               cout << "1 - Alta diagnosticos de consulta" << endl;
+               cout << "2 - Salir" << endl;
                cin >> option;
                switch (option) {
                   case 1:
-                     cout << "Realizar reserva" << endl;
+                     cout << "Alta diagnosticos de consulta" << endl;
                      break;
                   case 2:
-                     cout << "Cancelar reserva" << endl;
-                     break;
-                  case 5:
                      cedula = "-1";
                      usuarioSesion = DtUsuario();
                      cedulaValida = false;
@@ -178,10 +172,8 @@ int main() {
                string input;
                cout << "Que desea hacer admin?" << endl;
                cout << "1 - Alta/Reactivacion de usuario" << endl;
-               cout << "2 - " << endl;
-               cout << "3 - " << endl;
-               cout << "4 - " << endl;
-               cout << "5 - Salir admin" << endl;
+               cout << "2 - Registro de consulta" << endl;
+               cout << "3 - Salir" << endl;
                cin >> option;
 
                string nombre, apellido, sexo, categoria;
@@ -222,21 +214,21 @@ int main() {
                               cout << "\n Edad: " << user.getEdad();
                               cout << "\n Activo: " << user.getActivo();
                               if(dynamic_cast<Administrativo*>(user.getCategoria())){
-                                 cout << "\n Categoria: Administrativo";
+                                 cout << "\n Categoria: Administrativo\n";
                               } else if(dynamic_cast<Socio*>(user.getCategoria())){
-                                 cout << "\n Categoria: Socio";
+                                 cout << "\n Categoria: Socio\n";
                               } else if(dynamic_cast<Medico*>(user.getCategoria())){
-                                 cout << "\n Categoria: Medico";
+                                 cout << "\n Categoria: Medico\n";
                               }
 
                               if(user.getActivo() == false){
                                  cout << "desea reactivar el usuario?" << endl;
-                                 cout << "1- SI\t\t2- NO";
+                                 cout << "1- SI\t\t2- NO" << endl;
                                  cin >> option;
 
                                  if(option == 1){
                                     IU->activarUsuario(user.getCedula());
-                                    cout << "Usuario reactivado";
+                                    cout << "Usuario reactivado" << endl;
                                  }
                               }
                            }
@@ -244,9 +236,9 @@ int main() {
                      IU->salir();
                      break;
                   case 2:
-                     cout << "Cancelar reserva" << endl;
+                     cout << "Registro de consulta" << endl;
                      break;
-                  case 5:
+                  case 3:
                      cedula = "-1";
                      usuarioSesion = DtUsuario();
                      cedulaValida = false;
