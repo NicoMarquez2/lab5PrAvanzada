@@ -55,6 +55,9 @@ implementaciones/%.o: implementaciones/%.cpp
 
 # Regla para limpiar los archivos de construcción
 clean:
+	find . -name "*.o" -type f -delete
+	find . -name "*.d" -type f -delete
+	find . -name "myprogram" -type f -delete
 	del *.o *.d myprogram.exe
 	powershell -Command "if (Test-Path 'dataTypes\*.o') { Remove-Item 'dataTypes\*.o' }"
 	powershell -Command "if (Test-Path 'dataTypes\*.d') { Remove-Item 'dataTypes\*.d' }"

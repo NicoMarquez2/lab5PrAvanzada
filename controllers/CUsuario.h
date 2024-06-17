@@ -3,7 +3,7 @@
 
 #include <map>
 #include "../interfaces/IUsuario.h"
-#include "../dataTypes/Fecha.h"
+#include "../dataTypes/fecha.h"
 #include "../headers/usuario.h"
 
 class CUsuario : public IUsuario

@@ -2,7 +2,7 @@
 #define CINICIARSESION_H
 
 #include "../interfaces/IIniciarSesion.h"
-#include "../dataTypes/Fecha.h"
+#include "../dataTypes/fecha.h"
 #include "../headers/usuario.h"
 
 class CIniciarSesion : public IIniciarSesion
