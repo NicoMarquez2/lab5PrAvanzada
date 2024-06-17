@@ -25,11 +25,16 @@ map<string, Usuario*> CUsuario::getUsuarios(){
 DtUsuario CUsuario::ingresarCedula(string ci){
     cout << "ingresar ci: " << ci << endl;
     map<string, Usuario*>::iterator it;
+    DtUsuario DtU;
     it = this->usuarios.find(ci);
-    Usuario* u = it->second;
-    this->userSesion = u;
-    DtUsuario DtU = DtUsuario(u->getContrasena(), u->getNombre(), u->getApellido(), u->getCedula(),
-                    u->getSexo(), u->getFechaNacimiento(), u->getActivo(), u->getCategoria());
+    if (it != usuarios.end()) {
+        Usuario* u = it->second;
+        this->userSesion = u;
+        DtU = DtUsuario(u->getContrasena(), u->getNombre(), u->getApellido(), u->getCedula(),
+                        u->getSexo(), u->getFechaNacimiento(), u->getActivo(), u->getCategoria());
+    } else {
+        DtU = DtUsuario();
+    }
     return DtU;
 }
 
