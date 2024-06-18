@@ -104,7 +104,7 @@ int main() {
             }
             pass = "";
          } else {
-            cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
+            cout << "Ingrese su contrasena (ingrese -1 si desea cancelar)\n" << endl;
             while (!passCorrecto) {
                cin >> pass;
                if(pass == "-1"){
@@ -116,7 +116,7 @@ int main() {
                }
                passCorrecto = IU->ingresarContrasena(pass);
                if (!passCorrecto)
-                     cout << "Contrasena incorrecta" << endl;
+                     cout << "Contrasena incorrecta\n" << endl;
             }
             pass = "";
          }
@@ -227,7 +227,7 @@ int main() {
                               cout << "\n Categoria: " << user.getCategoria();
 
                               if(user.getActivo() == false){
-                                 cout << "desea reactivar el usuario?" << endl;
+                                 cout << "\ndesea reactivar el usuario?" << endl;
                                  cout << "1- SI\t\t2- NO" << endl;
                                  cin >> option;
 
