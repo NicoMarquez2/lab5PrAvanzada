@@ -36,7 +36,6 @@ int main() {
    IConsulta* IC;
    Fecha fecha = Fecha(2001, 10, 22);
 
-   DtUsuario usuarioSesion = DtUsuario();
    map<string, Usuario*> usersCollection;
    Socio* catS = new Socio();
    Medico* catM = new Medico();
@@ -60,6 +59,7 @@ int main() {
    IU = f->getIUsuario();
    IC = f->getIConsulta();
 
+   DtUsuario usuarioSesion = DtUsuario();
    string cedula = "-1";
    string pass;
    bool salir = false;
@@ -94,7 +94,15 @@ int main() {
             }
          }
          usuarioSesion = IU->ingresarCedula(cedula);
+         cout << "\n\n USUARIO SESION NOMBRE: " << usuarioSesion.getNombre() <<"\t\tCEDULA: " << usuarioSesion.getCedula() << "\n\n";
+         if(usuarioSesion.getCedula() == "11111111"){
+            cout << "\n\n USUARIO NO ENCONTRADO\n\n";
+            cedula = "-1";
+            cedulaValida = false;
+            break;
+         }
 
+<<<<<<< HEAD
          if (usuarioSesion.getCedula() != "11111111") {
             if (usuarioSesion.getContrasena() == " ") {
                cout << "Ingrese su contrsena" << endl;
@@ -115,6 +123,40 @@ int main() {
             } 
          } else {
             cout << "Usuario inexistente" << endl;
+=======
+         if (usuarioSesion.getContrasena() == " ") {
+            cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
+            while (!passCorrecto) {
+               cin >> pass;
+               if(pass == "-1"){
+                  usuarioSesion = DtUsuario();
+                  cedula = "-1";
+                  cedulaValida = false;
+                  passCorrecto = false;
+                  break;
+               }
+               passCorrecto = IU->registrarContrasena(pass);
+               if (!passCorrecto)
+                     cout << "Contrasena invalida" << endl;
+            }
+            pass = "";
+         } else {
+            cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
+            while (!passCorrecto) {
+               cin >> pass;
+               if(pass == "-1"){
+                  usuarioSesion = DtUsuario();
+                  cedula = "-1";
+                  cedulaValida = false;
+                  passCorrecto = false;
+                  break;
+               }
+               passCorrecto = IU->ingresarContrasena(pass);
+               if (!passCorrecto)
+                     cout << "Contrasena incorrecta" << endl;
+            }
+            pass = "";
+>>>>>>> 3165e5d6ab7806bf4f8e1b1ebe4f3c6a4f88061f
          }
          break;
       
@@ -127,9 +169,7 @@ int main() {
          break;
       }
 
-      if(usuarioSesion.getCedula() == "11111111"){
-         cout << "\nUsuario no encontrado";
-      } else if (usuarioSesion.getCedula() != "11111111") {
+      if (usuarioSesion.getCedula() != "11111111") {
          bool salirSesion = false;
          int option = 0;
          while (!salirSesion) {
@@ -169,6 +209,7 @@ int main() {
                      break;
                   case 2:
                      cedula = "-1";
+                     pass = " ";
                      usuarioSesion = DtUsuario();
                      cedulaValida = false;
                      passCorrecto = false;
@@ -275,6 +316,7 @@ int main() {
                      break;
                   case 3:
                      cedula = "-1";
+                     pass = " ";
                      usuarioSesion = DtUsuario();
                      cedulaValida = false;
                      passCorrecto = false;

@@ -23,15 +23,14 @@ map<string, Usuario*> CUsuario::getUsuarios(){
 }
 
 DtUsuario CUsuario::ingresarCedula(string ci){
-    cout << "ingresar ci: " << ci << endl;
-    map<string, Usuario*>::iterator it;
     DtUsuario DtU;
+    this->ci = ci;
+    map<string, Usuario*>::iterator it;
     it = this->usuarios.find(ci);
-    if (it != usuarios.end()) {
-        Usuario* u = it->second;
-        this->userSesion = u;
-        DtU = DtUsuario(u->getContrasena(), u->getNombre(), u->getApellido(), u->getCedula(),
-                        u->getSexo(), u->getFechaNacimiento(), u->getActivo(), u->getCategoria());
+    if(it != usuarios.end()){
+        this->user = it->second;
+        DtU = DtUsuario(user->getContrasena(), user->getNombre(), user->getApellido(), user->getCedula(),
+                    user->getSexo(), user->getFechaNacimiento(), user->getActivo(), user->getCategoria());
     } else {
         DtU = DtUsuario();
     }
@@ -54,24 +53,48 @@ DtUsuario CUsuario::ingresarCedulaAlta(string ci){
 }
 
 void CUsuario::ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, CategoriaUsuario* categoria){
+    // Verificar si la cédula ha sido establecida previamente
+    if (this->ci.empty()) {
+        cout << "Error: Cédula no establecida." << endl;
+        return;
+    }
+
+    // Crear un nuevo usuario con los datos proporcionados
     Usuario* u = new Usuario(nombre, apellido, this->ci, sexo, fechaNacimiento, false, categoria);
-    this->usuarios.insert({this->ci,u});
+    
+    // Insertar el nuevo usuario en la colección
+    auto result = this->usuarios.insert({this->ci, u});
+    
+    // Verificar si la inserción fue exitosa
+    if (!result.second) {
+        // Si la inserción no fue exitosa, significa que ya existe un usuario con la misma cédula
+        cout << "Error: Ya existe un usuario con la cédula " << this->ci << endl;
+        delete u; // Liberar la memoria del usuario creado
+    } else {
+        cout << "Usuario con cedula " << this->ci << " ingresado exitosamente." << endl;
+    }
 }
 void CUsuario::activarUsuario(string ci){
     this->user->setActivo(true);
 }
 void CUsuario::salir(){
     cout << "salir";
-    delete this->user;
+    //delete this->user;
+    //delete this->userSesion;
 }
 bool CUsuario::registrarContrasena(string pass){
-    cout << "registrar ci: " << pass << endl;
+    cout << "registrar pass: " << pass << endl;
+    if (pass.length() >= 6 && pass.length() <= 9){
+        this->user->setContrasena(pass);
+        this->user->setActivo(true);
+    }
+    
     return (pass.length() >= 6 && pass.length() <= 9);
 }
 bool CUsuario::ingresarContrasena(string pass){
-    cout << "ingresar ci: " << pass << endl;
+    cout << "ingresar pass: " << pass << endl;
     this->pass = pass;
-    return (this->userSesion->esContrasena(pass));
+    return (this->user->esContrasena(pass));
 }
 void CUsuario::cerrarSesion(){
     cout << "cerrar sesion";
