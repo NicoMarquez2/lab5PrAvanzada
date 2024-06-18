@@ -25,12 +25,18 @@ map<string, Usuario*> CUsuario::getUsuarios(){
 DtUsuario CUsuario::ingresarCedula(string ci){
     cout << "ingresar ci: " << ci << endl;
     map<string, Usuario*>::iterator it;
-    it = this->usuarios.find(ci);
-    Usuario* u = it->second;
-    this->userSesion = u;
-    DtUsuario DtU = DtUsuario(u->getContrasena(), u->getNombre(), u->getApellido(), u->getCedula(),
-                    u->getSexo(), u->getFechaNacimiento(), u->getActivo(), u->getCategoria());
-    return DtU;
+    try{
+        it = this->usuarios.find(ci);
+        Usuario* u = it->second;
+        this->userSesion = u;
+        DtUsuario DtU = DtUsuario(u->getContrasena(), u->getNombre(), u->getApellido(), u->getCedula(),
+                        u->getSexo(), u->getFechaNacimiento(), u->getActivo(), u->getCategoria());
+        return DtU;
+    }
+    catch(const std::exception& e){
+        std::cerr << e.what() << '\n';
+        return DtUsuario();
+    }
 }
 
 DtUsuario CUsuario::ingresarCedulaAlta(string ci){
