@@ -21,7 +21,7 @@ int calcEdad(Fecha fecha){
 }
 
 DtUsuario::DtUsuario(string cont, string nom, string ap, string ced,
-                string s, Fecha fechaNac, bool activo, CategoriaUsuario* cat){
+                string s, Fecha fechaNac, bool activo, string cat){
     this->contrasena = cont;
     this->nombre = nom;
     this->apellido = ap;
@@ -42,7 +42,7 @@ DtUsuario::DtUsuario(){
     this->fechaNacimiento = Fecha();
     this->edad = calcEdad(this->fechaNacimiento);
     this->activo = false;
-    this->categoria = nullptr;
+    this->categoria = " ";
 }
 
 string DtUsuario::getContrasena(){
@@ -71,7 +71,7 @@ bool DtUsuario::getActivo(){
     return this->activo;
 }
 
-CategoriaUsuario* DtUsuario::getCategoria(){
+string DtUsuario::getCategoria(){
     return this->categoria;
 }
 

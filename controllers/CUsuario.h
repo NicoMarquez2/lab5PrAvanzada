@@ -22,7 +22,7 @@ public:
     Usuario* getUser();
     map<string, Usuario*> getUsuarios();
     DtUsuario ingresarCedula(string ci);
-    void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, CategoriaUsuario* categoria);
+    void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria);
     void activarUsuario(string ci);
     void salir();
     DtUsuario ingresarCedulaAlta(string ci);

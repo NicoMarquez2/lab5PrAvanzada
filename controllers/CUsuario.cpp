@@ -1,4 +1,7 @@
 #include "CUsuario.h"
+#include "../headers/socio.h"
+#include "../headers/administrativo.h"
+#include "../headers/medico.h"
 
 CUsuario* CUsuario::instancia = NULL;
 
@@ -24,13 +27,20 @@ map<string, Usuario*> CUsuario::getUsuarios(){
 
 DtUsuario CUsuario::ingresarCedula(string ci){
     DtUsuario DtU;
+    string cat;
     this->ci = ci;
     map<string, Usuario*>::iterator it;
     it = this->usuarios.find(ci);
     if(it != usuarios.end()){
         this->user = it->second;
+        if(dynamic_cast<Socio*>(user->getCategoria()))
+            cat = "socio";
+        if(dynamic_cast<Medico*>(user->getCategoria()))
+            cat = "medico";
+        if(dynamic_cast<Administrativo*>(user->getCategoria()))
+            cat = "administrativo";
         DtU = DtUsuario(user->getContrasena(), user->getNombre(), user->getApellido(), user->getCedula(),
-                    user->getSexo(), user->getFechaNacimiento(), user->getActivo(), user->getCategoria());
+                    user->getSexo(), user->getFechaNacimiento(), user->getActivo(), cat);
     } else {
         DtU = DtUsuario();
     }
@@ -39,28 +49,41 @@ DtUsuario CUsuario::ingresarCedula(string ci){
 
 DtUsuario CUsuario::ingresarCedulaAlta(string ci){
     DtUsuario DtU;
+    string cat;
     this->ci = ci;
     map<string, Usuario*>::iterator it;
     it = this->usuarios.find(ci);
     if(it != usuarios.end()){
         this->user = it->second;
+        if(dynamic_cast<Socio*>(user->getCategoria()))
+            cat = "socio";
+        if(dynamic_cast<Medico*>(user->getCategoria()))
+            cat = "medico";
+        if(dynamic_cast<Administrativo*>(user->getCategoria()))
+            cat = "administrativo";
         DtU = DtUsuario(user->getContrasena(), user->getNombre(), user->getApellido(), user->getCedula(),
-                    user->getSexo(), user->getFechaNacimiento(), user->getActivo(), user->getCategoria());
+                    user->getSexo(), user->getFechaNacimiento(), user->getActivo(), cat);
     } else {
         DtU = DtUsuario();
     }
     return DtU;
 }
 
-void CUsuario::ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, CategoriaUsuario* categoria){
+void CUsuario::ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria){
     // Verificar si la cédula ha sido establecida previamente
     if (this->ci.empty()) {
         cout << "Error: Cédula no establecida." << endl;
         return;
     }
-
+    CategoriaUsuario* cat;
+    if (categoria == "socio")
+        cat = new Socio();
+    else if(categoria == "medico")
+        cat = new Medico();
+    else 
+        cat = new Administrativo();
     // Crear un nuevo usuario con los datos proporcionados
-    Usuario* u = new Usuario(nombre, apellido, this->ci, sexo, fechaNacimiento, false, categoria);
+    Usuario* u = new Usuario(nombre, apellido, this->ci, sexo, fechaNacimiento, false, cat);
     
     // Insertar el nuevo usuario en la colección
     auto result = this->usuarios.insert({this->ci, u});
