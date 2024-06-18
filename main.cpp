@@ -49,14 +49,14 @@ int main() {
    usersCollection.insert({pruebaA->getCedula(), pruebaA});
 
    f = Fabrica::getInstancia();
-   iSesion = f->getIIniciarSesion();
-   iAD = f->getIAltaDiagnostico();
-   iAU = f->getIAltaUsuario();
-   ICS = f->getICerrarSesion();
-   iDR = f->getIDevolucionReserva();
-   iLR = f->getIListarRepresentaciones();
-   iOH = f->getIObtenerHistorial();
-   iRG = f->getIRegisConsulta();
+   //iSesion = f->getIIniciarSesion();
+   //iAD = f->getIAltaDiagnostico();
+   //iAU = f->getIAltaUsuario();
+   //ICS = f->getICerrarSesion();
+   //iDR = f->getIDevolucionReserva();
+   ////iLR = f->getIListarRepresentaciones();
+   //iOH = f->getIObtenerHistorial();
+   //iRG = f->getIRegisConsulta();
    IU = f->getIUsuario();
    IC = f->getIConsulta();
 
@@ -127,7 +127,9 @@ int main() {
          break;
       }
 
-      if (usuarioSesion.getCedula() != "11111111") {
+      if(usuarioSesion.getCedula() == "11111111"){
+         cout << "\nUsuario no encontrado";
+      } else if (usuarioSesion.getCedula() != "11111111") {
          bool salirSesion = false;
          int option = 0;
          while (!salirSesion) {
@@ -147,6 +149,7 @@ int main() {
                      break;
                   case 3:
                      cedula = "-1";
+                     pass = " ";
                      usuarioSesion = DtUsuario();
                      cedulaValida = false;
                      passCorrecto = false;
