@@ -24,14 +24,6 @@ bool correcto(string ci) {
 
 int main() {
    Fabrica* f;
-   IIniciarSesion* iSesion;
-   IAltaDiagnostico* iAD;
-   IAltaUsuario* iAU;
-   ICerrarSesion* ICS;
-   IDevolucionReserva* iDR;
-   IListarRepresentaciones* iLR;
-   IObtenerHistorial* iOH;
-   IRegisConsulta* iRG;
    IUsuario* IU;
    IConsulta* IC;
    Fecha fecha = Fecha(2001, 10, 22);
@@ -48,14 +40,6 @@ int main() {
    usersCollection.insert({pruebaA->getCedula(), pruebaA});
 
    f = Fabrica::getInstancia();
-   //iSesion = f->getIIniciarSesion();
-   //iAD = f->getIAltaDiagnostico();
-   //iAU = f->getIAltaUsuario();
-   //ICS = f->getICerrarSesion();
-   //iDR = f->getIDevolucionReserva();
-   ////iLR = f->getIListarRepresentaciones();
-   //iOH = f->getIObtenerHistorial();
-   //iRG = f->getIRegisConsulta();
    IU = f->getIUsuario();
    IC = f->getIConsulta();
 
@@ -174,7 +158,7 @@ int main() {
          int option = 0;
          while (!salirSesion) {
             cout << "\nBienvenido " << usuarioSesion.getNombre() << endl;
-            if (dynamic_cast<Socio*>(usuarioSesion.getCategoria())) {
+            if (usuarioSesion.getCategoria() == "socio") {
                cout << "Que desea hacer socio?" << endl;
                cout << "1 - Realizar reserva" << endl;
                cout << "2 - Cancelar reserva" << endl;
@@ -198,7 +182,7 @@ int main() {
                   default:
                      break;
                }
-            } else if (dynamic_cast<Medico*>(usuarioSesion.getCategoria())) {
+            } else if (usuarioSesion.getCategoria() == "medico") {
                cout << "Que desea hacer medico?" << endl;
                cout << "1 - Alta diagnosticos de consulta" << endl;
                cout << "2 - Salir" << endl;
@@ -218,7 +202,7 @@ int main() {
                   default:
                      break;
                }
-            } else if (dynamic_cast<Administrativo*>(usuarioSesion.getCategoria())) {
+            } else if (usuarioSesion.getCategoria() == "administrativo") {
                string input, nombre, apellido, sexo, categoria, ciMed, ciPac, motivo;
                int anio, mes, dia, anioR, mesR, diaR, opcionConsulta;
                DtUsuario user = DtUsuario();
@@ -251,24 +235,18 @@ int main() {
 
                               Fecha fecha(anio, mes, dia);
                               if (categoria == "socio")
-                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, catS);
+                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, categoria);
                               else if (categoria == "medico")
-                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, catM);
+                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, categoria);
                               else
-                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, catA);
+                                 IU->ingresarDatos(nombre, apellido, sexo, fecha, categoria);
                            } else {
                               cout << "\n Nombre: " << user.getNombre();
-                              cout << "\n Apellido:" << user.getApellido();
+                              cout << "\n Apellido: " << user.getApellido();
                               cout << "\n Sexo: " << user.getSexo();
                               cout << "\n Edad: " << user.getEdad();
                               cout << "\n Activo: " << user.getActivo();
-                              if(dynamic_cast<Administrativo*>(user.getCategoria())){
-                                 cout << "\n Categoria: Administrativo\n";
-                              } else if(dynamic_cast<Socio*>(user.getCategoria())){
-                                 cout << "\n Categoria: Socio\n";
-                              } else if(dynamic_cast<Medico*>(user.getCategoria())){
-                                 cout << "\n Categoria: Medico\n";
-                              }
+                              cout << "\n Categoria: " << user.getCategoria();
 
                               if(user.getActivo() == false){
                                  cout << "desea reactivar el usuario?" << endl;
@@ -331,8 +309,5 @@ int main() {
    }
    cout << "\n\nsalgo\n\n";
 
-   iAD->agregarDescripcion("descripcion");
-   iAU->salir();
-   ICS->cerrarSesion();
    return 0;
 }

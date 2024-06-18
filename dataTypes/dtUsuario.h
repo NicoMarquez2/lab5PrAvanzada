@@ -22,10 +22,10 @@ private:
     Fecha fechaNacimiento;
     int edad;
     bool activo;
-    CategoriaUsuario* categoria;
+    string categoria;
 public:
     DtUsuario(string cont, string nom, string ap, string ced,
-                string s, Fecha fechaNac, bool activo, CategoriaUsuario* cat);
+                string s, Fecha fechaNac, bool activo, string cat);
     DtUsuario();
     string getContrasena();
     string getNombre();
@@ -35,7 +35,7 @@ public:
     Fecha getFechaNacimiento();
     int getEdad();
     bool getActivo();
-    CategoriaUsuario* getCategoria();
+    string getCategoria();
     ~DtUsuario();
 };
 

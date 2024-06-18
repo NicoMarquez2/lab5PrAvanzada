@@ -17,7 +17,7 @@ class IUsuario
 public:
     virtual void cargarDatos(map<string, Usuario*> usersCol) = 0;
     virtual DtUsuario ingresarCedula(string ci) = 0;
-    virtual void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, CategoriaUsuario* categoria) = 0;
+    virtual void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria) = 0;
     virtual void activarUsuario(string ci) = 0;
     virtual void salir() = 0;
     virtual DtUsuario ingresarCedulaAlta(string ci) = 0;
