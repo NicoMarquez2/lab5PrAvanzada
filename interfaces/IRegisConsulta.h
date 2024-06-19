@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include "stdio.h"
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 
 using namespace std;
 

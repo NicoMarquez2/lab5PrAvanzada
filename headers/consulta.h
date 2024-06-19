@@ -4,7 +4,7 @@
 #include <set>
 #include <string>
 #include <iostream>
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 #include "../dataTypes/hora.h"
 #include "../headers/usuario.h"
 #include "../headers/diagnostico.h"

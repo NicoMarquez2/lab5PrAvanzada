@@ -2,7 +2,7 @@
 #define REGISCONSULTA_H
 
 #include "../interfaces/IRegisConsulta.h"
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 
 class CRegisConsulta: public IRegisConsulta
 {

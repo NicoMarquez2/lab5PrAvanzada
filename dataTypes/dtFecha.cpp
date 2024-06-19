@@ -1,4 +1,4 @@
-#include "fecha.h"
+#include "dtFecha.h"
 
 Fecha::Fecha(int a, int m, int d){
     this->anio = a;    
@@ -29,3 +29,4 @@ int Fecha::getMes() const{
 int Fecha::getDia() const{
     return this->dia;
 }
+

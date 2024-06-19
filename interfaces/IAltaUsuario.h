@@ -2,7 +2,7 @@
 #define IALTAUSUARIO_H
 
 #include <string.h>
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 #include <iostream>
 #include "stdio.h"
 

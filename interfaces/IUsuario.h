@@ -2,11 +2,12 @@
 #define IUSUARIO_H
 
 #include <string.h>
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 #include "../dataTypes/dtUsuario.h"
 #include <iostream>
 #include "stdio.h"
 #include <map>
+#include <set>
 #include "../headers/usuario.h"
 #include "../headers/categoriaUsuario.h"
 
@@ -26,6 +27,7 @@ public:
     virtual void cerrarSesion() = 0;
     virtual void cancelar() = 0;
     virtual void obtenerHistorialPaciente(string ci) = 0;
+    virtual set<DtUsuario> obtenerMedicos(map<string, Usuario*> usersCol) = 0;
 };
 
 #endif

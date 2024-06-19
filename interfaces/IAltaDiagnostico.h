@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string.h>
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 #include "../dataTypes/dtConsulta.h"
 
 using namespace std;

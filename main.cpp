@@ -137,6 +137,9 @@ int main() {
          while (!salirSesion) {
             cout << "\nBienvenido " << usuarioSesion.getNombre() << endl;
             if (usuarioSesion.getCategoria() == "socio") {
+               string input, nombre, apellido, sexo, categoria, ciMed, ciPac, motivo;
+               set<DtUsuario> medicos;
+
                cout << "Que desea hacer socio?" << endl;
                cout << "1 - Realizar reserva" << endl;
                cout << "2 - Cancelar reserva" << endl;
@@ -145,6 +148,10 @@ int main() {
                switch (option) {
                   case 1:
                      cout << "Realizar reserva" << endl;
+                        medicos = IU->obtenerMedicos(usersCollection);
+                        for (const auto& medico : medicos) {
+                           cout << "\n" << medico.getNombre() << " " << medico.getApellido() << " - " << medico.getCedula() << endl;
+                        }
                      break;
                   case 2:
                      cout << "Cancelar reserva" << endl;

@@ -52,27 +52,39 @@ void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha f
     map<string,Usuario*> users = CU->getUsuarios();
 
     map<string, Usuario*>::iterator it;
+    Usuario* med;
+    Usuario* pac;
+    Reserva* r;
+
     it = users.find(ciMed);
-    Usuario* med = it->second;
-
+    if (it != users.end()) {
+        med = it->second;
+    }
     it = users.find(ciPac);
-    Usuario* pac = it->second;
-    Reserva* r = new Reserva(fecha, Hora(), pac, med, fechaReserva);
-
-    this->consultas.push_back(r);
+    if (it != users.end()) {
+        pac = it->second;
+        r = new Reserva(fecha, Hora(), pac, med, fechaReserva);
+        this->consultas.push_back(r);
+    }
 }
 
 void CConsulta::registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo){  
     map<string,Usuario*> users = CU->getUsuarios();
 
     map<string, Usuario*>::iterator it;
+    Usuario* med;
+    Usuario* pac;
+    Emergencia* e;
+
     it = users.find(ciMed);
-    Usuario* med = it->second;
-
+    if (it != users.end()) {
+        med = it->second;
+    }
     it = users.find(ciPac);
-    Usuario* pac = it->second;
-    Emergencia* e = new Emergencia(fecha, Hora(), pac, med, motivo);
-
-    this->consultas.push_back(e);
+    if (it != users.end()) {
+        pac = it->second;
+        e = new Emergencia(fecha, Hora(), pac, med, motivo);
+        this->consultas.push_back(e);
+    }
 }
 void CConsulta::listarRepresentacionesEstandarizadas(){}

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "../dataTypes/dtConsulta.h"
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 #include "../dataTypes/hora.h"
 
 class IConsulta

@@ -2,7 +2,7 @@
 #define IINICIARSESION_H
 
 #include <string.h>
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 
 using namespace std;
 

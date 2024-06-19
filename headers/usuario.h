@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 #include "../headers/categoriaUsuario.h"
 
 using namespace std;

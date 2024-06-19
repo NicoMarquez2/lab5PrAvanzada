@@ -128,3 +128,22 @@ void CUsuario::cancelar(){
 void CUsuario::obtenerHistorialPaciente(string ci){
     cout << "obtener istorial: " << ci << endl;
 }
+
+set<DtUsuario> CUsuario::obtenerMedicos(map<string, Usuario*> usersCol){
+    set<DtUsuario> setDtU;
+    DtUsuario DtU;
+    string cat;
+    this->usuarios = usersCol;
+    map<string, Usuario*>::iterator it;
+
+    for (it=usuarios.begin(); it!=usuarios.end(); ++it){
+        this->user = it->second;
+        if(dynamic_cast<Medico*>(user->getCategoria())){
+            cat = "medico";
+            DtU = DtUsuario(user->getContrasena(), user->getNombre(), user->getApellido(), user->getCedula(),
+                    user->getSexo(), user->getFechaNacimiento(), user->getActivo(), cat);
+            setDtU.insert(DtU);
+        }
+    }    
+    return setDtU;
+}

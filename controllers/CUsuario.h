@@ -2,8 +2,9 @@
 #define CUSUARIO_H
 
 #include <map>
+#include <set>
 #include "../interfaces/IUsuario.h"
-#include "../dataTypes/fecha.h"
+#include "../dataTypes/dtFecha.h"
 #include "../headers/usuario.h"
 
 class CUsuario : public IUsuario
@@ -31,6 +32,7 @@ public:
     void cerrarSesion();
     void cancelar();
     void obtenerHistorialPaciente(string ci);
+    set<DtUsuario> obtenerMedicos(map<string, Usuario*> usersCol);
 };
 
 #endif
