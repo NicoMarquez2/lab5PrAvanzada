@@ -37,40 +37,6 @@ public:
     bool getActivo();
     string getCategoria();
 
-    bool operator<(const DtUsuario& other) const {
-        if (cedula != other.cedula) {
-            return cedula < other.cedula;
-        }
-        if (nombre != other.nombre) {
-            return nombre < other.nombre;
-        }
-        if (apellido != other.apellido) {
-            return apellido < other.apellido;
-        }
-        if (sexo != other.sexo) {
-            return sexo < other.sexo;
-        }
-        if (fechaNacimiento != other.fechaNacimiento) {
-            return fechaNacimiento < other.fechaNacimiento;
-        }
-        if (edad != other.edad) {
-            return edad < other.edad;
-        }
-        if (activo != other.activo) {
-            return !activo; // Assuming false < true
-        }
-        return categoria < other.categoria;
-    }
-
-    std::string getNombre() const { return nombre; }
-    std::string getApellido() const { return apellido; }
-    std::string getCedula() const { return cedula; }
-    std::string getSexo() const { return sexo; }
-    Fecha getFechaNacimiento() const { return fechaNacimiento; }
-    int getEdad() const { return edad; }
-    bool getActivo() const { return activo; }
-    std::string getCategoria() const { return categoria; }
-
     ~DtUsuario();
 };
 

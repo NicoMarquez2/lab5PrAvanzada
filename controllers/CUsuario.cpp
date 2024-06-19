@@ -129,11 +129,10 @@ void CUsuario::obtenerHistorialPaciente(string ci){
     cout << "obtener istorial: " << ci << endl;
 }
 
-set<DtUsuario> CUsuario::obtenerMedicos(map<string, Usuario*> usersCol){
-    set<DtUsuario> setDtU;
+map<string, DtUsuario> CUsuario::obtenerMedicos(){
+    map<string, DtUsuario> setDtU;
     DtUsuario DtU;
     string cat;
-    this->usuarios = usersCol;
     map<string, Usuario*>::iterator it;
 
     for (it=usuarios.begin(); it!=usuarios.end(); ++it){
@@ -142,7 +141,7 @@ set<DtUsuario> CUsuario::obtenerMedicos(map<string, Usuario*> usersCol){
             cat = "medico";
             DtU = DtUsuario(user->getContrasena(), user->getNombre(), user->getApellido(), user->getCedula(),
                     user->getSexo(), user->getFechaNacimiento(), user->getActivo(), cat);
-            setDtU.insert(DtU);
+            setDtU.insert({DtU.getCedula(), DtU});
         }
     }    
     return setDtU;

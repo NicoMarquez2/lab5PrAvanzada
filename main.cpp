@@ -34,9 +34,11 @@ int main() {
    Administrativo* catA = new Administrativo();
    Usuario* pruebaU = new Usuario("contrasena", "Nicolas", "Marquez", "51467384", "masculino", fecha, true, catS);
    Usuario* pruebaM = new Usuario("medico", "medico", "medicoAp", "12345678", "femenino", fecha, true, catM);
+   Usuario* pruebaM2 = new Usuario("medico", "medico", "medicoAp2", "12345679", "femenino", fecha, true, catM);
    Usuario* pruebaA = new Usuario("admin", "admin", "adminAp", "87654321", "masculino", fecha, true, catA);
    usersCollection.insert({pruebaU->getCedula(), pruebaU});
    usersCollection.insert({pruebaM->getCedula(), pruebaM});
+   usersCollection.insert({pruebaM2->getCedula(), pruebaM2});
    usersCollection.insert({pruebaA->getCedula(), pruebaA});
 
    f = Fabrica::getInstancia();
@@ -88,7 +90,7 @@ int main() {
          }
 
          if (usuarioSesion.getContrasena() == " ") {
-            cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)" << endl;
+            cout << "Ingrese su contrsena (ingrese -1 si desea cancelar)\n" << endl;
             while (!passCorrecto) {
                cin >> pass;
                if(pass == "-1"){
@@ -100,12 +102,12 @@ int main() {
                }
                passCorrecto = IU->registrarContrasena(pass);
                if (!passCorrecto)
-                     cout << "Contrasena invalida" << endl;
+                     cout << "Contrasena invalida\n" << endl;
             }
             pass = "";
          } else {
-            cout << "Ingrese su contrasena (ingrese -1 si desea cancelar)\n" << endl;
             while (!passCorrecto) {
+               cout << "Ingrese su contrasena (ingrese -1 si desea cancelar)\n" << endl;
                cin >> pass;
                if(pass == "-1"){
                   usuarioSesion = DtUsuario();
@@ -137,22 +139,42 @@ int main() {
          while (!salirSesion) {
             cout << "\nBienvenido " << usuarioSesion.getNombre() << endl;
             if (usuarioSesion.getCategoria() == "socio") {
-               string input, nombre, apellido, sexo, categoria, ciMed, ciPac, motivo;
-               set<DtUsuario> medicos;
-
+               
                cout << "Que desea hacer socio?" << endl;
                cout << "1 - Realizar reserva" << endl;
                cout << "2 - Cancelar reserva" << endl;
                cout << "3 - Salir" << endl;
                cin >> option;
                switch (option) {
-                  case 1:
+                  case 1: {
                      cout << "Realizar reserva" << endl;
-                        medicos = IU->obtenerMedicos(usersCollection);
-                        for (const auto& medico : medicos) {
-                           cout << "\n" << medico.getNombre() << " " << medico.getApellido() << " - " << medico.getCedula() << endl;
-                        }
+                     int anio, mes, dia;
+                     string input, nombre, apellido, sexo, categoria, ciMed, ciPac, motivo;
+                     map<string, DtUsuario> medicos;
+                     medicos = IU->obtenerMedicos();
+                     map<string, DtUsuario>::iterator it;
+                     
+                     for (it=medicos.begin(); it!=medicos.end(); ++it) {
+                        cout << it->second.getNombre() << " " << it->second.getApellido() << " - " << it->second.getCedula() << endl;
+                     }
+                     /*
+                     out << "Ingrese CI del medico para la reserva (ingrese -1 si desea salir): " << endl;
+                     cin >> input;
+                     if (input == "-1"){
+                        break;
+                     } else {
+                        cout << "\ningrese el anio, mes y dia de la reserva: ";
+                        cin >> anio >> mes >> dia;
+                        cout << "\ningrese la categoria del usuario: ";
+                        cin >> categoria;
+
+
+                        registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva)
+                     }
+                     */
+
                      break;
+                  }
                   case 2:
                      cout << "Cancelar reserva" << endl;
                      break;

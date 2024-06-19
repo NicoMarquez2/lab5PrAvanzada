@@ -27,7 +27,7 @@ public:
     virtual void cerrarSesion() = 0;
     virtual void cancelar() = 0;
     virtual void obtenerHistorialPaciente(string ci) = 0;
-    virtual set<DtUsuario> obtenerMedicos(map<string, Usuario*> usersCol) = 0;
+    virtual map<string, DtUsuario> obtenerMedicos() = 0;
 };
 
 #endif

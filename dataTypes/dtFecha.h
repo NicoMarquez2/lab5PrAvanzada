@@ -21,20 +21,6 @@ public:
     int getMes() const;
     int getDia() const;
 
-    bool operator<(const Fecha& other) const {
-        if (anio != other.anio) {
-            return anio < other.anio;
-        }
-        if (mes != other.mes) {
-            return mes < other.mes;
-        }
-        return dia < other.dia;
-    }
-
-    bool operator!=(const Fecha& other) const {
-        return dia != other.dia || mes != other.mes || anio != other.anio;
-    }
-
     ~Fecha();
 };
 

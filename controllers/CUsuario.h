@@ -32,7 +32,7 @@ public:
     void cerrarSesion();
     void cancelar();
     void obtenerHistorialPaciente(string ci);
-    set<DtUsuario> obtenerMedicos(map<string, Usuario*> usersCol);
+    map<string, DtUsuario> obtenerMedicos();
 };
 
 #endif
