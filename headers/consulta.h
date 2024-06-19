@@ -6,8 +6,9 @@
 #include <iostream>
 #include "../dataTypes/dtFecha.h"
 #include "../dataTypes/hora.h"
-#include "../headers/usuario.h"
 #include "../headers/diagnostico.h"
+
+class Usuario;
 
 class Consulta
 {

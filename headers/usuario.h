@@ -6,10 +6,13 @@
 #include <iostream>
 #include "../dataTypes/dtFecha.h"
 #include "../headers/categoriaUsuario.h"
+#include "../headers/consulta.h"
+#include "../dataTypes/dtConsulta.h"
 
 using namespace std;
 class DtEmergencia;
 class DtReserva;
+class DtConsulta;
 
 class Usuario
 {
@@ -23,6 +26,8 @@ private:
     int edad;
     bool activo;
     CategoriaUsuario* categoria;
+    Consulta* consulta;
+    vector<Consulta*> consultas;
 public:
     Usuario(string contrasena, string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, bool activo, CategoriaUsuario* cat);
     Usuario(string nombre, string apellido, string cedula, string sexo, Fecha fechaNacimiento, bool activo, CategoriaUsuario* cat);
@@ -38,6 +43,7 @@ public:
     bool getActivo();
     CategoriaUsuario* getCategoria();
     bool esContrasena(string pass);
+    vector<DtConsulta> obtenerConsultas();
 
     void setContrasena(string cont);
     void setNombre(string nom);
@@ -47,6 +53,8 @@ public:
     void setFechaNacimiento(Fecha fecha);
     void setActivo(bool act);
     void setCategoria(CategoriaUsuario* cat);
+    void setConsultas(vector<Consulta*> consultasUser);
+    void ingresarConsulta(Consulta* consultaUser);
 
     ~Usuario();
 };

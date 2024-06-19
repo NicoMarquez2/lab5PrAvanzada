@@ -12,6 +12,7 @@ class IConsulta
 public:
     virtual vector<DtConsulta> obtenerConsultas() = 0;
     virtual DtConsulta seleccionarConsulta(string ci) = 0;
+    virtual void reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed) = 0;
     virtual void obtenerCategorias() = 0;
     virtual void seleccionarCategoria(string categoria) = 0;
     virtual void obtenerDiagnosticos() = 0;

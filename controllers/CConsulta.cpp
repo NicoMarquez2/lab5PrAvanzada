@@ -68,6 +68,27 @@ void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha f
     }
 }
 
+void CConsulta::reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed){
+    map<string,Usuario*> users = CU->getUsuarios();
+
+    map<string, Usuario*>::iterator it;
+    Usuario* m;
+    Usuario* s;
+    Consulta* c;
+
+    it = users.find(ciMed);
+    if (it != users.end()) {
+        m = it->second;
+    }
+    it = users.find(ciSoc);
+    if (it != users.end()) {
+        s = it->second;
+        c = new Consulta(f, Hora(), s, m);
+        this->reservas.push_back(c);
+        CU->reservaConsultaUser(s, c);
+    }
+}
+
 void CConsulta::registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo){  
     map<string,Usuario*> users = CU->getUsuarios();
 

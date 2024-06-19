@@ -91,6 +91,18 @@ bool Usuario::esContrasena(string pass){
     return this->contrasena == pass;
 }
 
+vector<DtConsulta> Usuario::obtenerConsultas(){
+    vector<DtConsulta> setDtC;
+    DtConsulta DtC;
+    vector<Consulta*>::iterator it;
+    for (it=consultas.begin(); it!=consultas.end(); ++it){
+            this->consulta = *it;
+            DtC = DtConsulta(consulta->getFecha(), consulta->getHora(), consulta->getSocio(), consulta->getMedico());
+            setDtC.push_back(DtC);
+    }    
+    return setDtC;
+}
+
 void Usuario::setContrasena(string cont){
     this->contrasena = cont;
 }
@@ -115,6 +127,14 @@ void Usuario::setActivo(bool act){
 
 void Usuario::setCategoria(CategoriaUsuario* cat){
     this->categoria = cat;
+}
+
+void Usuario::setConsultas(vector<Consulta*> consultasUser){
+    this->consultas = consultasUser;
+}
+
+void Usuario::ingresarConsulta(Consulta* consultaUser){
+    this->consultas.push_back(consultaUser);
 }
 
 Usuario::~Usuario(){}

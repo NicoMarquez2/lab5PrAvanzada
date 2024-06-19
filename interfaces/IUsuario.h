@@ -2,7 +2,6 @@
 #define IUSUARIO_H
 
 #include <string.h>
-#include "../dataTypes/dtFecha.h"
 #include "../dataTypes/dtUsuario.h"
 #include <iostream>
 #include "stdio.h"

@@ -148,8 +148,8 @@ int main() {
                switch (option) {
                   case 1: {
                      cout << "Realizar reserva" << endl;
-                     int anio, mes, dia;
-                     string input, nombre, apellido, sexo, categoria, ciMed, ciPac, motivo;
+                     int anio, mes, dia, hora, minutos;
+                     string input, nombre, apellido, sexo, categoria, ciMed, motivo;
                      map<string, DtUsuario> medicos;
                      medicos = IU->obtenerMedicos();
                      map<string, DtUsuario>::iterator it;
@@ -157,26 +157,26 @@ int main() {
                      for (it=medicos.begin(); it!=medicos.end(); ++it) {
                         cout << it->second.getNombre() << " " << it->second.getApellido() << " - " << it->second.getCedula() << endl;
                      }
-                     /*
-                     out << "Ingrese CI del medico para la reserva (ingrese -1 si desea salir): " << endl;
+                     cout << "Ingrese CI del medico para la reserva (ingrese -1 si desea salir): " << endl;
                      cin >> input;
                      if (input == "-1"){
                         break;
                      } else {
-                        cout << "\ningrese el anio, mes y dia de la reserva: ";
+                        ciMed = input;
+                        cout << "\ningrese el anio, mes y dia de la reserva: " << endl;
                         cin >> anio >> mes >> dia;
-                        cout << "\ningrese la categoria del usuario: ";
-                        cin >> categoria;
-
-
-                        registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva)
+                        Fecha fechaConsulta(anio, mes, dia);
+                        cout << "\ningrese el hora, minutos: " << endl;
+                        cin >> hora >> minutos;
+                        Hora horaConsulta(hora, minutos);
+                        IC->reservaConsulta(fechaConsulta, horaConsulta, usuarioSesion.getCedula(), ciMed);
                      }
-                     */
 
                      break;
                   }
                   case 2:
                      cout << "Cancelar reserva" << endl;
+                     
                      break;
                   case 3:
                      cedula = "-1";

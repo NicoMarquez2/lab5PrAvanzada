@@ -23,6 +23,9 @@ public:
     Usuario* getUser();
     map<string, Usuario*> getUsuarios();
     DtUsuario ingresarCedula(string ci);
+
+    vector<DtConsulta> obtenerConsultasUser(string ci);
+
     void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria);
     void activarUsuario(string ci);
     void salir();
@@ -33,6 +36,11 @@ public:
     void cancelar();
     void obtenerHistorialPaciente(string ci);
     map<string, DtUsuario> obtenerMedicos();
+
+    void setConsultasUser(Usuario* usuario, vector<Consulta*> consultasUser);
+    void reservaConsultaUser(Usuario* usuario, Consulta* consultaUser);
+
+    
 };
 
 #endif

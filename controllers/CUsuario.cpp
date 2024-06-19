@@ -146,3 +146,27 @@ map<string, DtUsuario> CUsuario::obtenerMedicos(){
     }    
     return setDtU;
 }
+
+/*vector<DtConsulta> CUsuario::obtenerConsultasUser(string ci){
+    this->ci = ci;
+    map<string, Usuario*>::iterator it;
+    it = this->usuarios.find(ci);
+    if(it != usuarios.end()){
+        it->second->obtenerConsultas();
+    
+    return user->obtenerConsultas();
+*/
+
+void CUsuario::setConsultasUser(Usuario* usuario, vector<Consulta*> consultasUser){
+    map<string, Usuario*>::iterator it;
+    it = this->usuarios.find(usuario->getCedula());
+    if(it != usuarios.end())
+        it->second->setConsultas(consultasUser);
+}
+
+void CUsuario::reservaConsultaUser(Usuario* usuario, Consulta* consultaUser){
+    map<string, Usuario*>::iterator it;
+    it = this->usuarios.find(usuario->getCedula());
+    if(it != usuarios.end())
+        it->second->ingresarConsulta(consultaUser);
+}
