@@ -142,8 +142,9 @@ int main() {
                
                cout << "Que desea hacer socio?" << endl;
                cout << "1 - Realizar reserva" << endl;
-               cout << "2 - Cancelar reserva" << endl;
-               cout << "3 - Salir" << endl;
+               cout << "2 - Ver reservas" << endl;
+               cout << "3 - Cancelar reserva" << endl;
+               cout << "4 - Salir" << endl;
                cin >> option;
                switch (option) {
                   case 1: {
@@ -174,11 +175,26 @@ int main() {
 
                      break;
                   }
-                  case 2:
-                     cout << "Cancelar reserva" << endl;
-                     
+                  case 2: {
+                     cout << "Ver reservas" << endl;
+                     vector<DtConsulta> consultas;
+                     consultas = IU->obtenerConsultasUser(usuarioSesion.getCedula());
+                     vector<DtConsulta>::iterator it;
+                     for (it=consultas.begin(); it!=consultas.end(); ++it) {
+                        Fecha fechaConsulta = it->getFecha();
+                        Hora horaConsulta = it->getHora();
+                        Usuario* medicoConsulta = it->getMedico();
+                        cout << fechaConsulta.getAnio() << " " << fechaConsulta.getMes() << " " << fechaConsulta.getDia() << " " 
+                        << horaConsulta.getHoras() << horaConsulta.getMinutos() << " "  << " - " 
+                        << medicoConsulta->getNombre() << " " << medicoConsulta->getApellido() << endl;
+                     }
                      break;
+                  }
                   case 3:
+                     cout << "Cancelar reserva" << endl;
+
+                     break;
+                  case 4:
                      cedula = "-1";
                      pass = " ";
                      usuarioSesion = DtUsuario();

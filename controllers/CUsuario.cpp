@@ -147,15 +147,14 @@ map<string, DtUsuario> CUsuario::obtenerMedicos(){
     return setDtU;
 }
 
-/*vector<DtConsulta> CUsuario::obtenerConsultasUser(string ci){
+vector<DtConsulta> CUsuario::obtenerConsultasUser(string ci){
     this->ci = ci;
     map<string, Usuario*>::iterator it;
     it = this->usuarios.find(ci);
-    if(it != usuarios.end()){
-        it->second->obtenerConsultas();
-    
+    if(it != usuarios.end()){}
+        this->user = it->second;
     return user->obtenerConsultas();
-*/
+}
 
 void CUsuario::setConsultasUser(Usuario* usuario, vector<Consulta*> consultasUser){
     map<string, Usuario*>::iterator it;
