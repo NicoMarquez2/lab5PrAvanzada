@@ -184,8 +184,8 @@ int main() {
                         Fecha fechaConsulta = it->getFecha();
                         Hora horaConsulta = it->getHora();
                         Usuario* medicoConsulta = it->getMedico();
-                        cout << fechaConsulta.getAnio() << " " << fechaConsulta.getMes() << " " << fechaConsulta.getDia() << " " 
-                        << horaConsulta.getHoras() << horaConsulta.getMinutos() << " "  << " - " 
+                        cout << fechaConsulta.getAnio() << "/" << fechaConsulta.getMes() << "/" << fechaConsulta.getDia() << " - " 
+                        << horaConsulta.getHoras() << ":" << horaConsulta.getMinutos() << " - " 
                         << medicoConsulta->getNombre() << " " << medicoConsulta->getApellido() << endl;
                      }
                      break;

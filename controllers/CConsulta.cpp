@@ -83,7 +83,7 @@ void CConsulta::reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed){
     it = users.find(ciSoc);
     if (it != users.end()) {
         s = it->second;
-        c = new Consulta(f, Hora(), s, m);
+        c = new Consulta(f, h, s, m);
         this->reservas.push_back(c);
         CU->reservaConsultaUser(s, c);
     }
