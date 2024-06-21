@@ -15,7 +15,7 @@ public:
 
     void setFechaReserva(Fecha f);
 
-    ~Reserva();
+    virtual ~Reserva() override = default;
 };
 
 #endif

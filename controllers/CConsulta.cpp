@@ -1,4 +1,5 @@
 #include "CConsulta.h"
+#include <ctime>
 
 CUsuario* CU = CUsuario::getInstancia();
 
@@ -75,7 +76,9 @@ void CConsulta::reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed){
     Usuario* m;
     Usuario* s;
     Consulta* c;
-
+    time_t now = time(nullptr);
+    tm* ltm = localtime(&now);
+    Fecha ahora = Fecha(1900 + ltm->tm_year, 1 + ltm->tm_mon, ltm->tm_mday);
     it = users.find(ciMed);
     if (it != users.end()) {
         m = it->second;
@@ -83,8 +86,8 @@ void CConsulta::reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed){
     it = users.find(ciSoc);
     if (it != users.end()) {
         s = it->second;
-        c = new Consulta(f, h, s, m);
-        this->reservas.push_back(c);
+        c = new Reserva(f, h, s, m, ahora);
+        this->consultas.push_back(c);
         CU->reservaConsultaUser(s, c);
     }
 }

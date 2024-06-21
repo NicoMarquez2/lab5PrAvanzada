@@ -177,16 +177,18 @@ int main() {
                   }
                   case 2: {
                      cout << "Ver reservas" << endl;
-                     vector<DtConsulta> consultas;
+                     vector<DtReserva> consultas;
                      consultas = IU->obtenerConsultasUser(usuarioSesion.getCedula());
-                     vector<DtConsulta>::iterator it;
+                     vector<DtReserva>::iterator it;
                      for (it=consultas.begin(); it!=consultas.end(); ++it) {
                         Fecha fechaConsulta = it->getFecha();
+                        Fecha fechaReserva = it->getFechaReserva();
                         Hora horaConsulta = it->getHora();
                         Usuario* medicoConsulta = it->getMedico();
                         cout << fechaConsulta.getAnio() << "/" << fechaConsulta.getMes() << "/" << fechaConsulta.getDia() << " - " 
                         << horaConsulta.getHoras() << ":" << horaConsulta.getMinutos() << " - " 
-                        << medicoConsulta->getNombre() << " " << medicoConsulta->getApellido() << endl;
+                        << medicoConsulta->getNombre() << " " << medicoConsulta->getApellido() << " - "
+                        << fechaReserva.getAnio() << "/" << fechaReserva.getMes() << "/" << fechaReserva.getDia() << endl;
                      }
                      break;
                   }

@@ -147,7 +147,7 @@ map<string, DtUsuario> CUsuario::obtenerMedicos(){
     return setDtU;
 }
 
-vector<DtConsulta> CUsuario::obtenerConsultasUser(string ci){
+vector<DtReserva> CUsuario::obtenerConsultasUser(string ci){
     this->ci = ci;
     map<string, Usuario*>::iterator it;
     it = this->usuarios.find(ci);

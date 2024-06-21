@@ -32,7 +32,7 @@ public:
     void setSocio(Usuario* soc);
     void setMedico(Usuario* med);
 
-    ~Consulta();
+    virtual ~Consulta();
 };
 
 #endif

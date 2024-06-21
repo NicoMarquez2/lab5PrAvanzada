@@ -7,7 +7,9 @@
 #include "../dataTypes/dtFecha.h"
 #include "../headers/categoriaUsuario.h"
 #include "../headers/consulta.h"
+#include "../headers/reserva.h"
 #include "../dataTypes/dtConsulta.h"
+#include "../dataTypes/dtReserva.h"
 
 using namespace std;
 class DtEmergencia;
@@ -43,7 +45,7 @@ public:
     bool getActivo();
     CategoriaUsuario* getCategoria();
     bool esContrasena(string pass);
-    vector<DtConsulta> obtenerConsultas();
+    vector<DtReserva> obtenerConsultas();
 
     void setContrasena(string cont);
     void setNombre(string nom);

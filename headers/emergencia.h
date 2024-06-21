@@ -18,7 +18,7 @@ public:
 
     void setMotivo(string mot);
 
-    ~Emergencia();
+    virtual ~Emergencia() override = default;
 };
 
 #endif

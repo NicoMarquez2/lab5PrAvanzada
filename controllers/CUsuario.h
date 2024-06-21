@@ -24,7 +24,7 @@ public:
     map<string, Usuario*> getUsuarios();
     DtUsuario ingresarCedula(string ci);
 
-    vector<DtConsulta> obtenerConsultasUser(string ci);
+    vector<DtReserva> obtenerConsultasUser(string ci);
 
     void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria);
     void activarUsuario(string ci);

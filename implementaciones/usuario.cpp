@@ -91,16 +91,17 @@ bool Usuario::esContrasena(string pass){
     return this->contrasena == pass;
 }
 
-vector<DtConsulta> Usuario::obtenerConsultas(){
-    vector<DtConsulta> setDtC;
-    DtConsulta DtC;
+vector<DtReserva> Usuario::obtenerConsultas(){
+    vector<DtReserva> setDtR;
+    DtReserva DtR;
     vector<Consulta*>::iterator it;
     for (it=consultas.begin(); it!=consultas.end(); ++it){
             this->consulta = *it;
-            DtC = DtConsulta(consulta->getFecha(), consulta->getHora(), consulta->getSocio(), consulta->getMedico());
-            setDtC.push_back(DtC);
+            Reserva* reserva = dynamic_cast<Reserva*>(consulta);
+            DtR = DtReserva(reserva->getFecha(), reserva->getHora(), reserva->getFechaReserva(), reserva->getSocio(), reserva->getMedico());
+            setDtR.push_back(DtR);
     }    
-    return setDtC;
+    return setDtR;
 }
 
 void Usuario::setContrasena(string cont){
