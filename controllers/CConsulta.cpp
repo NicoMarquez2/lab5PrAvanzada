@@ -1,5 +1,6 @@
 #include "CConsulta.h"
 #include <ctime>
+#include <algorithm>
 
 CUsuario* CU = CUsuario::getInstancia();
 
@@ -93,8 +94,6 @@ void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha f
     bool rmedexiste = false;
     bool rpacexiste = false;
     
-    Consulta* consulta;
-    vector<Consulta>::iterator it3;
     vector<Consulta*> consultas = this->consultas;
     
 
@@ -121,8 +120,20 @@ void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha f
             rpacexiste = true;
     }
     if (rmedexiste & rpacexiste){
+        auto it3 = find_if(consultas.begin(), consultas.end(), [&fecha, &fechaReserva](Consulta* consulta) {
+                Reserva* reserva = dynamic_cast<Reserva*>(consulta);
+                return reserva != nullptr 
+                && reserva->getFecha().getDia() == fecha.getDia() 
+                && reserva->getFecha().getDia() == fechaReserva.getDia();
+            });
+        if (it3 != consultas.end()) {
+            Reserva* encontroReserva = dynamic_cast<Reserva*>(*it3);
+            if (encontroReserva) {
+                encontroReserva->setAsiste(true);
+            }
+        } else {
+        }
     }
-
 }
 
 void CConsulta::registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo){  
