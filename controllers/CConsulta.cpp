@@ -110,21 +110,23 @@ void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha f
     for (it2=rmed.begin(); it2!=rmed.end(); ++it2) {
         Fecha fechaCon = it2->getFecha();
         Fecha fechaRes = it2->getFechaReserva();
-        if (fechaCon.getDia() == fecha.getDia() & fechaRes.getDia() == fechaReserva.getDia())
+        if (fechaCon.getDia() == fecha.getDia() & fechaRes.getDia() == fechaReserva.getDia()){
             rmedexiste = true;
+        }
     }
     for (it2=rpac.begin(); it2!=rpac.end(); ++it2) {
         Fecha fechaCon = it2->getFecha();
         Fecha fechaRes = it2->getFechaReserva();
-        if (fechaCon.getDia() == fecha.getDia() & fechaRes.getDia() == fechaReserva.getDia())
+        if (fechaCon.getDia() == fecha.getDia() & fechaRes.getDia() == fechaReserva.getDia()){
             rpacexiste = true;
+        }
     }
-    if (rmedexiste & rpacexiste){
+    if (rmedexiste && rpacexiste){
         auto it3 = find_if(consultas.begin(), consultas.end(), [&fecha, &fechaReserva](Consulta* consulta) {
                 Reserva* reserva = dynamic_cast<Reserva*>(consulta);
                 return reserva != nullptr 
                 && reserva->getFecha().getDia() == fecha.getDia() 
-                && reserva->getFecha().getDia() == fechaReserva.getDia();
+                && reserva->getFechaReserva().getDia() == fechaReserva.getDia();
             });
         if (it3 != consultas.end()) {
             Reserva* encontroReserva = dynamic_cast<Reserva*>(*it3);

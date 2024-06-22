@@ -9,6 +9,10 @@ Fecha Reserva::getFechaReserva(){
     return this->fechaReserva;
 }
 
+bool Reserva::getAsiste(){
+    return this->asiste;
+}
+
 void Reserva::setAsiste(bool a){
     this->asiste = a;
 }

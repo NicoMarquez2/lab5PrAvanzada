@@ -185,10 +185,15 @@ int main() {
                         Fecha fechaReserva = it->getFechaReserva();
                         Hora horaConsulta = it->getHora();
                         Usuario* medicoConsulta = it->getMedico();
+                        bool asisteConsulta = it->getAsiste();
                         cout << fechaConsulta.getAnio() << "/" << fechaConsulta.getMes() << "/" << fechaConsulta.getDia() << " - " 
                         << horaConsulta.getHoras() << ":" << horaConsulta.getMinutos() << " - " 
                         << medicoConsulta->getNombre() << " " << medicoConsulta->getApellido() << " - "
-                        << fechaReserva.getAnio() << "/" << fechaReserva.getMes() << "/" << fechaReserva.getDia() << endl;
+                        << fechaReserva.getAnio() << "/" << fechaReserva.getMes() << "/" << fechaReserva.getDia();
+                        if (asisteConsulta)
+                           cout << " asiste" << endl;
+                        else
+                           cout << " no asiste" << endl;
                      }
                      break;
                   }
@@ -297,12 +302,12 @@ int main() {
                         cin >> ciMed;
                         cout << "\nIngrese la ci del paciente: ";
                         cin >> ciPac;
-                        cout << "\nIngrese dia, mes y anio de la consulta: ";
-                        cin >> dia >> mes >> anio;
-                        cout << "\nIngrese dia, mes y anio de la reserva: ";
-                        cin >> diaR >> mesR >> anioR;
+                        cout << "\nIngrese anio, mes y dia de la consulta: ";
+                        cin >> anio >> mes >> dia;
+                        cout << "\nIngrese anio, mes y dia de la reserva: ";
+                        cin >> anioR >> mesR >> diaR;
 
-                        IC->registroReserva(ciMed, ciPac, Fecha(dia, mes, anio), Fecha(diaR, mesR, anioR));
+                        IC->registroReserva(ciMed, ciPac, Fecha(anio, mes, dia), Fecha(anioR, mesR, diaR));
                      } else {
                         cout << "Registro de emergencia" << endl;
                         cout << "Ingrese la ci del medico: ";

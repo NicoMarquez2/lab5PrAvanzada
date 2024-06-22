@@ -13,6 +13,7 @@ public:
     Reserva(Fecha f, Hora h, Usuario* soc, Usuario* med, Fecha fechaRes);
 
     Fecha getFechaReserva();
+    bool getAsiste();
 
     void setAsiste(bool a);
     void setFechaReserva(Fecha f);

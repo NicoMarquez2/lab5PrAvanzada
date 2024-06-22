@@ -98,7 +98,7 @@ vector<DtReserva> Usuario::obtenerConsultas(){
     for (it=consultas.begin(); it!=consultas.end(); ++it){
             this->consulta = *it;
             Reserva* reserva = dynamic_cast<Reserva*>(consulta);
-            DtR = DtReserva(reserva->getFecha(), reserva->getHora(), reserva->getFechaReserva(), reserva->getSocio(), reserva->getMedico());
+            DtR = DtReserva(reserva->getFecha(), reserva->getHora(), reserva->getFechaReserva(), reserva->getSocio(), reserva->getMedico(), reserva->getAsiste());
             setDtR.push_back(DtR);
     }    
     return setDtR;

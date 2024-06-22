@@ -15,14 +15,16 @@ private:
     Fecha fecha;
     Hora hora;
     Fecha fechaReserva;
+    bool asiste;
     Usuario* paciente;
     Usuario* medico;
 public:
-    DtReserva(Fecha f, Hora h, Fecha fechaRes, Usuario* pac, Usuario* med);
+    DtReserva(Fecha f, Hora h, Fecha fechaRes, Usuario* pac, Usuario* med, bool a);
     DtReserva();
     Fecha getFecha();
     Hora getHora();
     Fecha getFechaReserva();
+    bool getAsiste();
     Usuario* getSocio();
     Usuario* getMedico();
     ~DtReserva();

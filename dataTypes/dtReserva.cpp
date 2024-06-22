@@ -1,11 +1,12 @@
 #include "dtReserva.h"
 
-DtReserva::DtReserva(Fecha f, Hora h, Fecha fechaRes, Usuario* pac, Usuario* med){
+DtReserva::DtReserva(Fecha f, Hora h, Fecha fechaRes, Usuario* pac, Usuario* med, bool a){
     this->fecha = f;
     this->hora = h;
     this->fechaReserva = fechaRes;
     this->paciente = pac;
     this->medico = med;
+    this->asiste = a;
 }
 
 DtReserva::DtReserva(){
@@ -27,6 +28,10 @@ Fecha DtReserva::getFecha(){
 
 Hora DtReserva::getHora(){
     return this->hora;
+}
+
+bool DtReserva::getAsiste(){
+    return this->asiste;
 }
 
 Fecha DtReserva::getFechaReserva(){
