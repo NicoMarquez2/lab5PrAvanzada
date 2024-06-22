@@ -49,25 +49,6 @@ void CConsulta::agregarDescripcion(string descripcion){}
 void CConsulta::agregarTratamiento(string descripcion, string tipo){}
 void CConsulta::agregarFecha(Fecha fecha){}
 void CConsulta::agregarMedicamento(string medicamento){}
-void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva){
-    map<string,Usuario*> users = CU->getUsuarios();
-
-    map<string, Usuario*>::iterator it;
-    Usuario* med;
-    Usuario* pac;
-    Reserva* r;
-
-    it = users.find(ciMed);
-    if (it != users.end()) {
-        med = it->second;
-    }
-    it = users.find(ciPac);
-    if (it != users.end()) {
-        pac = it->second;
-        r = new Reserva(fecha, Hora(), pac, med, fechaReserva);
-        this->consultas.push_back(r);
-    }
-}
 
 void CConsulta::reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed){
     map<string,Usuario*> users = CU->getUsuarios();
@@ -90,6 +71,58 @@ void CConsulta::reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed){
         this->consultas.push_back(c);
         CU->reservaConsultaUser(s, c);
     }
+    it = users.find(ciMed);
+    if (it != users.end()) {
+        s = it->second;
+        c = new Reserva(f, h, s, m, ahora);
+        this->consultas.push_back(c);
+        CU->reservaConsultaUser(s, c);
+    }
+}
+
+void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva){
+    map<string,Usuario*> users = CU->getUsuarios();
+
+    map<string, Usuario*>::iterator it;
+    Usuario* med;
+    Usuario* pac;
+
+    vector<DtReserva> rmed;
+    vector<DtReserva> rpac;
+    vector<DtReserva>::iterator it2;
+    bool rmedexiste = false;
+    bool rpacexiste = false;
+    
+    Consulta* consulta;
+    vector<Consulta>::iterator it3;
+    vector<Consulta*> consultas = this->consultas;
+    
+
+    it = users.find(ciMed);
+    if (it != users.end()) {
+        med = it->second;
+        rmed = med->obtenerConsultas();
+    }
+    it = users.find(ciPac);
+    if (it != users.end()) {
+        pac = it->second;
+        rpac = pac->obtenerConsultas();
+    }
+    for (it2=rmed.begin(); it2!=rmed.end(); ++it2) {
+        Fecha fechaCon = it2->getFecha();
+        Fecha fechaRes = it2->getFechaReserva();
+        if (fechaCon.getDia() == fecha.getDia() & fechaRes.getDia() == fechaReserva.getDia())
+            rmedexiste = true;
+    }
+    for (it2=rpac.begin(); it2!=rpac.end(); ++it2) {
+        Fecha fechaCon = it2->getFecha();
+        Fecha fechaRes = it2->getFechaReserva();
+        if (fechaCon.getDia() == fecha.getDia() & fechaRes.getDia() == fechaReserva.getDia())
+            rpacexiste = true;
+    }
+    if (rmedexiste & rpacexiste){
+    }
+
 }
 
 void CConsulta::registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo){  

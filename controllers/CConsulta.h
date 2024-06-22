@@ -16,7 +16,6 @@ class CConsulta : public IConsulta
 private:
     static CConsulta* instancia;
     CConsulta();
-    vector<Consulta*> reservas;
     vector<Consulta*> consultas;
     map<string, Diagnostico*> diagnosticos;
     vector<CodDiagnostico*> codigos;

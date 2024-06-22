@@ -39,7 +39,6 @@ public:
 
     void setConsultasUser(Usuario* usuario, vector<Consulta*> consultasUser);
     void reservaConsultaUser(Usuario* usuario, Consulta* consultaUser);
-
     
 };
 
