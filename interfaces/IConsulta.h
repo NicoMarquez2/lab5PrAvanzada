@@ -11,13 +11,14 @@
 class IConsulta
 {
 public:
+    virtual void cargarDatos(vector<CodDiagnostico*> codigos) = 0;
     virtual vector<DtConsulta> obtenerConsultas() = 0;
     virtual vector<DtCodDiagnostico> obtenerCodDiagnosticos() = 0;
     virtual DtConsulta seleccionarConsulta(string ci) = 0;
+    virtual map<string, DtDiagnostico> obtenerDiagnosticos() = 0;
     virtual void reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed) = 0;
     virtual void obtenerCategorias() = 0;
     virtual void seleccionarCategoria(string categoria) = 0;
-    virtual void obtenerDiagnosticos() = 0;
     virtual void seleccionarDiagnostico(string diagnostico) = 0;
     virtual void agregarDescripcion(string descripcion) = 0;
     virtual void agregarTratamiento(string descripcion, string tipo) = 0;
@@ -26,6 +27,7 @@ public:
     virtual void registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva) = 0;
     virtual void registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo) = 0;
     virtual void listarRepresentacionesEstandarizadas() = 0;
+    virtual void altaDiagnostico(string ciPac, string ciMed, string codCat, string codDiag, string desc) = 0;
 };
 
 #endif

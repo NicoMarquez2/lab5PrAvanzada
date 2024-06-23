@@ -47,6 +47,7 @@ public:
     bool esContrasena(string pass);
     vector<DtReserva> obtenerReservas();
     vector<DtConsulta> obtenerConsultas();
+    map<string, DtDiagnostico> obtenerDiagnosticosConsultas();
 
     void setContrasena(string cont);
     void setNombre(string nom);

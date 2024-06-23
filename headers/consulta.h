@@ -33,6 +33,8 @@ public:
     void setSocio(Usuario* soc);
     void setMedico(Usuario* med);
 
+    void agregarDiagnostico(Diagnostico* diag);
+
     virtual ~Consulta();
 };
 

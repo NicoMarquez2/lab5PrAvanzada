@@ -48,3 +48,10 @@ void Consulta::setMedico(Usuario* med){
 void Consulta::setSocio(Usuario* soc){
     this->socio = soc;
 }
+
+void Consulta::agregarDiagnostico(Diagnostico* diag){
+    Diagnostico* diagnostico = diag;
+    string codDiag = diag->getCodDiagnostico()->getCodigoDiagnostico();
+    this->Diagnosticos.insert({codDiag, diag});
+    cout << "todo ok" << endl;
+}

@@ -23,6 +23,7 @@ private:
 public:
     static CConsulta* getInstancia();
     void cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico*> diagnosticos, vector<CodDiagnostico*> codigos);
+    void cargarDatos(vector<CodDiagnostico*> codigos);
     vector<Consulta*> getConsultas();
     map<string, Diagnostico*> getDiagnosticos();
     vector<CodDiagnostico*> getCodigos();
@@ -36,9 +37,10 @@ public:
     vector<DtConsulta> obtenerConsultas();
     vector<DtCodDiagnostico> obtenerCodDiagnosticos();
     DtConsulta seleccionarConsulta(string ci);
+    map<string, DtDiagnostico> obtenerDiagnosticos();
+
     void obtenerCategorias();
     void seleccionarCategoria(string categoria);
-    void obtenerDiagnosticos();
     void seleccionarDiagnostico(string diagnostico);
     void agregarDescripcion(string descripcion);
     void agregarTratamiento(string descripcion, string tipo);
@@ -47,6 +49,7 @@ public:
     void registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva);
     void registroEmergencia(string ciMed, string ciPac, Fecha fecha, string motivo);
     void listarRepresentacionesEstandarizadas();
+    void altaDiagnostico(string ciPac, string ciMed, string codCat, string codDiag, string desc);
 };
 
 #endif

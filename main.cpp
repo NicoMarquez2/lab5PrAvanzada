@@ -40,6 +40,20 @@ int main() {
    usersCollection.insert({pruebaM->getCedula(), pruebaM});
    usersCollection.insert({pruebaM2->getCedula(), pruebaM2});
    usersCollection.insert({pruebaA->getCedula(), pruebaA});
+   
+   vector<CodDiagnostico*> codDiagCollection;
+   CodDiagnostico* codiag1 = new CodDiagnostico("A", "Afecciones pulmonares", "A01", "Asma");
+   CodDiagnostico* codiag2 = new CodDiagnostico("A", "Afecciones pulmonares", "A02", "Congestion");
+   CodDiagnostico* codiag3 = new CodDiagnostico("B", "Aparato Digestivo", "B01", "Nauseas");
+   codDiagCollection.push_back(codiag1);
+   codDiagCollection.push_back(codiag2);
+   codDiagCollection.push_back(codiag3);
+
+
+   map<string, Diagnostico*> diagCollection;
+
+
+
 
    f = Fabrica::getInstancia();
    IU = f->getIUsuario();
@@ -64,6 +78,7 @@ int main() {
       case  0:
          if(!datosCargados){        
             IU->cargarDatos(usersCollection);
+            IC->cargarDatos(codDiagCollection);
             datosCargados = true;  
          } else {
             cout << "\nLos datos ya fueron cargados" << endl;
@@ -220,14 +235,15 @@ int main() {
                switch (option) {
                   case 1:{
                      cout << "Alta diagnosticos de consulta" << endl;
+                     cout << endl;
+                     cout << "Consultas del dia: " << endl;
 
-                     
-                     int anio, mes, dia, hora, minutos;
-                     string input, nombre, apellido, sexo, categoria, ciMed, motivo;
-
+                     string input, ciPac, codCat, codDiag, descripcion;
+                     string cat = "Z";
                      vector<DtConsulta> consultas;
                      consultas = IU->obtenerConsultasUser(usuarioSesion.getCedula());
                      vector<DtConsulta>::iterator it;
+
                      for (it=consultas.begin(); it!=consultas.end(); ++it) {
                         Fecha fechaConsulta = it->getFecha();
                         Hora horaConsulta = it->getHora();
@@ -237,14 +253,58 @@ int main() {
                         Fecha ahora = Fecha(1900 + ltm->tm_year, 1 + ltm->tm_mon, ltm->tm_mday);
                         if (fechaConsulta.getAnio() == ahora.getAnio() && fechaConsulta.getMes() == ahora.getMes() && fechaConsulta.getDia()){
                            cout << pacConsulta->getNombre() << " " << pacConsulta->getApellido()
-                           << " - " << pacConsulta->getCedula() << endl;
+                           << " - " << pacConsulta->getCedula() << endl << endl;
                         }
                      }
+                     
+                     cout << "Ingrese cedula del paciente de la consulta deseada (-1 para salir): ";
+                     cin >> input;
+                     if (input != "-1")
+                        ciPac = input;
+                     else 
+                        break;
 
                      vector<DtCodDiagnostico> setDtCD;
                      setDtCD = IC->obtenerCodDiagnosticos();
-                     vector<DtReserva>::iterator it2;
+                     vector<DtCodDiagnostico>::iterator it2;
 
+                     while (input != "-1"){
+                        cout << "Desea agregar diagnostico? (S para agregar, -1 para salir): ";
+                        cin >> input;
+                        if (input != "-1" && input == "S"){
+                           cout << "Categorias de diagnostico: " << endl;
+                           for (it2=setDtCD.begin(); it2!=setDtCD.end(); ++it2) {
+                              DtCodDiagnostico DtDC = *it2;
+                              if (cat.compare(DtDC.getCodigoCategoria())!=0){
+                                 cat = DtDC.getCodigoCategoria();
+                                 cout << DtDC.getCodigoCategoria() << " - " << DtDC.getCategoria() << endl;
+                              }
+                           }
+                        } else
+                           break;
+                        cout << "Ingrese categoria deseada (Codigo de familia, -1 para salir): " << endl;
+                        cin >> input;
+                        if (input != "-1"){
+                           codCat = input;
+                           for (it2=setDtCD.begin(); it2!=setDtCD.end(); ++it2) {
+                              DtCodDiagnostico DtDC = *it2;
+                              if (DtDC.getCodigoCategoria() == input){
+                                 cout << DtDC.getCodigoDiagnostico() << " - " << DtDC.getEtiqueta() << endl;
+                              }
+                           }
+                        } else
+                           break;
+                        cout << "Ingrese la representacion deseada (Codigo de diagnostico, -1 para salir): " << endl;
+                        cin >> input;
+                        if (input != "-1"){
+                           codDiag = input;
+                           cout << "Agregar descripcion (vacio si no desea agregar nada): " << endl;
+                           cin >> descripcion;
+                           IC->altaDiagnostico(ciPac, usuarioSesion.getCedula(), codCat, codDiag, descripcion);
+                        } else
+                           break;
+                     }
+                     break;
                   }
                   case 2:
                      cedula = "-1";
@@ -268,7 +328,7 @@ int main() {
                cin >> option;
 
                switch (option) {
-                  case 1:
+                  case 1: {
                      while (input != "-1") {
                            cout << "Ingrese una cedula (ingrese -1 si desea salir): ";
                            cin >> input;
@@ -317,6 +377,7 @@ int main() {
                      }
                      IU->salir();
                      break;
+                  }
                   case 2:
                      cout << "Desea ingresar una reserva o una emergencia?" << endl;
                      cout << "1- RESERVA\t\t\t2- EMERGENCIA" << endl;

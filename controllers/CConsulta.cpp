@@ -19,6 +19,9 @@ void CConsulta::cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico
     this->diagnosticos = diagnosticos;
     this->codigos = codigos;
 }
+void CConsulta::cargarDatos(vector<CodDiagnostico*> codigos){
+    this->codigos = codigos;
+}
 
 vector<Consulta*> CConsulta::getConsultas(){
     return this->consultas;
@@ -55,7 +58,6 @@ vector<DtConsulta> CConsulta::obtenerConsultas(){}
 DtConsulta CConsulta::seleccionarConsulta(string ci){}
 void CConsulta::obtenerCategorias(){}
 void CConsulta::seleccionarCategoria(string categoria){}
-void CConsulta::obtenerDiagnosticos(){}
 void CConsulta::seleccionarDiagnostico(string diagnostico){}
 void CConsulta::agregarDescripcion(string descripcion){}
 void CConsulta::agregarTratamiento(string descripcion, string tipo){}
@@ -167,3 +169,57 @@ void CConsulta::registroEmergencia(string ciMed, string ciPac, Fecha fecha, stri
     }
 }
 void CConsulta::listarRepresentacionesEstandarizadas(){}
+
+void CConsulta::altaDiagnostico(string ciPac, string ciMed, string codCat, string codDiag, string desc){
+    vector<Consulta*> consultas = this->consultas;
+    vector<CodDiagnostico*> codigos = this->codigos;
+
+    CodDiagnostico* codigoDiagnostico;
+
+    auto it2 = find_if(codigos.begin(), codigos.end(), [&codCat, &codDiag](CodDiagnostico* codDiagnostico) {
+                return codDiagnostico != nullptr
+                && codDiagnostico->getCodigoCategoria() == codCat
+                && codDiagnostico->getCodigoDiagnostico() == codDiag;
+    });
+    if  (it2 != codigos.end()) {
+        codigoDiagnostico = *it2;
+    }
+
+    time_t now = time(nullptr);
+    tm* ltm = localtime(&now);
+    Fecha ahora = Fecha(1900 + ltm->tm_year, 1 + ltm->tm_mon, ltm->tm_mday);
+
+    auto it = find_if(consultas.begin(), consultas.end(), [&ciPac, &ciMed, &ahora](Consulta* consulta) {
+                return consulta != nullptr 
+                && consulta->getSocio()->getCedula() == ciPac
+                && consulta->getMedico()->getCedula() == ciMed
+                && consulta->getFecha().getDia() == ahora.getDia();  
+    });
+    if (it != consultas.end()) {
+        Consulta* encontroConsulta = *it;
+        Diagnostico* diagnostico = new Diagnostico(codigoDiagnostico, desc);
+        string descripcion = diagnostico->getDescripcion();
+        this->diagnosticos.insert({descripcion, diagnostico});
+        encontroConsulta->agregarDiagnostico(diagnostico);
+    }
+
+}
+
+map<string, DtDiagnostico> CConsulta::obtenerDiagnosticos(){
+    map<string, DtDiagnostico> setDtD;
+    DtDiagnostico DtD;
+    DtCodDiagnostico DtCD;
+    map<string, Diagnostico*>::iterator it;
+
+    for (it=diagnosticos.begin(); it!=diagnosticos.end(); ++it){
+        Diagnostico *diag = it->second;
+        DtCodDiagnostico * DtCodD = new DtCodDiagnostico(diag->getCodDiagnostico()->getCodigoCategoria(), diag->getCodDiagnostico()->getCategoria(),
+                                    diag->getCodDiagnostico()->getCodigoDiagnostico(), diag->getCodDiagnostico()->getEtiqueta());
+        DtCD = *DtCodD;
+        DtDiagnostico *DtDiag = new DtDiagnostico(DtCD, diag->getDescripcion());
+        DtD = *DtDiag;
+        string desc = DtD.getDescripcion();
+        setDtD.insert({desc, DtD});
+    }
+    return setDtD;
+}

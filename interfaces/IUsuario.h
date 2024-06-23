@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include "../dataTypes/dtUsuario.h"
+#include "../dataTypes/dtDiagnostico.h"
 #include <iostream>
 #include "stdio.h"
 #include <map>
