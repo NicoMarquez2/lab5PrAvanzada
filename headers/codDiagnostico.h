@@ -3,6 +3,7 @@
 
 #include "stdio.h"
 #include <string>
+#include <map>
 #include <iostream>
 
 using namespace std;
@@ -10,14 +11,23 @@ using namespace std;
 class CodDiagnostico
 {
 private:
-    int codigo;
+    string codCat;
+    string cat;
+    string codDiag;
+    string etiqueta;
 public:
-    CodDiagnostico(int cod);
+    CodDiagnostico(string codCat, string cat, string codDiag, string etiqueta);
     CodDiagnostico();
 
-    int getCodigo();
+    string getCodigoCategoria();
+    string getCategoria();
+    string getCodigoDiagnostico();
+    string getEtiqueta();
 
-    void setCodigo(int cod);
+    void setCodigoCategoria(string cod);
+    void setCategoria(string cat);
+    void setCodigoDiagnostico(string codDiag);
+    void setEtiqueta(string etiqueta);
     ~CodDiagnostico();
 };
 

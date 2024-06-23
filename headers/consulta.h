@@ -17,6 +17,7 @@ private:
     Hora hora;
     Usuario* socio;
     Usuario* medico;
+    map<string, Diagnostico*> Diagnosticos; 
 public:
     Consulta(Fecha f, Hora h, Usuario* soc, Usuario* med);
     Consulta(Fecha f, Hora h, Usuario* soc);

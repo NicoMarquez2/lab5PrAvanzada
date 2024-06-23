@@ -34,6 +34,7 @@ public:
     void setCodigos(vector<CodDiagnostico*> codigos);
 
     vector<DtConsulta> obtenerConsultas();
+    vector<DtCodDiagnostico> obtenerCodDiagnosticos();
     DtConsulta seleccionarConsulta(string ci);
     void obtenerCategorias();
     void seleccionarCategoria(string categoria);

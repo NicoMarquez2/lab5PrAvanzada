@@ -27,7 +27,8 @@ public:
     virtual void cancelar() = 0;
     virtual void obtenerHistorialPaciente(string ci) = 0;
     virtual map<string, DtUsuario> obtenerMedicos() = 0;
-    virtual vector<DtReserva> obtenerConsultasUser(string ci) = 0;
+    virtual vector<DtReserva> obtenerReservasUser(string ci) = 0;
+    virtual vector<DtConsulta> obtenerConsultasUser(string ci) = 0;
 };
 
 #endif

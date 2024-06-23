@@ -178,7 +178,7 @@ int main() {
                   case 2: {
                      cout << "Ver reservas" << endl;
                      vector<DtReserva> consultas;
-                     consultas = IU->obtenerConsultasUser(usuarioSesion.getCedula());
+                     consultas = IU->obtenerReservasUser(usuarioSesion.getCedula());
                      vector<DtReserva>::iterator it;
                      for (it=consultas.begin(); it!=consultas.end(); ++it) {
                         Fecha fechaConsulta = it->getFecha();
@@ -218,9 +218,34 @@ int main() {
                cout << "2 - Salir" << endl;
                cin >> option;
                switch (option) {
-                  case 1:
+                  case 1:{
                      cout << "Alta diagnosticos de consulta" << endl;
-                     break;
+
+                     
+                     int anio, mes, dia, hora, minutos;
+                     string input, nombre, apellido, sexo, categoria, ciMed, motivo;
+
+                     vector<DtConsulta> consultas;
+                     consultas = IU->obtenerConsultasUser(usuarioSesion.getCedula());
+                     vector<DtConsulta>::iterator it;
+                     for (it=consultas.begin(); it!=consultas.end(); ++it) {
+                        Fecha fechaConsulta = it->getFecha();
+                        Hora horaConsulta = it->getHora();
+                        Usuario* pacConsulta = it->getSocio();
+                        time_t now = time(nullptr);
+                        tm* ltm = localtime(&now);
+                        Fecha ahora = Fecha(1900 + ltm->tm_year, 1 + ltm->tm_mon, ltm->tm_mday);
+                        if (fechaConsulta.getAnio() == ahora.getAnio() && fechaConsulta.getMes() == ahora.getMes() && fechaConsulta.getDia()){
+                           cout << pacConsulta->getNombre() << " " << pacConsulta->getApellido()
+                           << " - " << pacConsulta->getCedula() << endl;
+                        }
+                     }
+
+                     vector<DtCodDiagnostico> setDtCD;
+                     setDtCD = IC->obtenerCodDiagnosticos();
+                     vector<DtReserva>::iterator it2;
+
+                  }
                   case 2:
                      cedula = "-1";
                      pass = " ";

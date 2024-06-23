@@ -45,7 +45,8 @@ public:
     bool getActivo();
     CategoriaUsuario* getCategoria();
     bool esContrasena(string pass);
-    vector<DtReserva> obtenerConsultas();
+    vector<DtReserva> obtenerReservas();
+    vector<DtConsulta> obtenerConsultas();
 
     void setContrasena(string cont);
     void setNombre(string nom);

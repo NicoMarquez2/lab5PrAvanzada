@@ -2,20 +2,14 @@
 
 using namespace std;
 
-Diagnostico::Diagnostico(string et, string desc, CodDiagnostico* cod){
-    this->etiqueta = et;
+Diagnostico::Diagnostico(CodDiagnostico* cod, string desc){
     this->descripcion = desc;
     this->codigo = cod;
 }
 Diagnostico::Diagnostico(){
-    this->etiqueta = "etiqueta";
     this->descripcion = "";
     this->codigo = 0;
 }
-
-string Diagnostico::getEtiqueta(){
-    return this->etiqueta;
-}    
 string Diagnostico::getDescripcion(){
     return this->descripcion;
 }

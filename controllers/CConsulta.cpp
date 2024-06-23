@@ -29,6 +29,17 @@ map<string, Diagnostico*> CConsulta::getDiagnosticos(){
 vector<CodDiagnostico*> CConsulta::getCodigos(){
     return this->codigos;
 }
+vector<DtCodDiagnostico> CConsulta::obtenerCodDiagnosticos(){
+    vector<DtCodDiagnostico> setDtCD;
+    DtCodDiagnostico DtCD;
+    vector<CodDiagnostico*>::iterator it;
+    for (it=codigos.begin(); it!=codigos.end(); ++it){
+        CodDiagnostico *cod = *it;
+        DtCD = DtCodDiagnostico(cod->getCodigoCategoria(), cod->getCategoria(), cod->getCodigoDiagnostico(), cod->getEtiqueta());
+        setDtCD.push_back(DtCD);
+    }
+    return setDtCD;
+}
 
 void CConsulta::setConsultas(vector<Consulta*> consultas){
     this->consultas = consultas;
@@ -71,13 +82,11 @@ void CConsulta::reservaConsulta(Fecha f, Hora h, string ciSoc, string ciMed){
         c = new Reserva(f, h, s, m, ahora);
         this->consultas.push_back(c);
         CU->reservaConsultaUser(s, c);
-    }
-    it = users.find(ciMed);
-    if (it != users.end()) {
-        s = it->second;
-        c = new Reserva(f, h, s, m, ahora);
-        this->consultas.push_back(c);
-        CU->reservaConsultaUser(s, c);
+        it = users.find(ciMed);
+        if (it != users.end()) {
+            m = it->second;
+            CU->reservaConsultaUser(m, c);
+        }
     }
 }
 
@@ -100,12 +109,12 @@ void CConsulta::registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha f
     it = users.find(ciMed);
     if (it != users.end()) {
         med = it->second;
-        rmed = med->obtenerConsultas();
+        rmed = med->obtenerReservas();
     }
     it = users.find(ciPac);
     if (it != users.end()) {
         pac = it->second;
-        rpac = pac->obtenerConsultas();
+        rpac = pac->obtenerReservas();
     }
     for (it2=rmed.begin(); it2!=rmed.end(); ++it2) {
         Fecha fechaCon = it2->getFecha();
