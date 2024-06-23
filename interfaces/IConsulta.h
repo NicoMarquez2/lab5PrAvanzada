@@ -5,6 +5,7 @@
 #include <vector>
 #include "../dataTypes/dtConsulta.h"
 #include "../dataTypes/dtCodDiagnostico.h"
+#include "../dataTypes/dtDiagnostico.h"
 #include "../dataTypes/dtFecha.h"
 #include "../dataTypes/hora.h"
 

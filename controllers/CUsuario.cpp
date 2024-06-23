@@ -165,13 +165,13 @@ vector<DtConsulta> CUsuario::obtenerConsultasUser(string ci){
     return user->obtenerConsultas();
 }
 
-map<string, DtDiagnostico> CUsuario::obtenerDiagnosticosConsultaUser(string ci){
+map<string, DtConsulta> CUsuario::obtenerDiagnosticosConsultaUser(string ci){
     this->ci = ci;
     map<string, Usuario*>::iterator it;
     it = this->usuarios.find(ci);
     if(it != usuarios.end()){}
         this->user = it->second;
-    return user->obtenerDiagnosticosConsulta();
+    return user->obtenerDiagnosticosConsultas();
 }
 
 void CUsuario::setConsultasUser(Usuario* usuario, vector<Consulta*> consultasUser){

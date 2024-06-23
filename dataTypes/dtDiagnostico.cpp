@@ -15,3 +15,5 @@ string DtDiagnostico::getDescripcion(){
 DtCodDiagnostico DtDiagnostico::getCodDiagnostico(){
     return this->codigo;
 }
+
+DtDiagnostico::~DtDiagnostico(){}

@@ -27,6 +27,7 @@ public:
     Hora getHora();
     Usuario* getSocio();
     Usuario* getMedico();
+    map<string, Diagnostico*> getDiagnosticos();
 
     void setFecha(Fecha f);
     void setHora(Hora h);

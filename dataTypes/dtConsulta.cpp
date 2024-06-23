@@ -1,10 +1,11 @@
 #include "dtConsulta.h"
 
-DtConsulta::DtConsulta(Fecha f, Hora h, Usuario* pac, Usuario* med){
+DtConsulta::DtConsulta(Fecha f, Hora h, Usuario* pac, Usuario* med, map<string, DtDiagnostico> diag){
     this->fecha = f;
     this->hora = h;
     this->paciente = pac;
     this->medico = med;
+    this->diagnosticos = diag;
 }
 
 DtConsulta::DtConsulta(){
@@ -34,3 +35,8 @@ Usuario* DtConsulta::getSocio(){
 Usuario* DtConsulta::getMedico(){
     return this->medico;
 }
+map<string, DtDiagnostico> DtConsulta::getDiagnosticos(){
+    return this->diagnosticos;
+}
+
+

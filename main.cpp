@@ -230,7 +230,8 @@ int main() {
             } else if (usuarioSesion.getCategoria() == "medico") {
                cout << "Que desea hacer medico?" << endl;
                cout << "1 - Alta diagnosticos de consulta" << endl;
-               cout << "2 - Salir" << endl;
+               cout << "2 - Obtener historial de paciente" << endl;
+               cout << "3 - Salir" << endl;
                cin >> option;
                switch (option) {
                   case 1:{
@@ -251,7 +252,7 @@ int main() {
                         time_t now = time(nullptr);
                         tm* ltm = localtime(&now);
                         Fecha ahora = Fecha(1900 + ltm->tm_year, 1 + ltm->tm_mon, ltm->tm_mday);
-                        if (fechaConsulta.getAnio() == ahora.getAnio() && fechaConsulta.getMes() == ahora.getMes() && fechaConsulta.getDia()){
+                        if (fechaConsulta.getAnio() == ahora.getAnio() && fechaConsulta.getMes() == ahora.getMes() && fechaConsulta.getDia() == ahora.getDia()){
                            cout << pacConsulta->getNombre() << " " << pacConsulta->getApellido()
                            << " - " << pacConsulta->getCedula() << endl << endl;
                         }
@@ -299,14 +300,59 @@ int main() {
                         if (input != "-1"){
                            codDiag = input;
                            cout << "Agregar descripcion (vacio si no desea agregar nada): " << endl;
-                           cin >> descripcion;
+                           cin.ignore();
+                           getline(cin, descripcion);
                            IC->altaDiagnostico(ciPac, usuarioSesion.getCedula(), codCat, codDiag, descripcion);
                         } else
                            break;
                      }
                      break;
                   }
-                  case 2:
+                  case 2:{
+                     string input, ciPac;
+                     DtUsuario paciente;
+                     vector<DtConsulta> consultasPacciente;
+                     cout << "Obtener historial de paciente" << endl;
+                     cout << endl;
+                     cout << "Ingrese CI del paciente (-1 para salir): ";
+                     cin >> input;
+                     if (input != "-1") {
+                        ciPac = input;
+                        paciente = IU->ingresarCedula(ciPac);
+                        cout << paciente.getCedula() << " - " << paciente.getNombre() << " " << paciente.getApellido() 
+                           << " - " << paciente.getFechaNacimiento().getAnio() << "/" 
+                           << paciente.getFechaNacimiento().getMes() << "/"
+                           << paciente.getFechaNacimiento().getDia() << endl;
+
+                        consultasPacciente = IU->obtenerConsultasUser(ciPac);
+                        vector<DtConsulta>::iterator it;
+
+                        for (it=consultasPacciente.begin(); it!=consultasPacciente.end(); ++it) {
+                           time_t now = time(nullptr);
+                           tm* ltm = localtime(&now);
+                           Fecha ahora = Fecha(1900 + ltm->tm_year, 1 + ltm->tm_mon, ltm->tm_mday);
+
+                           Fecha fechaConsulta = it->getFecha();
+                           Hora horaConsulta = it->getHora();
+                           Usuario* pacConsulta = it->getSocio();
+                           Usuario* medConsulta = it->getMedico();
+                           map<string, DtDiagnostico> dtDiag = it->getDiagnosticos();
+                           map<string, DtDiagnostico>::iterator it2;
+
+                           if (fechaConsulta.getAnio() <= ahora.getAnio() && fechaConsulta.getMes() <= ahora.getMes() && fechaConsulta.getDia() <= ahora.getDia()){
+                              cout << fechaConsulta.getAnio() << "/" << fechaConsulta.getMes() << "/" << fechaConsulta.getDia() << " - "
+                                 << medConsulta->getCedula() << " - " << medConsulta->getNombre() << " " << medConsulta->getApellido() << endl;
+                              for (it2=dtDiag.begin(); it2!=dtDiag.end(); ++it2){
+                                 cout << "- " << it2->second.getCodDiagnostico().getCodigoDiagnostico() << " - " << it2->second.getCodDiagnostico().getEtiqueta()
+                                       << " - " << it2->second.getDescripcion() << endl;
+                              }
+                           }
+                        }
+                     } 
+
+                     break;
+                  }
+                  case 3:
                      cedula = "-1";
                      pass = " ";
                      usuarioSesion = DtUsuario();

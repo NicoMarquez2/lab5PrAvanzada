@@ -16,3 +16,5 @@ string Diagnostico::getDescripcion(){
 CodDiagnostico* Diagnostico::getCodDiagnostico(){
     return this->codigo;
 }
+
+Diagnostico::~Diagnostico(){}

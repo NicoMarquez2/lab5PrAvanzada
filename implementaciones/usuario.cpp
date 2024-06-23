@@ -106,15 +106,34 @@ vector<DtReserva> Usuario::obtenerReservas(){
 
 vector<DtConsulta> Usuario::obtenerConsultas(){
     vector<DtConsulta> setDtC;
+    map<string, DtDiagnostico> dtDiag;
     DtConsulta DtC;
     vector<Consulta*>::iterator it;
     for (it=consultas.begin(); it!=consultas.end(); ++it){
             this->consulta = *it;
             Reserva* reserva = dynamic_cast<Reserva*>(consulta);
-            DtC = DtConsulta(reserva->getFecha(), reserva->getHora(), reserva->getSocio(), reserva->getMedico());
+            map<string, Diagnostico*> diag = reserva->getDiagnosticos();
+            map<string, Diagnostico*>::iterator it2;
+            for (it2=diag.begin(); it2!=diag.end(); ++it2){
+                string cod = it2->first;
+                Diagnostico codDiag = *it2->second;
+                string desc = codDiag.getDescripcion();
+                DtCodDiagnostico *tmp = new DtCodDiagnostico(codDiag.getCodDiagnostico()->getCodigoCategoria(), codDiag.getCodDiagnostico()->getCategoria(),
+                                                codDiag.getCodDiagnostico()->getCodigoDiagnostico(), codDiag.getCodDiagnostico()->getEtiqueta());
+                DtCodDiagnostico dtCod = *tmp;
+                DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc);
+                DtDiagnostico DtD = *tmp2;
+                dtDiag.insert({DtD.getCodDiagnostico().getCodigoDiagnostico(), DtD});
+            }
+
+            DtC = DtConsulta(reserva->getFecha(), reserva->getHora(), reserva->getSocio(), reserva->getMedico(), dtDiag);
+            dtDiag.clear();
             setDtC.push_back(DtC);
     }    
     return setDtC;
+}
+
+map<string, DtConsulta> Usuario::obtenerDiagnosticosConsultas(){
 }
 
 void Usuario::setContrasena(string cont){

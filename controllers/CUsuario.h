@@ -26,7 +26,7 @@ public:
 
     vector<DtReserva> obtenerReservasUser(string ci);
     vector<DtConsulta> obtenerConsultasUser(string ci);
-    map<string, DtDiagnostico> obtenerDiagnosticosConsultaUser(string ci);
+    map<string, DtConsulta> obtenerDiagnosticosConsultaUser(string ci);
 
     void ingresarDatos(string nombre, string apellido, string sexo, Fecha fechaNacimiento, string categoria);
     void activarUsuario(string ci);

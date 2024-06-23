@@ -33,6 +33,10 @@ Usuario* Consulta::getMedico(){
     return this->medico;
 }
 
+map<string, Diagnostico*> Consulta::getDiagnosticos(){
+    return this->Diagnosticos;
+}
+
 void Consulta::setFecha(Fecha f){
     this->fecha = f;
 }
@@ -53,5 +57,4 @@ void Consulta::agregarDiagnostico(Diagnostico* diag){
     Diagnostico* diagnostico = diag;
     string codDiag = diag->getCodDiagnostico()->getCodigoDiagnostico();
     this->Diagnosticos.insert({codDiag, diag});
-    cout << "todo ok" << endl;
 }
