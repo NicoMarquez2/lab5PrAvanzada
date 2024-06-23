@@ -33,6 +33,7 @@ public:
     void setHora(Hora h);
     void setSocio(Usuario* soc);
     void setMedico(Usuario* med);
+    void setDiagnosticos(map<string, Diagnostico*> diag);
 
     void agregarDiagnostico(Diagnostico* diag);
 

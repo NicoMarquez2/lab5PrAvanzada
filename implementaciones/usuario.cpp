@@ -87,6 +87,10 @@ CategoriaUsuario* Usuario::getCategoria(){
     return this->categoria;
 }
 
+vector<Consulta*> Usuario::getConsultas(){
+    return this->consultas;
+}
+
 bool Usuario::esContrasena(string pass){
     return this->contrasena == pass;
 }

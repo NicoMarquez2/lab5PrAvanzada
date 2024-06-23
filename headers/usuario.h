@@ -43,6 +43,7 @@ public:
     Fecha getFechaNacimiento();
     int getEdad();
     bool getActivo();
+    vector<Consulta*> getConsultas();
     CategoriaUsuario* getCategoria();
     bool esContrasena(string pass);
     vector<DtReserva> obtenerReservas();

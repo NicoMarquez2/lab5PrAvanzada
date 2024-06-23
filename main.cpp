@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <algorithm>
 #include "fabrica/fabrica.h"
 #include "../headers/socio.h"
 #include "../headers/medico.h"
@@ -36,23 +37,147 @@ int main() {
    Usuario* pruebaM = new Usuario("medico", "medico", "medicoAp", "12345678", "femenino", fecha, true, catM);
    Usuario* pruebaM2 = new Usuario("medico", "medico", "medicoAp2", "12345679", "femenino", fecha, true, catM);
    Usuario* pruebaA = new Usuario("admin", "admin", "adminAp", "87654321", "masculino", fecha, true, catA);
+   Usuario* JA = new Usuario("admin", "James", "Peer", "34567645", "masculino", Fecha(1988, 12, 28), true, catA);
+   Usuario* TM = new Usuario("socio", "Tifany", "McKensey", "34562345", "femenino", Fecha(1990, 1, 01), true, catS);
+   Usuario* DP = new Usuario("socio", "Diego", "Perez", "12345435", "masculino", Fecha(1980, 3, 03), true, catS);
+   Usuario* JM = new Usuario("medico", "Juan", "Montoya", "65436667", "masculino", Fecha(1970, 4, 07), true, catM);
+   Usuario* DC = new Usuario("medico", "Debora", "Corral", "43521343", "femenino", Fecha(1993, 7, 13), true, catM);
+   Usuario* AL = new Usuario("medico", "Ana", "Lopez", "98056743", "femenino", Fecha(1981, 9, 24), true, catM);
    usersCollection.insert({pruebaU->getCedula(), pruebaU});
    usersCollection.insert({pruebaM->getCedula(), pruebaM});
    usersCollection.insert({pruebaM2->getCedula(), pruebaM2});
-   usersCollection.insert({pruebaA->getCedula(), pruebaA});
+   usersCollection.insert({JA->getCedula(), JA});
+   usersCollection.insert({TM->getCedula(), TM});
+   usersCollection.insert({DP->getCedula(), DP});
+   usersCollection.insert({JM->getCedula(), JM});
+   usersCollection.insert({DC->getCedula(), DC});
+   usersCollection.insert({AL->getCedula(), AL});
+
+   
+
+   vector<Consulta*> consultCollection;
+   Reserva* C1 = new Reserva(Fecha(2024, 6, 24), Hora(10, 10), TM, JM, Fecha(2014, 6, 21));
+   Reserva* C2 = new Reserva(Fecha(2024, 6, 24), Hora(11, 11), TM, DC, Fecha(2015, 7, 21));
+   Reserva* C3 = new Reserva(Fecha(2024, 6, 24), Hora(12, 12), DP, JM, Fecha(2016, 4, 26));
+   Reserva* C4 = new Reserva(Fecha(2024, 6, 24), Hora(13, 13), DP, AL, Fecha(2017, 9, 30));
+   Emergencia* U1 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), TM, JM, "Fiebre alta");
+   Emergencia* U2 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), DP, DC, "Asma");
+   Emergencia* U3 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), DP, AL, "Mareos");
+   consultCollection.push_back(C1);
+   consultCollection.push_back(C2);
+   consultCollection.push_back(C3);
+   consultCollection.push_back(C4);
+   consultCollection.push_back(U1);
+   consultCollection.push_back(U2);
+   consultCollection.push_back(U3);
+   
+   map<string, Usuario*>::iterator it800;
+   it800 = usersCollection.find(C1->getSocio()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(C1);
+   }
+   it800 = usersCollection.find(C1->getMedico()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(C1);
+   }
+   it800 = usersCollection.find(C2->getSocio()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(C2);
+   }
+   it800 = usersCollection.find(C2->getMedico()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(C2);
+   }
+   it800 = usersCollection.find(C3->getSocio()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(C3);
+   }
+   it800 = usersCollection.find(C3->getMedico()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(C3);
+   }
+   it800 = usersCollection.find(C4->getSocio()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(C4);
+   }
+   it800 = usersCollection.find(C4->getMedico()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(C4);
+   }
+   it800 = usersCollection.find(U1->getSocio()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(U1);
+   }
+   it800 = usersCollection.find(U1->getMedico()->getCedula());
+   if(it800 != usersCollection.end()){
+      it800->second->ingresarConsulta(U1);
+   }
+   
+   map<string, Usuario*>::iterator it801;
+   for (it801=usersCollection.begin(); it801 !=usersCollection.end(); ++it801){
+      Usuario *us = it801->second;
+      cout << " - " << us->getCedula() << endl;
+      vector<DtConsulta>::iterator it803;
+      for (it803=it801->second->obtenerConsultas().begin(); it803!=it801->second->obtenerConsultas().end(); ++it803){
+         cout << it803->getMedico()->getCedula() << " - " << it803->getSocio()->getCedula() << endl;
+      }
+   }
+   
    
    vector<CodDiagnostico*> codDiagCollection;
-   CodDiagnostico* codiag1 = new CodDiagnostico("A", "Afecciones pulmonares", "A01", "Asma");
-   CodDiagnostico* codiag2 = new CodDiagnostico("A", "Afecciones pulmonares", "A02", "Congestion");
-   CodDiagnostico* codiag3 = new CodDiagnostico("B", "Aparato Digestivo", "B01", "Nauseas");
-   codDiagCollection.push_back(codiag1);
-   codDiagCollection.push_back(codiag2);
-   codDiagCollection.push_back(codiag3);
+   CodDiagnostico* R1 = new CodDiagnostico("A", "Afecciones pulmonares", "A01", "Asma");
+   CodDiagnostico* R2 = new CodDiagnostico("A", "Afecciones pulmonares", "A02", "Congestion");
+   CodDiagnostico* R3 = new CodDiagnostico("B", "Aparato Digestivo", "B01", "Nauseas");
+   codDiagCollection.push_back(R1);
+   codDiagCollection.push_back(R2);
+   codDiagCollection.push_back(R3);
 
 
    map<string, Diagnostico*> diagCollection;
-
-
+   Diagnostico* D1 = new Diagnostico(R2, "Desc1");
+   Diagnostico* D2 = new Diagnostico(R3, "Desc2");
+   Diagnostico* D3 = new Diagnostico(R2, "Desc3");
+   Diagnostico* D4 = new Diagnostico(R3, "Desc4");
+   Diagnostico* D5 = new Diagnostico(R1, "Desc5");
+   Diagnostico* D6 = new Diagnostico(R2, "Desc6");
+   auto it900 = find_if(consultCollection.begin(), consultCollection.end(), [&C1](Consulta* consulta) {
+               return consulta != nullptr 
+               && consulta->getSocio()->getCedula() == C1->getSocio()->getCedula()
+               && consulta->getMedico()->getCedula() == C1->getMedico()->getCedula();
+   });
+   if (it900 != consultCollection.end()) {
+      Consulta *con = *it900;
+      con->getDiagnosticos().insert({D1->getCodDiagnostico()->getCodigoDiagnostico(), D1});
+      con->getDiagnosticos().insert({D2->getCodDiagnostico()->getCodigoDiagnostico(), D2});
+   }
+   auto it901 = find_if(consultCollection.begin(), consultCollection.end(), [&C3](Consulta* consulta) {
+               return consulta != nullptr 
+               && consulta->getSocio()->getCedula() == C3->getSocio()->getCedula()
+               && consulta->getMedico()->getCedula() == C3->getMedico()->getCedula();
+   });
+   if (it901 != consultCollection.end()) {
+      Consulta *con = *it901;
+      con->getDiagnosticos().insert({D3->getCodDiagnostico()->getCodigoDiagnostico(), D3});
+   }
+   auto it902 = find_if(consultCollection.begin(), consultCollection.end(), [&U1](Consulta* consulta) {
+               return consulta != nullptr 
+               && consulta->getSocio()->getCedula() == U1->getSocio()->getCedula()
+               && consulta->getMedico()->getCedula() == U1->getMedico()->getCedula();
+   });
+   if (it902 != consultCollection.end()) {
+      Consulta *con = *it902;
+      con->getDiagnosticos().insert({D4->getCodDiagnostico()->getCodigoDiagnostico(), D4});
+   }
+   auto it903 = find_if(consultCollection.begin(), consultCollection.end(), [&U2](Consulta* consulta) {
+               return consulta != nullptr 
+               && consulta->getSocio()->getCedula() == U2->getSocio()->getCedula()
+               && consulta->getMedico()->getCedula() == U2->getMedico()->getCedula();
+   });
+   if (it903 != consultCollection.end()) {
+      Consulta *con = *it903;
+      con->getDiagnosticos().insert({D5->getCodDiagnostico()->getCodigoDiagnostico(), D5});
+      con->getDiagnosticos().insert({D5->getCodDiagnostico()->getCodigoDiagnostico(), D5});
+   }
 
 
    f = Fabrica::getInstancia();
@@ -78,7 +203,7 @@ int main() {
       case  0:
          if(!datosCargados){        
             IU->cargarDatos(usersCollection);
-            IC->cargarDatos(codDiagCollection);
+            IC->cargarDatos(consultCollection, diagCollection, codDiagCollection);
             datosCargados = true;  
          } else {
             cout << "\nLos datos ya fueron cargados" << endl;

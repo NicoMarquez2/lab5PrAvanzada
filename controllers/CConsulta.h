@@ -23,7 +23,9 @@ private:
 public:
     static CConsulta* getInstancia();
     void cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico*> diagnosticos, vector<CodDiagnostico*> codigos);
-    void cargarDatos(vector<CodDiagnostico*> codigos);
+    void cargarConsultas(vector<Consulta*> consultas);
+    void cargarDiagnosticos(map<string, Diagnostico*> diagnosticos);
+    void cargarCodigos(vector<CodDiagnostico*> codigos);
     vector<Consulta*> getConsultas();
     map<string, Diagnostico*> getDiagnosticos();
     vector<CodDiagnostico*> getCodigos();

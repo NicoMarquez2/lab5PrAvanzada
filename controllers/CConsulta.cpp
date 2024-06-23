@@ -19,7 +19,7 @@ void CConsulta::cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico
     this->diagnosticos = diagnosticos;
     this->codigos = codigos;
 }
-void CConsulta::cargarDatos(vector<CodDiagnostico*> codigos){
+void CConsulta::cargarCodigos(vector<CodDiagnostico*> codigos){
     this->codigos = codigos;
 }
 
@@ -222,4 +222,12 @@ map<string, DtDiagnostico> CConsulta::obtenerDiagnosticos(){
         setDtD.insert({desc, DtD});
     }
     return setDtD;
+}
+
+void CConsulta::cargarConsultas(vector<Consulta*> consultas){
+    this->consultas = consultas;
+}
+
+void CConsulta::cargarDiagnosticos(map<string, Diagnostico*> diagnosticos){
+    this->diagnosticos = diagnosticos;
 }

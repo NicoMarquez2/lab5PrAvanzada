@@ -53,6 +53,10 @@ void Consulta::setSocio(Usuario* soc){
     this->socio = soc;
 }
 
+void Consulta::setDiagnosticos(map<string, Diagnostico*> diag){
+    this->Diagnosticos = diag;
+}
+
 void Consulta::agregarDiagnostico(Diagnostico* diag){
     Diagnostico* diagnostico = diag;
     string codDiag = diag->getCodDiagnostico()->getCodigoDiagnostico();
