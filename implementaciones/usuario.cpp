@@ -134,35 +134,32 @@ vector<DtConsulta> Usuario::obtenerConsultas(){
                 vector<Tratamiento*>::iterator itTrat;
                 vector<DtFarm> setDtFarm;
                 vector<DtQuir> setDtQuir;
-                string quirFarm;
+                bool trat = false;
                 for (itTrat=tratDiag.begin(); itTrat !=tratDiag.end(); ++itTrat){
                     Tratamiento *t = *itTrat;
                     if (dynamic_cast<Farmaco*>(t)){
                         Farmaco *f = dynamic_cast<Farmaco*>(t);
-                        DtFarm *tmp = new DtFarm(f->getDescripcion(), f->getMedicamento());
+                        DtFarm *tmp = new DtFarm(t->getDescripcion(), f->getMedicamento());
                         DtFarm DtF = *tmp;
                         setDtFarm.push_back(DtF);
-                        quirFarm = "farmaco";
+                        DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc, setDtFarm);
+                        DtD = *tmp2;
                     } else if (dynamic_cast<Quirurgico*>(t)){
                         Quirurgico *q = dynamic_cast<Quirurgico*>(t);
-                        DtQuir *tmp = new DtQuir(q->getDescripcion(), q->getFechaintervencion());
+                        DtQuir *tmp = new DtQuir(t->getDescripcion(), q->getFechaintervencion());
                         DtQuir DtQ = *tmp;
                         setDtQuir.push_back(DtQ);
-                        quirFarm = "quirurgico";
+                        DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc, setDtQuir);
+                        DtD = *tmp2;
                     }
+                    trat = true;
+                    dtDiag.insert({DtD.getCodDiagnostico().getCodigoDiagnostico(), DtD});
                 }
-                if (quirFarm == "farmaco"){
-                    DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc, setDtFarm);
-                    DtD = *tmp2;
-                }
-                else if (quirFarm == "quirurgico"){
-                    DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc, setDtQuir);
-                    DtD = *tmp2;
-                }else{
+                if (!trat) {
                     DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc);
                     DtD = *tmp2;
+                    dtDiag.insert({DtD.getCodDiagnostico().getCodigoDiagnostico(), DtD});
                 }
-                dtDiag.insert({DtD.getCodDiagnostico().getCodigoDiagnostico(), DtD});
             }
 
             DtConsulta *tmp3 = new DtConsulta(reserva->getFecha(), reserva->getHora(), reserva->getSocio(), reserva->getMedico(), dtDiag);

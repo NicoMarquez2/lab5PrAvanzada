@@ -12,7 +12,7 @@
 class IConsulta
 {
 public:
-    virtual void cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico*> diagnosticos, vector<CodDiagnostico*> codigos) = 0;
+    virtual void cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico*> diagnosticos, vector<CodDiagnostico*> codigos, vector<Tratamiento*> tratamientos) = 0;
     virtual void cargarConsultas(vector<Consulta*> consultas) = 0;
     virtual void cargarDiagnosticos(map<string, Diagnostico*> diagnosticos) = 0;
     virtual void cargarCodigos(vector<CodDiagnostico*> codigos) = 0;

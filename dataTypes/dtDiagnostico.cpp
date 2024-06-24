@@ -10,7 +10,7 @@ DtDiagnostico::DtDiagnostico(DtCodDiagnostico cod, string desc){
 DtDiagnostico::DtDiagnostico(DtCodDiagnostico cod, string desc, vector<DtQuir> quir){
     this->descripcion = desc;
     this->codigo = cod;
-    this->quirurjico = quir;
+    this->quirurgico = quir;
 }
 
 DtDiagnostico::DtDiagnostico(DtCodDiagnostico cod, string desc, vector<DtFarm> farm){
@@ -23,8 +23,8 @@ DtDiagnostico::DtDiagnostico(){
     this->descripcion = "";
 }
 
-vector<DtQuir> DtDiagnostico::getQuirurjico(){
-    return this->quirurjico;
+vector<DtQuir> DtDiagnostico::getQuirurgico(){
+    return this->quirurgico;
 }
 vector<DtFarm> DtDiagnostico::getFarmacologico(){
     return this->farmacologico;

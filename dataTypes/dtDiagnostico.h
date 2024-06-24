@@ -17,7 +17,7 @@ class DtDiagnostico
 private:
     DtCodDiagnostico codigo;
     string descripcion;
-    vector<DtQuir> quirurjico;
+    vector<DtQuir> quirurgico;
     vector<DtFarm> farmacologico;
 
 public:
@@ -28,7 +28,7 @@ public:
 
     string getDescripcion();
     DtCodDiagnostico getCodDiagnostico();
-    vector<DtQuir> getQuirurjico();
+    vector<DtQuir> getQuirurgico();
     vector<DtFarm> getFarmacologico();
 
     void setDescripcion();

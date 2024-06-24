@@ -1,6 +1,6 @@
 # Definiciones de variables
 CXX = g++
-CXXFLAGS = -I./fabrica -I./controllers -I./interfaces -I./dataTypes -I./headers -I./implementaciones -std=c++11
+CXXFLAGS = -g -I./fabrica -I./controllers -I./interfaces -I./dataTypes -I./headers -I./implementaciones -std=c++11
 LDFLAGS =
 TARGET = myprogram
 DATATYPES_DIR := dataTypes

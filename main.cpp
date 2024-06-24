@@ -7,6 +7,7 @@
 #include "../headers/socio.h"
 #include "../headers/medico.h"
 #include "../headers/administrativo.h"
+#include <curses.h>
 
 using namespace std;
 
@@ -252,7 +253,7 @@ int main() {
       case  0:
          if(!datosCargados){        
             IU->cargarDatos(usersCollection);
-            IC->cargarDatos(consultCollection, diagCollection, codDiagCollection);
+            IC->cargarDatos(consultCollection, diagCollection, codDiagCollection, tratamientoCollection);
             datosCargados = true;  
          } else {
             cout << "\nLos datos ya fueron cargados" << endl;
@@ -548,16 +549,21 @@ int main() {
                                  cout << "- " << it2->second.getCodDiagnostico().getCodigoDiagnostico() << " - " << it2->second.getCodDiagnostico().getEtiqueta()
                                        << " - " << it2->second.getDescripcion() << endl;
                                  
-                                 if (it2->second.getFarmacologico().size() != 0){
+                                 vector<DtFarm> dtFarm = it2->second.getFarmacologico();
+                                 vector<DtQuir> dtQuir = it2->second.getQuirurgico();
+
+                                 if (dtFarm.size() != 0){
                                     vector<DtFarm>::iterator it3;
-                                    for (it3=it2->second.getFarmacologico().begin(); it3 !=it2->second.getFarmacologico().end(); ++it3){
+                                    for (it3=dtFarm.begin(); it3 !=dtFarm.end(); ++it3){
                                        DtFarm DtF = *it3;
-                                       cout << " -- " << DtF.getDescripcion() << " - " << DtF.getMedicamento() << endl;
+                                       cout << " -- ";
+                                       cout << DtF.getDescripcion();
+                                       cout << " - " << DtF.getMedicamento() << endl;
                                     }
                                  }
-                                 if (it2->second.getQuirurjico().size() != 0){
+                                 if (dtQuir.size() != 0){
                                     vector<DtQuir>::iterator it4;
-                                    for (it4=it2->second.getQuirurjico().begin(); it4 !=it2->second.getQuirurjico().end(); ++it4){
+                                    for (it4=dtQuir.begin(); it4 !=dtQuir.end(); ++it4){
                                        cout << " -- " << it4->getDescripcion() << " - " 
                                        << it4->getFechaIntervencion().getAnio() << "/" 
                                        << it4->getFechaIntervencion().getMes() << "/" 

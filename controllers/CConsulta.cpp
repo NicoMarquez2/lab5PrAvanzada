@@ -14,10 +14,11 @@ CConsulta* CConsulta::getInstancia(){
     return instancia;
 }
 
-void CConsulta::cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico*> diagnosticos, vector<CodDiagnostico*> codigos){
+void CConsulta::cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico*> diagnosticos, vector<CodDiagnostico*> codigos, vector<Tratamiento*> tratamientos){
     this->consultas = consultas;
     this->diagnosticos = diagnosticos;
     this->codigos = codigos;
+    this->tratamientos = tratamientos;
 }
 void CConsulta::cargarCodigos(vector<CodDiagnostico*> codigos){
     this->codigos = codigos;
