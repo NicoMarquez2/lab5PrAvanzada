@@ -57,13 +57,13 @@ int main() {
    
 
    vector<Consulta*> consultCollection;
-   Reserva* C1 = new Reserva(Fecha(2024, 6, 23), Hora(10, 10), TM, JM, Fecha(2014, 6, 21));
-   Reserva* C2 = new Reserva(Fecha(2024, 6, 23), Hora(11, 11), TM, DC, Fecha(2015, 7, 21));
-   Reserva* C3 = new Reserva(Fecha(2024, 6, 23), Hora(12, 12), DP, JM, Fecha(2016, 4, 26));
-   Reserva* C4 = new Reserva(Fecha(2024, 6, 23), Hora(13, 13), DP, AL, Fecha(2017, 9, 30));
-   Emergencia* U1 = new Emergencia(Fecha(2024, 6, 23), Hora(10, 10), TM, JM, "Fiebre alta");
-   Emergencia* U2 = new Emergencia(Fecha(2024, 6, 23), Hora(10, 10), DP, DC, "Asma");
-   Emergencia* U3 = new Emergencia(Fecha(2024, 6, 23), Hora(10, 10), DP, AL, "Mareos");
+   Reserva* C1 = new Reserva(Fecha(2024, 6, 24), Hora(10, 10), TM, JM, Fecha(2014, 6, 21));
+   Reserva* C2 = new Reserva(Fecha(2024, 6, 24), Hora(11, 11), TM, DC, Fecha(2015, 7, 21));
+   Reserva* C3 = new Reserva(Fecha(2024, 6, 24), Hora(12, 12), DP, JM, Fecha(2016, 4, 26));
+   Reserva* C4 = new Reserva(Fecha(2024, 6, 24), Hora(13, 13), DP, AL, Fecha(2017, 9, 30));
+   Emergencia* U1 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), TM, JM, "Fiebre alta");
+   Emergencia* U2 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), DP, DC, "Asma");
+   Emergencia* U3 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), DP, AL, "Mareos");
    consultCollection.push_back(C1);
    consultCollection.push_back(C2);
    consultCollection.push_back(C3);
