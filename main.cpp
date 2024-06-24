@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include <string>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <algorithm>
 #include "fabrica/fabrica.h"
@@ -490,7 +491,6 @@ int main() {
                               cin.ignore();
                               getline(cin, descripcionT);
                               cout << "Farmaco - Agregar medicamento: " << endl;
-                              cin.ignore();
                               getline(cin, medicamento);
                            } else if (input == "2") {
                               tratamiento = "quirurjico";
