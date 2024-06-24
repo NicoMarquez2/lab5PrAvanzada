@@ -12,6 +12,7 @@ private:
     string medicamento;
 public:
     DtFarm(string desc, string medic);
+    DtFarm();
     string getDescripcion();
     string getMedicamento();
     ~DtFarm();

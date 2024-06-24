@@ -56,13 +56,13 @@ int main() {
    
 
    vector<Consulta*> consultCollection;
-   Reserva* C1 = new Reserva(Fecha(2024, 6, 24), Hora(10, 10), TM, JM, Fecha(2014, 6, 21));
-   Reserva* C2 = new Reserva(Fecha(2024, 6, 24), Hora(11, 11), TM, DC, Fecha(2015, 7, 21));
-   Reserva* C3 = new Reserva(Fecha(2024, 6, 24), Hora(12, 12), DP, JM, Fecha(2016, 4, 26));
-   Reserva* C4 = new Reserva(Fecha(2024, 6, 24), Hora(13, 13), DP, AL, Fecha(2017, 9, 30));
-   Emergencia* U1 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), TM, JM, "Fiebre alta");
-   Emergencia* U2 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), DP, DC, "Asma");
-   Emergencia* U3 = new Emergencia(Fecha(2024, 6, 24), Hora(10, 10), DP, AL, "Mareos");
+   Reserva* C1 = new Reserva(Fecha(2024, 6, 23), Hora(10, 10), TM, JM, Fecha(2014, 6, 21));
+   Reserva* C2 = new Reserva(Fecha(2024, 6, 23), Hora(11, 11), TM, DC, Fecha(2015, 7, 21));
+   Reserva* C3 = new Reserva(Fecha(2024, 6, 23), Hora(12, 12), DP, JM, Fecha(2016, 4, 26));
+   Reserva* C4 = new Reserva(Fecha(2024, 6, 23), Hora(13, 13), DP, AL, Fecha(2017, 9, 30));
+   Emergencia* U1 = new Emergencia(Fecha(2024, 6, 23), Hora(10, 10), TM, JM, "Fiebre alta");
+   Emergencia* U2 = new Emergencia(Fecha(2024, 6, 23), Hora(10, 10), DP, DC, "Asma");
+   Emergencia* U3 = new Emergencia(Fecha(2024, 6, 23), Hora(10, 10), DP, AL, "Mareos");
    consultCollection.push_back(C1);
    consultCollection.push_back(C2);
    consultCollection.push_back(C3);
@@ -75,6 +75,10 @@ int main() {
    it800 = usersCollection.find(C1->getSocio()->getCedula());
    if(it800 != usersCollection.end()){
       it800->second->ingresarConsulta(C1);
+      /*vector<DtConsulta>::iterator it809;
+      for (it809=it800->second->obtenerConsultas().begin(); it809!=it800->second->obtenerConsultas().end(); ++it809){
+         cout << it809->getMedico()->getCedula() << " - " << it809->getSocio()->getCedula() << endl;
+      }*/
    }
    it800 = usersCollection.find(C1->getMedico()->getCedula());
    if(it800 != usersCollection.end()){
@@ -104,15 +108,26 @@ int main() {
    if(it800 != usersCollection.end()){
       it800->second->ingresarConsulta(C4);
    }
+   /*
    it800 = usersCollection.find(U1->getSocio()->getCedula());
    if(it800 != usersCollection.end()){
       it800->second->ingresarConsulta(U1);
+      vector<DtConsulta>::iterator it809;
+      for (it809=it800->second->obtenerConsultas().begin(); it809!=it800->second->obtenerConsultas().end(); ++it809){
+         cout << it809->getMedico()->getCedula() << " - " << it809->getSocio()->getCedula() << endl;
+      }
    }
    it800 = usersCollection.find(U1->getMedico()->getCedula());
    if(it800 != usersCollection.end()){
       it800->second->ingresarConsulta(U1);
+      vector<DtConsulta>::iterator it809;
+      for (it809=it800->second->obtenerConsultas().begin(); it809!=it800->second->obtenerConsultas().end(); ++it809){
+         cout << it809->getMedico()->getCedula() << " - " << it809->getSocio()->getCedula() << endl;
+      }
    }
+   */
    
+   /*
    map<string, Usuario*>::iterator it801;
    for (it801=usersCollection.begin(); it801 !=usersCollection.end(); ++it801){
       Usuario *us = it801->second;
@@ -121,7 +136,8 @@ int main() {
       for (it803=it801->second->obtenerConsultas().begin(); it803!=it801->second->obtenerConsultas().end(); ++it803){
          cout << it803->getMedico()->getCedula() << " - " << it803->getSocio()->getCedula() << endl;
       }
-   }
+   }*/
+   
    
    
    vector<CodDiagnostico*> codDiagCollection;
@@ -147,8 +163,8 @@ int main() {
    });
    if (it900 != consultCollection.end()) {
       Consulta *con = *it900;
-      con->getDiagnosticos().insert({D1->getCodDiagnostico()->getCodigoDiagnostico(), D1});
-      con->getDiagnosticos().insert({D2->getCodDiagnostico()->getCodigoDiagnostico(), D2});
+      con->agregarDiagnostico(D1);
+      con->agregarDiagnostico(D2);
    }
    auto it901 = find_if(consultCollection.begin(), consultCollection.end(), [&C3](Consulta* consulta) {
                return consulta != nullptr 
@@ -157,7 +173,7 @@ int main() {
    });
    if (it901 != consultCollection.end()) {
       Consulta *con = *it901;
-      con->getDiagnosticos().insert({D3->getCodDiagnostico()->getCodigoDiagnostico(), D3});
+      con->agregarDiagnostico(D3);
    }
    auto it902 = find_if(consultCollection.begin(), consultCollection.end(), [&U1](Consulta* consulta) {
                return consulta != nullptr 
@@ -166,7 +182,7 @@ int main() {
    });
    if (it902 != consultCollection.end()) {
       Consulta *con = *it902;
-      con->getDiagnosticos().insert({D4->getCodDiagnostico()->getCodigoDiagnostico(), D4});
+      con->agregarDiagnostico(D4);
    }
    auto it903 = find_if(consultCollection.begin(), consultCollection.end(), [&U2](Consulta* consulta) {
                return consulta != nullptr 
@@ -175,10 +191,36 @@ int main() {
    });
    if (it903 != consultCollection.end()) {
       Consulta *con = *it903;
-      con->getDiagnosticos().insert({D5->getCodDiagnostico()->getCodigoDiagnostico(), D5});
-      con->getDiagnosticos().insert({D5->getCodDiagnostico()->getCodigoDiagnostico(), D5});
+      con->agregarDiagnostico(D5);
+      con->agregarDiagnostico(D5);
    }
 
+   vector<Tratamiento*> tratamientoCollection;
+   Farmaco* F1 = new Farmaco("Desc 1", "M1");
+   Farmaco* F2 = new Farmaco("Desc 2", "M2");
+   Quirurgico* Q1 = new Quirurgico("Desc 11", Fecha(2014, 7, 25));
+   Quirurgico* Q2 = new Quirurgico("Desc 22", Fecha(2015, 2, 1));
+   tratamientoCollection.push_back(F1);
+   tratamientoCollection.push_back(F2);
+   tratamientoCollection.push_back(Q1);
+   tratamientoCollection.push_back(Q2);
+   map<string, Diagnostico*>::iterator it950;
+   it950 = diagCollection.find(D1->getCodDiagnostico()->getCodigoDiagnostico());
+   if(it950 != diagCollection.end()){
+      Diagnostico *diag = it950->second;
+      diag->ingresarTratamiento(F1);
+      diag->ingresarTratamiento(F2);
+   }
+   it950 = diagCollection.find(D2->getCodDiagnostico()->getCodigoDiagnostico());
+   if(it950 != diagCollection.end()){
+      Diagnostico *diag = it950->second;
+      diag->ingresarTratamiento(Q1);
+   }
+   it950 = diagCollection.find(D3->getCodDiagnostico()->getCodigoDiagnostico());
+   if(it950 != diagCollection.end()){
+      Diagnostico *diag = it950->second;
+      diag->ingresarTratamiento(Q2);
+   }
 
    f = Fabrica::getInstancia();
    IU = f->getIUsuario();
@@ -364,7 +406,8 @@ int main() {
                      cout << endl;
                      cout << "Consultas del dia: " << endl;
 
-                     string input, ciPac, codCat, codDiag, descripcion;
+                     string input, ciPac, codCat, codDiag, descripcion, tratamiento, descripcionT, medicamento;
+                     Fecha tQuirurjico;
                      string cat = "Z";
                      vector<DtConsulta> consultas;
                      consultas = IU->obtenerConsultasUser(usuarioSesion.getCedula());
@@ -422,14 +465,39 @@ int main() {
                            break;
                         cout << "Ingrese la representacion deseada (Codigo de diagnostico, -1 para salir): " << endl;
                         cin >> input;
-                        if (input != "-1"){
+                        if (input != "-1") {
                            codDiag = input;
                            cout << "Agregar descripcion (vacio si no desea agregar nada): " << endl;
                            cin.ignore();
                            getline(cin, descripcion);
-                           IC->altaDiagnostico(ciPac, usuarioSesion.getCedula(), codCat, codDiag, descripcion);
-                        } else
-                           break;
+                        }
+                        cout << "Desea agregar un tratamiento? (S para agregar, -1 para salir): " << endl;
+                        cin >> input;
+                        if (input != "-1") {
+                           cout << "Seleccine el tipo" << endl;
+                           cout << "1- Farmaco" << " \t\t " << "2- Quirurjico" << endl;
+                           cin >> input;
+                           if (input == "1") {
+                              tratamiento = "farmaco";
+                              cout << "Farmaco - Agregar descripción: " << endl;
+                              cin.ignore();
+                              getline(cin, descripcionT);
+                              cout << "Farmaco - Agregar medicamento: " << endl;
+                              cin.ignore();
+                              getline(cin, medicamento);
+                           } else if (input == "2") {
+                              tratamiento = "quirurjico";
+                              cout << "Quirurjico - Agregar descripción: " << endl;
+                              cin.ignore();
+                              getline(cin, descripcionT);
+                              cout << "Quirurjico - Agregar fecha (anio, mes, dia): " << endl;
+                              int anio, mes, dia;
+                              cin >> anio >> mes >> dia;
+                              tQuirurjico = Fecha(anio, mes, dia);
+                           }
+                           IC->agregarTratamiento(descripcionT, tratamiento, medicamento, tQuirurjico);         
+                        } else 
+                           IC->altaDiagnostico(ciPac, usuarioSesion.getCedula(), codCat, codDiag, descripcion); 
                      }
                      break;
                   }
@@ -469,7 +537,18 @@ int main() {
                                  << medConsulta->getCedula() << " - " << medConsulta->getNombre() << " " << medConsulta->getApellido() << endl;
                               for (it2=dtDiag.begin(); it2!=dtDiag.end(); ++it2){
                                  cout << "- " << it2->second.getCodDiagnostico().getCodigoDiagnostico() << " - " << it2->second.getCodDiagnostico().getEtiqueta()
-                                       << " - " << it2->second.getDescripcion() << endl;
+                                       << " - " << it2->second.getDescripcion();
+                                 vector<DtFarm>::iterator it3;
+                                 for (it3=it2->second.getFarmacologico().begin(); it3 !=it2->second.getFarmacologico().end(); ++it3){
+                                    cout << " - " << it3->getDescripcion() << " - " << it3->getMedicamento() << endl;
+                                 }
+                                 vector<DtQuir>::iterator it4;
+                                 for (it4=it2->second.getQuirurjico().begin(); it4 !=it2->second.getQuirurjico().end(); ++it4){
+                                    cout << " - " << it4->getDescripcion() << " - " 
+                                    << it4->getFechaIntervencion().getAnio() << "/" 
+                                    << it4->getFechaIntervencion().getMes() << "/" 
+                                    << it4->getFechaIntervencion().getDia() << endl;
+                                 }
                               }
                            }
                         }

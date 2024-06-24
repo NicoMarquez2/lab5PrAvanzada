@@ -9,6 +9,9 @@
 #include "../headers/codDiagnostico.h"
 #include "../headers/reserva.h"
 #include "../headers/emergencia.h"
+#include "../headers/tratamiento.h"
+#include "../headers/quirurgico.h"
+#include "../headers/farmaco.h"
 #include "CUsuario.h"
 
 class CConsulta : public IConsulta
@@ -19,7 +22,8 @@ private:
     vector<Consulta*> consultas;
     map<string, Diagnostico*> diagnosticos;
     vector<CodDiagnostico*> codigos;
-    
+    vector<Tratamiento*> tratamientos;
+    Tratamiento* tratamiento;
 public:
     static CConsulta* getInstancia();
     void cargarDatos(vector<Consulta*> consultas, map<string, Diagnostico*> diagnosticos, vector<CodDiagnostico*> codigos);
@@ -45,7 +49,7 @@ public:
     void seleccionarCategoria(string categoria);
     void seleccionarDiagnostico(string diagnostico);
     void agregarDescripcion(string descripcion);
-    void agregarTratamiento(string descripcion, string tipo);
+    void agregarTratamiento(string descripcion, string tipo, string med, Fecha fechaQ);
     void agregarFecha(Fecha fecha);
     void agregarMedicamento(string medicamento);
     void registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva);

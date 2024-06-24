@@ -1,8 +1,11 @@
 #include "../headers/usuario.h"
 #include "../dataTypes/dtEmergencia.h"
 #include "../dataTypes/dtReserva.h"
+#include "../dataTypes/dtFarm.h"
+#include "../dataTypes/dtQuir.h"
 #include <chrono>
 #include <ctime>
+#include <iostream>
 
 int calcularEdad(Fecha fecha){
     auto now = std::chrono::system_clock::now();
@@ -120,15 +123,55 @@ vector<DtConsulta> Usuario::obtenerConsultas(){
             map<string, Diagnostico*>::iterator it2;
             for (it2=diag.begin(); it2!=diag.end(); ++it2){
                 string cod = it2->first;
+                DtDiagnostico DtD;
                 Diagnostico codDiag = *it2->second;
                 string desc = codDiag.getDescripcion();
                 DtCodDiagnostico *tmp = new DtCodDiagnostico(codDiag.getCodDiagnostico()->getCodigoCategoria(), codDiag.getCodDiagnostico()->getCategoria(),
                                                 codDiag.getCodDiagnostico()->getCodigoDiagnostico(), codDiag.getCodDiagnostico()->getEtiqueta());
                 DtCodDiagnostico dtCod = *tmp;
-                DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc);
-                DtDiagnostico DtD = *tmp2;
+
+                vector<Tratamiento*> tratDiag = it2->second->getTratamientos();
+                vector<Tratamiento*>::iterator itTrat;
+                vector<DtFarm> setDtFarm;
+                vector<DtQuir> setDtQuir;
+                string quirFarm;
+                for (itTrat=tratDiag.begin(); itTrat !=tratDiag.end(); ++itTrat){
+                    cout << "test4" << endl;
+                    Tratamiento *t = *itTrat;
+                    if (dynamic_cast<Farmaco*>(t)){
+                        Farmaco *f = dynamic_cast<Farmaco*>(t);
+                        DtFarm *tmp = new DtFarm(f->getDescripcion(), f->getMedicamento());
+                        DtFarm DtF = *tmp;
+                        setDtFarm.push_back(DtF);
+                        quirFarm = "farmaco";
+                        cout << quirFarm << endl;
+                    } else if (dynamic_cast<Quirurgico*>(t)){
+                        Quirurgico *q = dynamic_cast<Quirurgico*>(t);
+                        DtQuir *tmp = new DtQuir(q->getDescripcion(), q->getFechaintervencion());
+                        DtQuir DtQ = *tmp;
+                        setDtQuir.push_back(DtQ);
+                        quirFarm = "quirurgico";
+                        cout << quirFarm << endl;
+                    }
+                }
+                codDiag.getTratamientos();
+                if (quirFarm == "farmaco"){
+                    DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc, setDtFarm);
+                    DtD = *tmp2;
+                    cout << DtD.getCodDiagnostico().getCodigoDiagnostico() << endl;
+                }
+                else if (quirFarm == "quirurgico"){
+                    DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc, setDtQuir);
+                    DtD = *tmp2;
+                    cout << DtD.getCodDiagnostico().getCodigoDiagnostico() << endl;
+                }else{
+                    DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc);
+                    DtD = *tmp2;
+                }
                 dtDiag.insert({DtD.getCodDiagnostico().getCodigoDiagnostico(), DtD});
+
             }
+
 
             DtC = DtConsulta(reserva->getFecha(), reserva->getHora(), reserva->getSocio(), reserva->getMedico(), dtDiag);
             dtDiag.clear();

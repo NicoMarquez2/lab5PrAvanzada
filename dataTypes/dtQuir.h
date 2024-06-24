@@ -14,6 +14,7 @@ private:
     Fecha fechaIntervencion;
 public:
     DtQuir(string desc, Fecha fechaInt);
+    DtQuir();
     string getDescripcion();
     Fecha getFechaIntervencion();
     ~DtQuir();

@@ -25,7 +25,7 @@ public:
     virtual void seleccionarCategoria(string categoria) = 0;
     virtual void seleccionarDiagnostico(string diagnostico) = 0;
     virtual void agregarDescripcion(string descripcion) = 0;
-    virtual void agregarTratamiento(string descripcion, string tipo) = 0;
+    virtual void agregarTratamiento(string descripcion, string tipo, string med, Fecha fechaQ) = 0;
     virtual void agregarFecha(Fecha fecha) = 0;
     virtual void agregarMedicamento(string medicamento) = 0;
     virtual void registroReserva(string ciMed, string ciPac, Fecha fecha, Fecha fechaReserva) = 0;

@@ -4,9 +4,9 @@ Quirurgico::Quirurgico(){
     this->fechaIntervencion = Fecha();
 }
 
-Quirurgico::Quirurgico(Fecha fecha){
-    this->fechaIntervencion = fecha;
-}
+Quirurgico::Quirurgico(string desc, Fecha fecha): 
+    Tratamiento(desc), fechaIntervencion(fecha){}
+    
 
 Fecha Quirurgico::getFechaintervencion(){
     return this->fechaIntervencion;
@@ -15,3 +15,4 @@ Fecha Quirurgico::getFechaintervencion(){
 void Quirurgico::setFechaIntervencion(Fecha fecha){
     this->fechaIntervencion = fecha;
 }
+Quirurgico::~Quirurgico(){}

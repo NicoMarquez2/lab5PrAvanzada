@@ -16,5 +16,12 @@ string Diagnostico::getDescripcion(){
 CodDiagnostico* Diagnostico::getCodDiagnostico(){
     return this->codigo;
 }
+vector<Tratamiento*> Diagnostico::getTratamientos(){
+    return this->tratamientos;
+}
+
+void Diagnostico::ingresarTratamiento(Tratamiento* t){
+    this->tratamientos.push_back(t);
+}
 
 Diagnostico::~Diagnostico(){}

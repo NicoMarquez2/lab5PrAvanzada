@@ -4,6 +4,7 @@ DtQuir::DtQuir(string desc, Fecha fechaInt){
     this->descripcion = desc;
     this->fechaIntervencion = fechaInt;
 }
+DtQuir::DtQuir(){}
 
 DtQuir::~DtQuir(){}
 

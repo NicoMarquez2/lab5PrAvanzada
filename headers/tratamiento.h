@@ -17,7 +17,7 @@ public:
     string getDescripcion();
 
     void setDescripcion(string desc);
-    ~Tratamiento();
+    virtual ~Tratamiento();
 };
 
 #endif

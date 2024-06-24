@@ -60,7 +60,21 @@ void CConsulta::obtenerCategorias(){}
 void CConsulta::seleccionarCategoria(string categoria){}
 void CConsulta::seleccionarDiagnostico(string diagnostico){}
 void CConsulta::agregarDescripcion(string descripcion){}
-void CConsulta::agregarTratamiento(string descripcion, string tipo){}
+
+void CConsulta::agregarTratamiento(string descripcion, string tipo, string med, Fecha fechaQ){
+    Quirurgico *q;
+    Farmaco *f;
+    if (tipo == "quirurjico") {
+        q = new Quirurgico(descripcion, fechaQ);
+        this->tratamientos.push_back(q);
+        this->tratamiento = q;
+    }
+    else if (tipo == "farmaco") {
+        f = new Farmaco(descripcion, med);
+        this->tratamientos.push_back(f);
+        this->tratamiento = f;
+    }
+}
 void CConsulta::agregarFecha(Fecha fecha){}
 void CConsulta::agregarMedicamento(string medicamento){}
 
@@ -198,6 +212,7 @@ void CConsulta::altaDiagnostico(string ciPac, string ciMed, string codCat, strin
     if (it != consultas.end()) {
         Consulta* encontroConsulta = *it;
         Diagnostico* diagnostico = new Diagnostico(codigoDiagnostico, desc);
+        diagnostico->ingresarTratamiento(this->tratamiento);
         string descripcion = diagnostico->getDescripcion();
         this->diagnosticos.insert({descripcion, diagnostico});
         encontroConsulta->agregarDiagnostico(diagnostico);

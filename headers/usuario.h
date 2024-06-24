@@ -10,6 +10,9 @@
 #include "../headers/reserva.h"
 #include "../dataTypes/dtConsulta.h"
 #include "../dataTypes/dtReserva.h"
+#include "../headers/tratamiento.h"
+#include "../headers/farmaco.h"
+#include "../headers/quirurgico.h"
 
 using namespace std;
 class DtEmergencia;

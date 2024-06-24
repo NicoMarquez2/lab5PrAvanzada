@@ -4,12 +4,12 @@
 #include "tratamiento.h"
 #include "../dataTypes/dtFecha.h"
 
-class Quirurgico
+class Quirurgico: public Tratamiento
 {
 private:
     Fecha fechaIntervencion;
 public:
-    Quirurgico(Fecha fecha);
+    Quirurgico(string desc, Fecha fecha);
     Quirurgico();
     Fecha getFechaintervencion();
     void setFechaIntervencion(Fecha fecha);
