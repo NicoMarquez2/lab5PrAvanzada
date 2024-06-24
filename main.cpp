@@ -156,6 +156,13 @@ int main() {
    Diagnostico* D4 = new Diagnostico(R3, "Desc4");
    Diagnostico* D5 = new Diagnostico(R1, "Desc5");
    Diagnostico* D6 = new Diagnostico(R2, "Desc6");
+   diagCollection.insert({D1->getCodDiagnostico()->getCodigoDiagnostico(), D1});
+   diagCollection.insert({D2->getCodDiagnostico()->getCodigoDiagnostico(), D2});
+   diagCollection.insert({D3->getCodDiagnostico()->getCodigoDiagnostico(), D3});
+   diagCollection.insert({D4->getCodDiagnostico()->getCodigoDiagnostico(), D4});
+   diagCollection.insert({D5->getCodDiagnostico()->getCodigoDiagnostico(), D5});
+   diagCollection.insert({D6->getCodDiagnostico()->getCodigoDiagnostico(), D6});
+
    auto it900 = find_if(consultCollection.begin(), consultCollection.end(), [&C1](Consulta* consulta) {
                return consulta != nullptr 
                && consulta->getSocio()->getCedula() == C1->getSocio()->getCedula()
@@ -473,7 +480,7 @@ int main() {
                         }
                         cout << "Desea agregar un tratamiento? (S para agregar, -1 para salir): " << endl;
                         cin >> input;
-                        if (input != "-1") {
+                        if (input != "-1" && input == "S") {
                            cout << "Seleccine el tipo" << endl;
                            cout << "1- Farmaco" << " \t\t " << "2- Quirurjico" << endl;
                            cin >> input;
@@ -496,7 +503,9 @@ int main() {
                               tQuirurjico = Fecha(anio, mes, dia);
                            }
                            IC->agregarTratamiento(descripcionT, tratamiento, medicamento, tQuirurjico);         
-                        } else 
+                        } else  {
+                           input = "";
+                        } 
                            IC->altaDiagnostico(ciPac, usuarioSesion.getCedula(), codCat, codDiag, descripcion); 
                      }
                      break;
@@ -537,17 +546,23 @@ int main() {
                                  << medConsulta->getCedula() << " - " << medConsulta->getNombre() << " " << medConsulta->getApellido() << endl;
                               for (it2=dtDiag.begin(); it2!=dtDiag.end(); ++it2){
                                  cout << "- " << it2->second.getCodDiagnostico().getCodigoDiagnostico() << " - " << it2->second.getCodDiagnostico().getEtiqueta()
-                                       << " - " << it2->second.getDescripcion();
-                                 vector<DtFarm>::iterator it3;
-                                 for (it3=it2->second.getFarmacologico().begin(); it3 !=it2->second.getFarmacologico().end(); ++it3){
-                                    cout << " - " << it3->getDescripcion() << " - " << it3->getMedicamento() << endl;
+                                       << " - " << it2->second.getDescripcion() << endl;
+                                 
+                                 if (it2->second.getFarmacologico().size() != 0){
+                                    vector<DtFarm>::iterator it3;
+                                    for (it3=it2->second.getFarmacologico().begin(); it3 !=it2->second.getFarmacologico().end(); ++it3){
+                                       DtFarm DtF = *it3;
+                                       cout << " -- " << DtF.getDescripcion() << " - " << DtF.getMedicamento() << endl;
+                                    }
                                  }
-                                 vector<DtQuir>::iterator it4;
-                                 for (it4=it2->second.getQuirurjico().begin(); it4 !=it2->second.getQuirurjico().end(); ++it4){
-                                    cout << " - " << it4->getDescripcion() << " - " 
-                                    << it4->getFechaIntervencion().getAnio() << "/" 
-                                    << it4->getFechaIntervencion().getMes() << "/" 
-                                    << it4->getFechaIntervencion().getDia() << endl;
+                                 if (it2->second.getQuirurjico().size() != 0){
+                                    vector<DtQuir>::iterator it4;
+                                    for (it4=it2->second.getQuirurjico().begin(); it4 !=it2->second.getQuirurjico().end(); ++it4){
+                                       cout << " -- " << it4->getDescripcion() << " - " 
+                                       << it4->getFechaIntervencion().getAnio() << "/" 
+                                       << it4->getFechaIntervencion().getMes() << "/" 
+                                       << it4->getFechaIntervencion().getDia() << endl;
+                                    }
                                  }
                               }
                            }

@@ -113,10 +113,10 @@ vector<DtReserva> Usuario::obtenerReservas(){
 
 vector<DtConsulta> Usuario::obtenerConsultas(){
     vector<DtConsulta> setDtC;
-    map<string, DtDiagnostico> dtDiag;
-    DtConsulta DtC;
     vector<Consulta*>::iterator it;
     for (it=consultas.begin(); it!=consultas.end(); ++it){
+            map<string, DtDiagnostico> dtDiag;
+            DtConsulta DtC;
             this->consulta = *it;
             Reserva* reserva = dynamic_cast<Reserva*>(consulta);
             map<string, Diagnostico*> diag = reserva->getDiagnosticos();
@@ -136,7 +136,6 @@ vector<DtConsulta> Usuario::obtenerConsultas(){
                 vector<DtQuir> setDtQuir;
                 string quirFarm;
                 for (itTrat=tratDiag.begin(); itTrat !=tratDiag.end(); ++itTrat){
-                    cout << "test4" << endl;
                     Tratamiento *t = *itTrat;
                     if (dynamic_cast<Farmaco*>(t)){
                         Farmaco *f = dynamic_cast<Farmaco*>(t);
@@ -144,39 +143,32 @@ vector<DtConsulta> Usuario::obtenerConsultas(){
                         DtFarm DtF = *tmp;
                         setDtFarm.push_back(DtF);
                         quirFarm = "farmaco";
-                        cout << quirFarm << endl;
                     } else if (dynamic_cast<Quirurgico*>(t)){
                         Quirurgico *q = dynamic_cast<Quirurgico*>(t);
                         DtQuir *tmp = new DtQuir(q->getDescripcion(), q->getFechaintervencion());
                         DtQuir DtQ = *tmp;
                         setDtQuir.push_back(DtQ);
                         quirFarm = "quirurgico";
-                        cout << quirFarm << endl;
                     }
                 }
-                codDiag.getTratamientos();
                 if (quirFarm == "farmaco"){
                     DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc, setDtFarm);
                     DtD = *tmp2;
-                    cout << DtD.getCodDiagnostico().getCodigoDiagnostico() << endl;
                 }
                 else if (quirFarm == "quirurgico"){
                     DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc, setDtQuir);
                     DtD = *tmp2;
-                    cout << DtD.getCodDiagnostico().getCodigoDiagnostico() << endl;
                 }else{
                     DtDiagnostico *tmp2 = new DtDiagnostico(dtCod, desc);
                     DtD = *tmp2;
                 }
                 dtDiag.insert({DtD.getCodDiagnostico().getCodigoDiagnostico(), DtD});
-
             }
 
-
-            DtC = DtConsulta(reserva->getFecha(), reserva->getHora(), reserva->getSocio(), reserva->getMedico(), dtDiag);
-            dtDiag.clear();
+            DtConsulta *tmp3 = new DtConsulta(reserva->getFecha(), reserva->getHora(), reserva->getSocio(), reserva->getMedico(), dtDiag);
+            DtC = *tmp3;
             setDtC.push_back(DtC);
-    }    
+    }
     return setDtC;
 }
 
