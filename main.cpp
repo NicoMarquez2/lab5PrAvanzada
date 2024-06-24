@@ -7,7 +7,6 @@
 #include "../headers/socio.h"
 #include "../headers/medico.h"
 #include "../headers/administrativo.h"
-#include <curses.h>
 
 using namespace std;
 
